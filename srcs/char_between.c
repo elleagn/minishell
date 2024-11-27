@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   char_between.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 12:11:45 by gozon             #+#    #+#             */
-/*   Updated: 2024/05/23 12:13:30 by gozon            ###   ########.fr       */
+/*   Created: 2024/11/26 15:47:30 by gozon             #+#    #+#             */
+/*   Updated: 2024/11/26 16:01:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-void	ft_putstr_fd(char *s, int fd)
+char	*begin_str(int cut, char *str)
 {
-	int	i;
+	char	*res;
+	int		i;
 
+	if (!str)
+		return (NULL);
+	if (ft_strlen(str) < cut)
+		return (ft_strdup(str));
+	res = ft_calloc((cut + 1), sizeof(char));
+	if (!res)
+		return (NULL);
 	i = 0;
-	while (s[i])
+	while (i < cut)
 	{
-		ft_putchar_fd(s[i], fd);
+		res[i] = str[i];
 		i++;
 	}
+	return (res[i]);
 }
