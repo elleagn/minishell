@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:29:41 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/27 10:39:28 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/28 10:58:15 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,20 @@ int	count_words(char *str)
 t_list	*tokenizer(char *input)
 {
 	int		i;
-	t_list	*tokens;
-	int		error;
+	t_list	*token_list;
+	t_token	*token;
 
-	tokens = NULL;
+	token_list = NULL;
 	i = 0;
-	error = 0;
 	while (input[i])
 	{
-		if (is_operator(input[i]))
-			error = add_operator(input, tokens, &i);
-		else if (is_string(input[i]))
-			error = add_string(input, tokens, &i);
-		else
-			error = add_word(input, tokens, &i);
-		if (error)
-			return (ft_lstclear(&tokens, clear_token), NULL);
+		token = create_next_token(&input[i]);
+		if (!token)
+			return (ft_lstclear(&token_list, clear_token), NULL);
+		if (add_token_to_list(&token_list, token))
+			return (ft_lstclear(&token_list, clear_token), clear_token(token),
+				NULL);
+		go_to_next_word(input, &i, token->type);
 	}
-	return (tokens);
+	return (token_list);
 }
