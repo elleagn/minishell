@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:29:41 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 10:58:15 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/28 11:10:04 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,29 @@ int	count_words(char *str)
 		i++;
 	}
 	return (res);
+}
+
+t_token	*create_next_token(char *input)
+{
+	t_token	*token;
+
+	token = init_token();
+	if (!token)
+		return (NULL);
+	update_token_type(token, input);
+	if (token->type == STRING_DOUBLE || token->type == STRING_SIMPLE)
+	{
+		update_string_literal(token, input);
+		if (!token->literal)
+			return (clear_token(token), NULL);
+	}
+	else if (token->type == WORD)
+	{
+		update_word_literal(token, input);
+		if (!token->literal)
+			return (clear_token(token), NULL);
+	}
+	return (token);
 }
 
 t_list	*tokenizer(char *input)
