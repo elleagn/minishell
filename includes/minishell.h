@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/27 10:23:59 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/28 11:05:31 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,12 @@ typedef struct s_token
 	char		*literal;
 	int			position;
 }	t_token;
+
+t_token	*init_token(void);
+void	clear_token(void *vtoken);
+t_token	*create_next_token(char *input);
+int		add_token_to_list(t_list **token_list, t_token *next_token);
+void	go_to_next_word(char *input, int *i, t_lexeme type);
+void	update_token_type(t_token *token, char *input);
 
 #endif
