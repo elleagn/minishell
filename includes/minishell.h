@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 11:05:31 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/28 13:55:11 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 typedef enum e_lexeme
 {
+	UNDEFINED,
 	STRING_SIMPLE,
 	STRING_DOUBLE,
 	LESS,
@@ -45,5 +46,7 @@ t_token	*create_next_token(char *input);
 int		add_token_to_list(t_list **token_list, t_token *next_token);
 void	go_to_next_word(char *input, int *i, t_lexeme type);
 void	update_token_type(t_token *token, char *input);
+int		find_closing_quote(char *input, int start, char quote_type);
+char	*begin_str(int cut, char *str);
 
 #endif
