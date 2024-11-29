@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/11/29 09:42:20 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/29 15:50:19 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	update_token_type(t_token *token, char *input)
 	}
 	else if (ft_strncmp(input, "<<", 2) == 0)
 		token->type = LESSLESS;
-	if (ft_strncmp(input, "<", 1) == 0)
+	else if (ft_strncmp(input, "<", 1) == 0)
 		token->type = LESS;
 	else if (ft_strncmp(input, ">>", 2) == 0)
 		token->type = GREATERGREATER;
@@ -75,5 +75,24 @@ void	update_token_type(t_token *token, char *input)
 // 	char	str[] = "";
 
 // 	printf("%i\n", find_closing_quote(str, 0, '\''));
+// 	return (0);
+// }
+
+// update_token_type
+
+// int	main(void)
+// {
+// 	t_token	*token;
+// 	char	*input = "'xsusj\"'";
+
+// 	token = init_token();
+// 	if (!token)
+// 		return (1);
+// 	update_token_type(token, input);
+// 	if (token->type == STRING_SIMPLE)
+// 		printf("OK\n");
+// 	else
+// 		printf("KO");
+// 	clear_token(token);
 // 	return (0);
 // }
