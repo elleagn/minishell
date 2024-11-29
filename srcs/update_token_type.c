@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_token_type.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/11/28 12:36:07 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/11/29 10:47:09 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	handle_quote_token(t_token *token, char *input)
 	int		closing_index;
 
 	quote_type = input[0];
-	closing_index = find_closing_quote(input, token->position, quote_type);
+	closing_index = find_closing_quote(input, 0, quote_type);
 	if (closing_index != -1)
 	{
 		if (quote_type == '"')
