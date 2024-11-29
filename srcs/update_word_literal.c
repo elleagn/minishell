@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:09:48 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/29 10:16:24 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/29 11:21:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	find_word_end(char *input)
 	{
 		if (is_delimiter(input[i], "<>| "))
 			return (i);
-		else if (input[i] == '\'' && find_closing_quote(input, 0, '\'') >= 0)
+		else if (input[i] == '\'' && find_closing_quote(input, i, '\'') >= 0)
 			return (i);
-		else if (input[i] == '\"' && find_closing_quote(input, 0, '\"') >= 0)
+		else if (input[i] == '\"' && find_closing_quote(input, i, '\"') >= 0)
 			return (i);
 		i++;
 	}
@@ -67,8 +67,24 @@ void	update_word_literal(t_token *token, char *input)
 
 // int main(void)
 // {
-// 	char	str[] = "bl\"bl' ";
+// 	char	str[] = "bl'bl snxsnsn snxs";
 
 // 	printf("%i\n", find_word_end(str));
+// 	return (0);
+// }
+
+// update word literal
+
+// int	main(void)
+// {
+// 	t_token	*token;
+// 	char	str[] = "Bonjo\"ur jaime les pates";
+
+// 	token = init_token();
+// 	if (!token)
+// 		return (1);
+// 	update_word_literal(token, str);
+// 	printf("%s\n", token->literal);
+// 	clear_token(token);
 // 	return (0);
 // }
