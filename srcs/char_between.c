@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:47:30 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/26 16:01:18 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/29 10:12:25 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*begin_str(int cut, char *str)
 
 	if (!str)
 		return (NULL);
-	if (ft_strlen(str) < cut)
+	if (ft_strlen(str) < (size_t)cut)
 		return (ft_strdup(str));
 	res = ft_calloc((cut + 1), sizeof(char));
 	if (!res)
@@ -30,5 +30,16 @@ char	*begin_str(int cut, char *str)
 		res[i] = str[i];
 		i++;
 	}
-	return (res[i]);
+	return (res);
 }
+
+// int	main(void)
+// {
+// 	char	str[] = "Bonjour j'aime les pates !";
+// 	char	*str_beginning;
+
+// 	str_beginning = begin_str(7, str);
+// 	printf("%s\n", str_beginning);
+// 	free(str_beginning);
+// 	return (0);
+// }
