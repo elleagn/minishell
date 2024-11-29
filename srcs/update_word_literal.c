@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:09:48 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 14:01:10 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/29 10:16:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	find_word_end(char *input)
 	{
 		if (is_delimiter(input[i], "<>| "))
 			return (i);
-		else if (input[i] == '\'' || find_closing_quote(input, 1, '\'') >= 0)
+		else if (input[i] == '\'' && find_closing_quote(input, 0, '\'') >= 0)
 			return (i);
-		else if (input[i] == '\"' || find_closing_quote(input, 1, '\"') >= 0)
+		else if (input[i] == '\"' && find_closing_quote(input, 0, '\"') >= 0)
 			return (i);
 		i++;
 	}
@@ -54,3 +54,21 @@ void	update_word_literal(t_token *token, char *input)
 	if (word)
 		token->literal = word;
 }
+
+// is_delimiter
+
+// int	main(void)
+// {
+// 	printf("%i\n", is_delimiter('f', "abcde"));
+// 	return (0);
+// }
+
+// find word end
+
+// int main(void)
+// {
+// 	char	str[] = "bl\"bl' ";
+
+// 	printf("%i\n", find_word_end(str));
+// 	return (0);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_token_type.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/11/28 12:36:07 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/11/29 09:42:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,13 @@ void	update_token_type(t_token *token, char *input)
 	else
 		token->type = WORD;
 }
+
+// find_closing_quote
+
+// int	main(void)
+// {
+// 	char	str[] = "";
+
+// 	printf("%i\n", find_closing_quote(str, 0, '\''));
+// 	return (0);
+// }
