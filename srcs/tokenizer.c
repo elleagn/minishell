@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:29:41 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 10:38:12 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/11/29 15:27:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,46 @@ int	count_words(char *str)
 	return (res);
 }
 
+t_token	*create_next_token(char *input)
+{
+	t_token	*token;
+
+	token = init_token();
+	if (!token)
+		return (NULL);
+	update_token_type(token, input);
+	if (token->type == STRING_DOUBLE || token->type == STRING_SIMPLE)
+	{
+		update_string_literal(token, input);
+		if (!token->literal)
+			return (clear_token(token), NULL);
+	}
+	else if (token->type == WORD)
+	{
+		update_word_literal(token, input);
+		if (!token->literal)
+			return (clear_token(token), NULL);
+	}
+	return (token);
+}
+
 t_list	*tokenizer(char *input)
 {
 	int		i;
-	t_list	*tokens;
-	int		error;
+	t_list	*token_list;
+	t_token	*token;
 
-	tokens = NULL;
+	token_list = NULL;
 	i = 0;
-	error = 0;
 	while (input[i])
 	{
-		if (is_operator(input[i]))
-			error = add_operator(input, tokens, &i);
-		else if (is_string(input[i]))
-			error = add_string(input, tokens, &i);
-		else
-			error = add_word(input, tokens, &i);
-		if (error)
-			return (ft_lstclear(&tokens, clear_token), NULL);
+		token = create_next_token(&input[i]);
+		if (!token)
+			return (ft_lstclear(&token_list, clear_token), NULL);
+		if (add_token_to_list(&token_list, token))
+			return (ft_lstclear(&token_list, clear_token), clear_token(token),
+				NULL);
+		go_to_next_word(input, &i, token);
 	}
-	return (tokens);
+	return (token_list);
 }

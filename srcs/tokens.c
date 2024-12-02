@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:23:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 08:30:23 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/29 10:39:13 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*init_token(void)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(token));
+	token = malloc(sizeof(t_token));
 	if (!token)
 		return (NULL);
 	token->literal = NULL;
@@ -33,3 +33,21 @@ void	clear_token(void *vtoken)
 	free(token->literal);
 	free(token);
 }
+
+// int	main(void)
+// {
+// 	t_token	*token;
+
+// 	token = init_token();
+// 	if (!token)
+// 		return (1);
+// 	if (token->type == UNDEFINED)
+// 		printf("Type : OK\n");
+// 	if (token->literal == NULL)
+// 		printf("Literal : OK\n");
+// 	if (token->position == -1)
+// 		printf("Postion : OK\n");
+// 	token->literal = malloc(sizeof(char));
+// 	clear_token(token);
+// 	return (0);
+// }
