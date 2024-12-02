@@ -6,21 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:58:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/02 10:00:37 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/02 10:06:21 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	space_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != ' ')
-		i++;
-	return (i);
-}
 
 int	delim_strlen(const char *str, char delimiter)
 {
@@ -30,27 +20,6 @@ int	delim_strlen(const char *str, char delimiter)
 	while (str[i] && str[i] != delimiter)
 		i++;
 	return (i);
-}
-
-char	*space_strdup(const char *str)
-{
-	char	*dup;
-	int		i;
-	int		len;
-
-	if (!str)
-		return (NULL);
-	len = space_strlen(str);
-	dup = malloc((len + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
-	i = 0;
-	while (i <= len)
-	{
-		dup[i] = str[i];
-		i++;
-	}
-	return (dup);
 }
 
 char	*delim_strdup(const char *str, char delimiter)
@@ -75,11 +44,4 @@ char	*delim_strdup(const char *str, char delimiter)
 	}
 	dup[len] = '\0';
 	return (dup);
-}
-
-int	main(int ac, char **av)
-{
-	(void)ac;
-	printf("%s\n", space_strdup(av[1]));
-	return (0);
 }

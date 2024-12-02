@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/29 15:20:59 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/02 10:22:19 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	update_token_type(t_token *token, char *input);
 int		find_closing_quote(char *input, int start, char quote_type);
 char	*begin_str(int cut, char *str);
 void	update_word_literal(t_token *token, char *input);
+char	*delim_strdup(const char *str, char delimiter);
+void	update_str_literal(t_token *token, char *input);
 
 #endif

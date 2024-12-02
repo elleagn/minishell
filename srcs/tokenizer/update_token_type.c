@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/11/29 15:50:19 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/02 10:53:41 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ void	update_token_type(t_token *token, char *input)
 	if (!token || !input)
 		return ;
 	if (input[0] == '"' || input[0] == '\'')
-	{
 		handle_quote_token(token, input);
-		return ;
-	}
 	else if (ft_strncmp(input, "<<", 2) == 0)
 		token->type = LESSLESS;
 	else if (ft_strncmp(input, "<", 1) == 0)
@@ -64,7 +61,7 @@ void	update_token_type(t_token *token, char *input)
 		token->type = GREATER;
 	else if (ft_strncmp(input, "|", 1) == 0)
 		token->type = PIPE;
-	else
+	if (token->type == UNDEFINED)
 		token->type = WORD;
 }
 
