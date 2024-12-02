@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strdup_space.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:58:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 13:19:19 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/12/02 10:00:37 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*space_strdup(const char *str)
 	return (dup);
 }
 
-char	*space_strdup(const char *str, char delimiter)
+char	*delim_strdup(const char *str, char delimiter)
 {
 	char	*dup;
 	int		i;
