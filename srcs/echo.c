@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:33:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/26 08:45:04 by gozon            ###   ########.fr       */
+/*   Updated: 2024/11/29 11:10:03 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	mini_echo(char **args, char **env)
 	if (!args || !args[0])
 		return (1);
 	if (!ft_strncmp(args[1], "-n", 3))
-			n_opt = 1;
+		n_opt = 1;
 	return (print_args(&args[1 + n_opt], n_opt));
 }
 

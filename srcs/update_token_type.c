@@ -34,7 +34,7 @@ static void	handle_quote_token(t_token *token, char *input)
 	int		closing_index;
 
 	quote_type = input[0];
-	closing_index = find_closing_quote(input, token->position, quote_type);
+	closing_index = find_closing_quote(input, 0, quote_type);
 	if (closing_index != -1)
 	{
 		if (quote_type == '"')
