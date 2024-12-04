@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -60,7 +60,7 @@ t_token	*create_next_token(char *input)
 	return (token);
 }
 
-// t_list	*tokenizer(char *input)
+// t_list	*lexer(char *input)
 // {
 // 	int		i;
 // 	t_list	*token_list;

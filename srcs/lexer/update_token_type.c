@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/12/02 13:33:37 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 13:04:26 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ int	is_string(char *input)
 	i = 0;
 	while (input[i] && !is_separator(input[i]))
 	{
-		if (input[i] == '\'' && find_closing_quote(input, i, '\'') >= 0)
-			return (1);
-		if (input[i] == '\"' && find_closing_quote(input, i, '\"') >= 0)
+		if (input[i] == '\'' || input[i] == '\"')
 			return (1);
 		i++;
 	}

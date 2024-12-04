@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/02 13:32:38 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 09:48:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 # include <libft.h>
 
-typedef enum e_lexeme
+typedef enum e_type
 {
 	UNDEFINED,
 	STRING,
@@ -31,11 +31,11 @@ typedef enum e_lexeme
 	GREATERGREATER,
 	PIPE,
 	WORD
-}	t_lexeme;
+}	t_type;
 
 typedef struct s_token
 {
-	t_lexeme	type;
+	t_type		type;
 	char		*literal;
 	int			position;
 }	t_token;

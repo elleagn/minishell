@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:09:48 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/29 11:21:22 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 13:05:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ int	find_word_end(char *input)
 	while (input[i])
 	{
 		if (is_delimiter(input[i], "<>| "))
-			return (i);
-		else if (input[i] == '\'' && find_closing_quote(input, i, '\'') >= 0)
-			return (i);
-		else if (input[i] == '\"' && find_closing_quote(input, i, '\"') >= 0)
 			return (i);
 		i++;
 	}

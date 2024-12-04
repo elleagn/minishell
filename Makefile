@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/02 13:05:27 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/04 13:00:17 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,14 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = srcs
 SRC_FILES =	main.c
-			tokenizer/char_between.c \
-			tokenizer/strdup_space.c \
-			tokenizer/tokenizer.c \
-			tokenizer/tokens.c \
-			tokenizer/update_operator.c \
-			tokenizer/update_str_literal.c \
-			tokenizer/update_token_type.c \
-			tokenizer/update_word_literal.c
+			lexer/char_between.c \
+			lexer/strdup_space.c \
+			lexer/lexer.c \
+			lexer/tokens.c \
+			lexer/update_operator.c \
+			lexer/update_str_literal.c \
+			lexer/update_token_type.c \
+			lexer/update_word_literal.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
