@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:48:27 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/04 14:52:04 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/12/04 14:56:14 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(void)
 	char	input9[] = "caca>sacs askc";
 	char	input10[] = "\"dfdrtytrtrc\"qwjwqdjd";
 	char	input11[] = "'dfdrtytrtrc'qwjwqdjd";
+	char	input12[] = "Coucou Lea";
 
 	printf("------ CREATE_NEXT_TOKEN ----\n");
 	printf("------ operators ------\n");
@@ -88,5 +89,3 @@ int	main(void)
 		printf("KO\n");
 	return (0);
 }
-
-coucou gaelle comment tu vas ?
