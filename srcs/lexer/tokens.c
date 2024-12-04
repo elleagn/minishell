@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:23:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/29 10:39:13 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 14:48:14 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_token	*init_token(void)
 	token->literal = NULL;
 	token->type = UNDEFINED;
 	token->position = -1;
+	token->next = NULL;
+	token->prev = NULL;
 	return (token);
 }
 
