@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:29:41 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/02 10:49:01 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 09:43:30 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_token	*create_next_token(char *input)
 	if (!token)
 		return (NULL);
 	update_token_type(token, input);
-	if (token->type == STRING_DOUBLE || token->type == STRING_SIMPLE)
+	if (token->type == STRING)
 	{
 		update_str_literal(token, input);
 		if (!token->literal)

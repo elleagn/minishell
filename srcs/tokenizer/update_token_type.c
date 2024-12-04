@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/12/02 10:53:41 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/02 13:33:37 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,27 @@ int	find_closing_quote(char *input, int start, char quote_type)
 	return (-1);
 }
 
-/* check if the token is a quote and update its type */
-static void	handle_quote_token(t_token *token, char *input)
+int	is_separator(char c)
 {
-	char	quote_type;
-	int		closing_index;
+	if (c == ' ' || c == '<' || c == '>' || c == '|')
+		return (1);
+	return (0);
+}
 
-	quote_type = input[0];
-	closing_index = find_closing_quote(input, 0, quote_type);
-	if (closing_index != -1)
+int	is_string(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i] && !is_separator(input[i]))
 	{
-		if (quote_type == '"')
-			token->type = STRING_DOUBLE;
-		else
-			token->type = STRING_SIMPLE;
+		if (input[i] == '\'' && find_closing_quote(input, i, '\'') >= 0)
+			return (1);
+		if (input[i] == '\"' && find_closing_quote(input, i, '\"') >= 0)
+			return (1);
+		i++;
 	}
+	return (0);
 }
 
 /* update the token type */
@@ -49,9 +55,7 @@ void	update_token_type(t_token *token, char *input)
 {
 	if (!token || !input)
 		return ;
-	if (input[0] == '"' || input[0] == '\'')
-		handle_quote_token(token, input);
-	else if (ft_strncmp(input, "<<", 2) == 0)
+	if (ft_strncmp(input, "<<", 2) == 0)
 		token->type = LESSLESS;
 	else if (ft_strncmp(input, "<", 1) == 0)
 		token->type = LESS;
@@ -61,7 +65,9 @@ void	update_token_type(t_token *token, char *input)
 		token->type = GREATER;
 	else if (ft_strncmp(input, "|", 1) == 0)
 		token->type = PIPE;
-	if (token->type == UNDEFINED)
+	else if (is_string(input))
+		token->type = STRING;
+	else
 		token->type = WORD;
 }
 

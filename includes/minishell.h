@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/02 10:22:19 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/02 13:32:38 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 typedef enum e_lexeme
 {
 	UNDEFINED,
-	STRING_SIMPLE,
-	STRING_DOUBLE,
+	STRING,
 	LESS,
 	LESSLESS,
 	GREATER,
@@ -52,5 +51,6 @@ char	*begin_str(int cut, char *str);
 void	update_word_literal(t_token *token, char *input);
 char	*delim_strdup(const char *str, char delimiter);
 void	update_str_literal(t_token *token, char *input);
+int		is_separator(char c);
 
 #endif

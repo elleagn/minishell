@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:48:27 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/02 11:00:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 09:44:12 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	main(void)
 		printf("KO\n");
 	printf("------ strings ------\n");
 	token = create_next_token(input10);
-	if (token->type == STRING_DOUBLE)
+	if (token->type == STRING)
 		printf("input: %s result: %s\n", input10, token->literal);
 	else
 		printf("KO\n");
 	token = create_next_token(input11);
-	if (token->type == STRING_SIMPLE)
+	if (token->type == STRING)
 		printf("input: %s result: %s\n", input11, token->literal);
 	else
 		printf("KO\n");
