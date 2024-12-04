@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/04 09:48:32 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 14:40:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <unistd.h>
+# include <sys/types.h>
 # include <stdlib.h>
 # include <libft.h>
 
@@ -33,12 +34,40 @@ typedef enum e_type
 	WORD
 }	t_type;
 
+typedef struct s_data
+{
+	char	**env;
+	char	**path;
+	char	*pwd;
+	t_list	*lexer_list;
+}	t_data;
+
 typedef struct s_token
 {
 	t_type		type;
 	char		*literal;
 	int			position;
 }	t_token;
+
+typedef struct s_redir
+{
+	t_type	type;
+	char	*filename;
+	int		fd;
+	t_redir	*next;
+}	t_redir;
+
+typedef struct s_command
+{
+	char				**av;
+	t_redir				*redirs;
+	char				**heredocs;
+	int					pipe[2];
+	pid_t				pid;
+	int					errornb;
+	struct s_command	*next;
+	struct s_command	*prev;
+}	t_command;
 
 t_token	*init_token(void);
 void	clear_token(void *vtoken);
