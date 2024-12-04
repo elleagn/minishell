@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:48:27 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/04 09:44:12 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 14:52:04 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,5 @@ int	main(void)
 		printf("KO\n");
 	return (0);
 }
+
+coucou gaelle comment tu vas ?
