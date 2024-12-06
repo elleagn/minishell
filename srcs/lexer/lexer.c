@@ -28,11 +28,26 @@ int	check_unclosed_quotes(char *input)
 			if (closing_quote > 0)
 				i = closing_quote;
 			else
+			{
+				printf("minishell: unclosed quotes\n");
 				return (1);
+			}
 		}
 		i++;
 	}
 	return (0);
+}
+
+void	go_to_next_word(char *input, int *i, t_token *token)
+{
+	if (token->literal)
+		*i += ft_strlen(token->literal);
+	else if (token->type == GREATERGREATER || token->type == LESSLESS)
+		*i += 2;
+	else
+		*i += 1;
+	while (input[*i] == ' ')
+		*i++;
 }
 
 t_token	*create_next_token(char *input)
@@ -58,25 +73,23 @@ t_token	*create_next_token(char *input)
 	return (token);
 }
 
-// t_list	*lexer(char *input)
-// {
-// 	int		i;
-// 	t_list	*token_list;
-// 	t_token	*token;
+t_list	*lexer(char *input)
+{
+	int		i;
+	t_list	*token_list;
+	t_token	*token;
 
-// 	if (check_unclosed_quotes(input))
-// 		return (NULL);
-// 	token_list = NULL;
-// 	i = 0;
-// 	while (input[i])
-// 	{
-// 		token = create_next_token(&input[i]);
-// 		if (!token)
-// 			return (ft_lstclear(&token_list, clear_token), NULL);
-// 		if (add_token_to_list(&token_list, token))
-// 			return (ft_lstclear(&token_list, clear_token), clear_token(token),
-// 				NULL);
-// 		go_to_next_word(input, &i, token);
-// 	}
-// 	return (token_list);
-// }
+	if (check_unclosed_quotes(input))
+		return (NULL);
+	token_list = NULL;
+	i = 0;
+	while (input[i])
+	{
+		token = create_next_token(&input[i]);
+		if (!token)
+			return (clear_token_list(&token_list), NULL);
+		add_token_to_list(&token_list, token);
+		go_to_next_word(input, &i, token);
+	}
+	return (token_list);
+}
