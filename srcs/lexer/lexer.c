@@ -12,29 +12,27 @@
 
 #include <minishell.h>
 
-int	count_words(char *str)
+int	check_unclosed_quotes(char *input)
 {
-	int	i;
-	int	res;
-	int	in_word;
+	int		i;
+	int		closing_quote;
+	char	quote_type;
 
 	i = 0;
-	res = 0;
-	in_word = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	while (input[i])
 	{
-		if (in_word && str[i] == ' ')
-			in_word = 0;
-		if (!in_word && str[i] != ' ')
+		if (input[i] == '\'' || input[i] == '\"')
 		{
-			res += 1;
-			in_word = 1;
+			quote_type = input[i];
+			closing_quote = find_closing_quote(input, i, quote_type);
+			if (closing_quote > 0)
+				i = closing_quote;
+			else
+				return (1);
 		}
 		i++;
 	}
-	return (res);
+	return (0);
 }
 
 t_token	*create_next_token(char *input)
@@ -66,6 +64,8 @@ t_token	*create_next_token(char *input)
 // 	t_list	*token_list;
 // 	t_token	*token;
 
+// 	if (check_unclosed_quotes(input))
+// 		return (NULL);
 // 	token_list = NULL;
 // 	i = 0;
 // 	while (input[i])

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 10:49:04 by nouillebobb       #+#    #+#             */
-/*   Updated: 2024/12/04 09:40:45 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 15:17:28 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ int	find_string_end(char *input)
 		{
 			closing_quote = find_closing_quote(input, i, '\'');
 			if (closing_quote > 0)
-				i += closing_quote;
+				i = closing_quote;
+		}
+		else if (input[i] == '\"')
+		{
+			closing_quote = find_closing_quote(input, i, '\"');
+			if (closing_quote > 0)
+				i = closing_quote;
 		}
 		i++;
 	}

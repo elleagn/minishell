@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/04 14:46:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/04 15:08:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ typedef struct s_data
 
 typedef struct s_token
 {
-	t_type		type;
-	char		*literal;
-	int			position;
-	t_token		*next;
-	t_token		*prev;
+	t_type				type;
+	char				*literal;
+	int					position;
+	struct s_token		*next;
+	struct s_token		*prev;
 }	t_token;
 
 typedef struct s_redir
 {
-	t_type	type;
-	char	*filename;
-	int		fd;
-	t_redir	*next;
+	t_type			type;
+	char			*filename;
+	int				fd;
+	struct s_redir	*next;
 }	t_redir;
 
 typedef struct s_command
