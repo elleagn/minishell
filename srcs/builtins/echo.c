@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:33:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/29 11:10:03 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2024/12/06 13:53:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,9 @@ int	print_args(char **args, int n_opt)
 	return (0);
 }
 
-int	mini_echo(char **args, char **env)
+int	mini_echo(t_command *command, t_data *data)
 {
-	int	n_opt;
-
-	(void)env;
-	n_opt = 0;
-	if (!args || !args[0])
-		return (1);
-	if (!ft_strncmp(args[1], "-n", 3))
-		n_opt = 1;
-	return (print_args(&args[1 + n_opt], n_opt));
+	(void)	*data;
 }
 
 int	main(int ac, char **av)

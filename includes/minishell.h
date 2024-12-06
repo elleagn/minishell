@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/06 08:59:29 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/06 13:54:30 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_data
 	char	**path;
 	char	*pwd;
 	t_list	*lexer_list;
+	int		last_error;
 }	t_data;
 
 typedef struct s_token
