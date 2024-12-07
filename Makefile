@@ -6,15 +6,16 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/04 13:00:17 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/07 07:57:36 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = srcs
-SRC_FILES =	main.c
+LIBFT = libft/libft.a
+SRC_FILES =	main.c \
 			lexer/char_between.c \
 			lexer/strdup_space.c \
 			lexer/lexer.c \
@@ -33,15 +34,20 @@ CHECK_MARK = ✔
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) $(OBJ) -lpthread -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT)
+	@$(CC) $(OBJ) -Llibft -lft -lreadline -o $(NAME)
 	@echo "$(NAME) a été créé avec succès ($(CHECK_MARK))"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -Iincludes -c $< -o $@
+	@$(CC) $(CFLAGS) -Iincludes -Ilibft -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
+	@mkdir $(OBJ_DIR)/lexer
+
+$(LIBFT):
+	@make -C libft --silent --no-print-directory
+	@echo "Compilation de la Libft ($(CHECK_MARK))"
 
 clean:
 	@rm -rf $(OBJ_DIR)
