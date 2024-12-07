@@ -6,7 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/12/06 13:54:30 by gozon            ###   ########.fr       */
+=======
+/*   Updated: 2024/12/07 07:54:26 by gozon            ###   ########.fr       */
+>>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +79,7 @@ typedef struct s_command
 t_token	*init_token(void);
 void	clear_token(void *vtoken);
 t_token	*create_next_token(char *input);
-int		add_token_to_list(t_list **token_list, t_token *next_token);
+void		add_token_to_list(t_token **token_list, t_token *next_token);
 void	clear_token_list(t_token **token_lst);
 void	del_token_from_list(t_token **token_lst, t_token *token);
 void	go_to_next_word(char *input, int *i, t_token *token);

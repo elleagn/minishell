@@ -47,7 +47,7 @@ void	go_to_next_word(char *input, int *i, t_token *token)
 	else
 		*i += 1;
 	while (input[*i] == ' ')
-		*i++;
+		*i += 1;
 }
 
 t_token	*create_next_token(char *input)
@@ -73,10 +73,10 @@ t_token	*create_next_token(char *input)
 	return (token);
 }
 
-t_list	*lexer(char *input)
+t_token	*lexer(char *input)
 {
 	int		i;
-	t_list	*token_list;
+	t_token	*token_list;
 	t_token	*token;
 
 	if (check_unclosed_quotes(input))
