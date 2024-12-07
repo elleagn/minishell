@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/07 09:44:10 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/07 17:09:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/types.h>
 # include <stdlib.h>
 # include <libft.h>
+
+# define ENV_SIZE 100
 
 typedef enum e_type
 {
@@ -37,6 +39,7 @@ typedef enum e_type
 typedef struct s_data
 {
 	char	**env;
+	int		env_size;
 	char	**path;
 	char	*pwd;
 	t_list	*lexer_list;

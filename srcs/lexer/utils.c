@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup_space.c                                     :+:      :+:    :+:   */
+/*   delim_strdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:58:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/02 10:06:21 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/07 17:13:42 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,25 @@ char	*delim_strdup(const char *str, char delimiter)
 	}
 	dup[len] = '\0';
 	return (dup);
+}
+
+char	*begin_str(int cut, char *str)
+{
+	char	*res;
+	int		i;
+
+	if (!str)
+		return (NULL);
+	if (ft_strlen(str) < (size_t)cut)
+		return (ft_strdup(str));
+	res = ft_calloc((cut + 1), sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < cut)
+	{
+		res[i] = str[i];
+		i++;
+	}
+	return (res);
 }
