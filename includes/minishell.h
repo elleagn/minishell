@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/08 07:33:20 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/08 08:02:55 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_data
 	char	**env;
 	int		env_size;
 	char	**path;
-	char	*pwd;
 	t_list	*lexer_list;
 	int		last_error;
 }	t_data;
