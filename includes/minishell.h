@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/08 07:29:15 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/08 07:33:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	update_str_literal(t_token *token, char *input);
 int		is_separator(char c);
 
 // Builtins
+
+int		find_out_fd(t_command *command);
 
 // Utils
 
