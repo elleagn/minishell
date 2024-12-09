@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 07:32:20 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 08:31:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/09 09:35:42 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,38 @@
 int	find_env_var(char *name, char **env)
 {
 	int	i;
+	int	nlen;
 
 	i = 0;
+	nlen = 0;
+	while (name[nlen] && name[nlen] != '=')
+		nlen++;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], name, ft_strlen(name))
-			&& env[i][ft_strlen(name)] == '=')
+		if (!ft_strncmp(env[i], name, nlen) && env[i][nlen] == '=')
 			return (i);
 		i++;
 	}
 	return (-1);
+}
+
+char	*strjoin_three(char const *s1, char const *s2, char const *s3)
+{
+	char	*res;
+	int		len1;
+	int		len2;
+	int		len3;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	len3 = ft_strlen(s3);
+	res = malloc((len1 + len2 + len3 + 1) * sizeof(char));
+	if (res == NULL)
+		return (NULL);
+	ft_strlcpy(res, s1, len1 + 1);
+	ft_strlcat(res, s2, len1 + len2 + 1);
+	ft_strlcat(res, s3, len1 + len2 + len3 + 1);
+	return (res);
 }
 
 int	find_out_fd(t_command *command)
@@ -52,6 +74,8 @@ int	find_out_fd(t_command *command)
 // 	char	name2[]="SHLVL";
 // 	char	name3[]="HOME";
 // 	char	name4[]="BLBL";
+// 	char	name5[]="BLBL=";
+// 	char	name6[]="HOME=";
 
 // 	(void)ac;
 // 	(void)av;
@@ -60,5 +84,7 @@ int	find_out_fd(t_command *command)
 // 	ft_printf("%s: %i\n", name2, find_env_var(name2, envp));
 // 	ft_printf("%s: %i\n", name3, find_env_var(name3, envp));
 // 	ft_printf("%s: %i\n", name4, find_env_var(name4, envp));
+// 	ft_printf("%s: %i\n", name5, find_env_var(name5, envp));
+// 	ft_printf("%s: %i\n", name6, find_env_var(name6, envp));
 // 	return (0);
 // }

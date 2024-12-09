@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:33:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/08 07:40:13 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:34:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	mini_echo(t_command *command, t_data *data)
 
 	(void)	*data;
 	n_opt = 0;
-	if (!command || !command->av[0])
-		return (1);
 	out_fd = find_out_fd(command);
 	if (out_fd < 0)
 		return (1);

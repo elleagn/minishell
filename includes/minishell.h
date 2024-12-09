@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/08 08:02:55 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:35:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_command
 	pid_t				pid;
 	int					errornb;
 	struct s_command	*next;
-	struct s_command	*prev;
 }	t_command;
 
 // Lexer
@@ -84,6 +83,8 @@ int		is_separator(char c);
 // Builtins
 
 int		find_out_fd(t_command *command);
+int		find_env_var(char *name, char **env);
+int		mini_env(t_command *command, t_data *data);
 
 // Utils
 
@@ -95,5 +96,7 @@ void	del_token_from_list(t_token **token_lst, t_token *token);
 char	*begin_str(int cut, char *str);
 char	*delim_strdup(const char *str, char delimiter);
 void	clear_redir_list(t_redir *redir);
+void	remove_var(char *var, t_data *data);
+int		add_var(char *var, t_data *data);
 
 #endif
