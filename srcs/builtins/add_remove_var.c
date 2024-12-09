@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:36:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 10:04:10 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/09 12:45:53 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	add_var(char *var, t_data *data)
 	int	oldvar;
 	int	env_index;
 
-	oldvar = find_env_var(var, data->env);
+	oldvar = find_env_var(var, data->env, 0);
 	if (oldvar >= 0)
 	{
 		free(data->env[oldvar]);
@@ -74,7 +74,7 @@ void	remove_var(char *var, t_data *data)
 	int	var_index;
 	int	i;
 
-	var_index = find_env_var(var, data->env);
+	var_index = find_env_var(var, data->env, 1);
 	if (var_index < 0)
 		return ;
 	free(data->env[var_index]);

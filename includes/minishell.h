@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 11:35:48 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/09 14:21:50 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ int		is_separator(char c);
 // Builtins
 
 int		find_out_fd(t_command *command);
-int		find_env_var(char *name, char **env);
+int		find_env_var(char *name, char **env, int strict);
 int		mini_env(t_command *command, t_data *data);
+char	*strjoin_three(char const *s1, char const *s2, char const *s3);
 
 // Utils
 

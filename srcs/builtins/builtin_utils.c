@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 07:32:20 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 09:35:42 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/09 12:44:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	find_env_var(char *name, char **env)
+int	find_env_var(char *name, char **env, int strict)
 {
 	int	i;
-	int	nlen;
+	int	len;
 
 	i = 0;
-	nlen = 0;
-	while (name[nlen] && name[nlen] != '=')
-		nlen++;
+	if (strict == 1)
+		len = ft_strlen(name);
+	else
+	{
+		while (name[len] && name[len] != '=')
+			len++;
+	}
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], name, nlen) && env[i][nlen] == '=')
+		if (!ft_strncmp(env[i], name, len) && env[i][len] == '=')
 			return (i);
 		i++;
 	}
