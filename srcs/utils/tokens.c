@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:23:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/06 09:01:03 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/07 09:47:08 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	clear_token(void *vtoken)
 	t_token	*token;
 
 	token = (t_token *)vtoken;
+	if (!token)
+		return ;
 	free(token->literal);
 	free(token);
 }
@@ -40,6 +42,8 @@ void	clear_token_list(t_token **token_lst)
 {
 	t_token	*token;
 
+	if (!token_lst || !*token_lst)
+		return ;
 	token = *token_lst;
 	while (token->prev)
 		token = token->prev;
@@ -56,9 +60,9 @@ void	add_token_to_list(t_token **token_lst, t_token *new_token)
 {
 	t_token	*token;
 
-	token = *token_lst;
-	if (!new_token)
+	if (!new_token || !token_lst)
 		return ;
+	token = *token_lst;
 	if (!token)
 		*token_lst = new_token;
 	else

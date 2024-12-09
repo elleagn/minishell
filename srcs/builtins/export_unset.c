@@ -1,47 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup_space.c                                     :+:      :+:    :+:   */
+/*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 14:58:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/02 10:06:21 by gozon            ###   ########.fr       */
+/*   Created: 2024/12/09 10:10:54 by gozon             #+#    #+#             */
+/*   Updated: 2024/12/09 12:01:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	delim_strlen(const char *str, char delimiter)
+int	is_valid(char *var)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != delimiter)
-		i++;
-	return (i);
+	while (var[i])
+	{
+		if (var[i] == '=')
+			return (var[i + 1]);
+	}
+	return (0);
 }
 
-char	*delim_strdup(const char *str, char delimiter)
+int	mini_export(t_command *command, t_data *data)
 {
-	char	*dup;
+	char	*var;
 	int		i;
-	int		len;
 
-	if (!str)
-		return (NULL);
-	len = 0;
-	while (str[len] && str[len] != delimiter)
-		len++;
-	dup = malloc((len + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len)
+	if (!command->av[1])
+		return (mini_env(command, data));
+	i = 1;
+	while (command->av[i])
 	{
-		dup[i] = str[i];
+		if (is_valid(command->av[i]))
+		{
+			if (add_var(command->av[i], data))
+				return (1);
+		}
 		i++;
 	}
-	dup[len] = '\0';
-	return (dup);
+	return (0);
+}
+
+int	mini_unset(t_command)
+{
+
 }

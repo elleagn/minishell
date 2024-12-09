@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/07 07:54:26 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:35:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/types.h>
 # include <stdlib.h>
 # include <libft.h>
+
+# define ENV_SIZE 100
 
 typedef enum e_type
 {
@@ -37,9 +39,10 @@ typedef enum e_type
 typedef struct s_data
 {
 	char	**env;
+	int		env_size;
 	char	**path;
-	char	*pwd;
 	t_list	*lexer_list;
+	int		last_error;
 }	t_data;
 
 typedef struct s_token
@@ -63,27 +66,37 @@ typedef struct s_command
 {
 	char				**av;
 	t_redir				*redirs;
-	char				**heredocs;
 	int					pipe[2];
 	pid_t				pid;
 	int					errornb;
 	struct s_command	*next;
-	struct s_command	*prev;
 }	t_command;
+
+// Lexer
+
+void	update_token_type(t_token *token, char *input);
+int		find_closing_quote(char *input, int start, char quote_type);
+void	update_word_literal(t_token *token, char *input);
+void	update_str_literal(t_token *token, char *input);
+int		is_separator(char c);
+
+// Builtins
+
+int		find_out_fd(t_command *command);
+int		find_env_var(char *name, char **env);
+int		mini_env(t_command *command, t_data *data);
+
+// Utils
 
 t_token	*init_token(void);
 void	clear_token(void *vtoken);
-t_token	*create_next_token(char *input);
-void		add_token_to_list(t_token **token_list, t_token *next_token);
+void	add_token_to_list(t_token **token_list, t_token *next_token);
 void	clear_token_list(t_token **token_lst);
 void	del_token_from_list(t_token **token_lst, t_token *token);
-void	go_to_next_word(char *input, int *i, t_token *token);
-void	update_token_type(t_token *token, char *input);
-int		find_closing_quote(char *input, int start, char quote_type);
 char	*begin_str(int cut, char *str);
-void	update_word_literal(t_token *token, char *input);
 char	*delim_strdup(const char *str, char delimiter);
-void	update_str_literal(t_token *token, char *input);
-int		is_separator(char c);
+void	clear_redir_list(t_redir *redir);
+void	remove_var(char *var, t_data *data);
+int		add_var(char *var, t_data *data);
 
 #endif

@@ -29,7 +29,7 @@ int	check_unclosed_quotes(char *input)
 				i = closing_quote;
 			else
 			{
-				printf("minishell: unclosed quotes\n");
+				write(2, "minishell: unclosed quotes\n", 28);
 				return (1);
 			}
 		}

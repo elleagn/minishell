@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_operator.c                                  :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 10:20:46 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 10:20:58 by gozon            ###   ########.fr       */
+/*   Created: 2024/12/08 08:10:09 by gozon             #+#    #+#             */
+/*   Updated: 2024/12/08 08:21:00 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	update_operator_type(t_token *token, char *input)
+int	mini_pwd(t_command *command, t_data *data)
 {
-	if (ft_strncmp(input, "<<", 2))
-		token->type = LESSLESS;
-	else if (ft_strncmp(input, "<", 1))
-		token->type = LESS;
-	else if (ft_strncmp(input, ">>", 2))
-		token->type = GREATERGREATER;
-	else if (ft_strncmp(input, ">", 1))
-		token->type = GREATER;
-	else if (ft_strncmp(input, "|", 1))
-		token->type = PIPE;
+	int		out_fd;
+	char	buffer[4096];
+
+	(void)data;
+	out_fd = find_out_fd(command);
+	if (out_fd < 0)
+		return (1);
+	ft_bzero(buffer, 4096);
+	getcwd(buffer, 4096);
+	if (write(out_fd, buffer, ft_strlen(buffer)) < 0)
+		return (1);
+	return (0);
 }

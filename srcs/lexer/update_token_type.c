@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/12/04 13:04:26 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/08 07:29:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ int	find_closing_quote(char *input, int start, char quote_type)
 		i++;
 	}
 	return (-1);
-}
-
-int	is_separator(char c)
-{
-	if (c == ' ' || c == '<' || c == '>' || c == '|')
-		return (1);
-	return (0);
 }
 
 int	is_string(char *input)
