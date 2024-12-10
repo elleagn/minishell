@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 07:32:20 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 08:19:11 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 09:10:41 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	find_env_var(char *name, char **env, int strict)
 		len = ft_strlen(name);
 	else
 	{
+		len = 0;
 		while (name[len] && name[len] != '=')
 			len++;
 	}
