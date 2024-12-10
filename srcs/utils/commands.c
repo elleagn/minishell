@@ -6,26 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 08:04:11 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 09:16:54 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:15:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	free_char_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
 
 t_command	*init_comand(void)
 {
@@ -39,6 +24,7 @@ t_command	*init_comand(void)
 	command->next = NULL;
 	command->pid = -1;
 	command->redirs = NULL;
+	command->builtin = NULL;
 	command->pipe[0] = 0;
 	command->pipe[1] = 1;
 	return (command);

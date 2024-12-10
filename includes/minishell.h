@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 09:30:27 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:40:06 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_data
 	char	**env;
 	int		env_size;
 	char	**path;
-	t_list	*lexer_list;
-	int		last_error;
+	t_token	*lexer_list;
+	int		exit_code;
 }	t_data;
 
 typedef struct s_token
@@ -107,5 +107,10 @@ void		clear_command(t_command *command);
 void		clear_command_list(t_command *command);
 t_redir		*init_redir(void);
 void		clear_redir_list(t_redir *redir);
+void		free_char_array(char **array);
+t_data		*init_data(void);
+void		clear_data(t_data *data);
+int			array_size(char **env);
+char		**dup_env_array(char **envp, t_data *data);
 
 #endif

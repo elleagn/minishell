@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:36:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 08:18:32 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:25:26 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ char	**expand_env(t_data *data)
 	return (new_env);
 }
 
-int	env_filled_size(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	return (i);
-}
-
 int	add_var(char *var, t_data *data)
 {
 	int	oldvar;
@@ -58,7 +48,7 @@ int	add_var(char *var, t_data *data)
 	}
 	else
 	{
-		env_index = env_filled_size(data->env);
+		env_index = array_size(data->env);
 		if (!(env_index < data->env_size))
 		{
 			if (!expand_env(data))
