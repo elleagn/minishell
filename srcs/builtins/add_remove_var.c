@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:36:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 12:45:53 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:18:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**expand_env(t_data *data)
 	new_size = data->env_size + ENV_SIZE;
 	new_env = ft_calloc(new_size + 1, sizeof(char *));
 	if (!new_env)
-		return (NULL);
+		return (perror("minishell"), NULL);
 	data->env_size = new_size;
 	i = 0;
 	while (data->env[i])

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 07:32:20 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 12:44:44 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:19:11 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*strjoin_three(char const *s1, char const *s2, char const *s3)
 	len3 = ft_strlen(s3);
 	res = malloc((len1 + len2 + len3 + 1) * sizeof(char));
 	if (res == NULL)
-		return (NULL);
+		return (perror("minishell"), NULL);
 	ft_strlcpy(res, s1, len1 + 1);
 	ft_strlcat(res, s2, len1 + len2 + 1);
 	ft_strlcat(res, s3, len1 + len2 + len3 + 1);

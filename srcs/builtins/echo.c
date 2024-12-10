@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:33:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 11:34:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:20:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int	print_args(char **args, int n_opt, int fd)
 	while (args[i])
 	{
 		if (write(fd, args[i], ft_strlen(args[i])) < 0)
-			return (1);
+			return (perror("minishell"), 1);
 		i++;
 		if (args[i])
 		{
 			if (write(fd, " ", 1) < 0)
-				return (1);
+				return (perror("minishell"), 1);
 		}
 	}
 	if (!n_opt)
 	{
 		if (write(fd, "\n", 1) < 0)
-			return (1);
+			return (perror("minishell"), 1);
 	}
 	return (0);
 }

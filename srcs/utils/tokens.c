@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:23:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/07 09:47:08 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:14:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*init_token(void)
 
 	token = malloc(sizeof(t_token));
 	if (!token)
-		return (NULL);
+		return (perror("minishell"), NULL);
 	token->literal = NULL;
 	token->type = UNDEFINED;
 	token->position = -1;

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:10:09 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 14:28:22 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:21:35 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	mini_cd(t_command *command, t_data *data)
 	if (chdir(command->av[1] < 0))
 		return (perror("minishell: cd"), 1);
 	if (!getcwd(buf, 4096))
-		return (perror("minishell: cd"), 1);
+		return (perror("minishell"), 1);
 	pwd = strjoin_three("PWD", "=", buf);
 	if (!pwd)
 		return (1);

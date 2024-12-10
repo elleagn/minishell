@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:10:54 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 14:28:43 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:21:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	mini_export(t_command *command, t_data *data)
 		{
 			var = ft_strdup(command->av[i]);
 			if (!var)
-				return (perror("minishell: export"), 1);
+				return (perror("minishell"), 1);
 			if (add_var(var, data))
 				return (1);
 		}

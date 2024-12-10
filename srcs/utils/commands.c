@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 08:04:11 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/07 09:51:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:17:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_command	*init_comand(void)
 
 	command = malloc(sizeof(t_command));
 	if (!command)
-		return (NULL);
+		return (perror("minishell"), NULL);
 	command->av = NULL;
 	command->errornb = 0;
 	command->next = NULL;
