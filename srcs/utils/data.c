@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:04:48 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 11:21:01 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:44:56 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_data	*init_data(void)
 	data->path = 0;
 	data->lexer_list = NULL;
 	data->exit_code = 0;
+	return (data);
 }
 
 void	clear_data(t_data *data)

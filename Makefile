@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/10 10:03:35 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/10 11:44:22 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRC_FILES =	lexer/lexer.c \
 			utils/commands.c \
 			utils/tokens.c \
 			utils/redirs.c \
+			utils/data.c \
+			utils/arrays.c \
 			builtins/builtin_utils.c \
 			builtins/echo.c \
 			builtins/env.c \

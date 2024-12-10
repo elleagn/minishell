@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:14:39 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 11:39:48 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:45:27 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ char	**dup_env_array(char **envp, t_data *data)
 		data->env_size += ENV_SIZE;
 	new_env = ft_calloc(data->env_size + 1, sizeof(char *));
 	if (!new_env)
-		return (perror("minishell"), 1);
+		return (perror("minishell"), NULL);
 	i = 0;
 	while (envp[i])
 	{
 		new_env[i] = ft_strdup(envp[i]);
 		if (!new_env)
-			return (perror("minishell"), free_char_array(new_env), 1);
+			return (perror("minishell"), free_char_array(new_env), NULL);
 		i++;
 	}
 	data->env = new_env;
-	return (0);
+	return (new_env);
 }

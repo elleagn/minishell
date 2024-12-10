@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 11:40:06 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:43:46 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef enum e_type
 
 typedef struct s_data
 {
-	char	**env;
-	int		env_size;
-	char	**path;
-	t_token	*lexer_list;
-	int		exit_code;
+	char			**env;
+	int				env_size;
+	char			**path;
+	struct s_token	*lexer_list;
+	int				exit_code;
 }	t_data;
 
 typedef struct s_token
