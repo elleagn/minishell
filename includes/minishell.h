@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 11:43:46 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 12:50:00 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <libft.h>
 # include <fcntl.h>
 
-# define ENV_SIZE 100
+# define ENV_SIZE 3
 
 typedef enum e_type
 {
@@ -89,6 +89,8 @@ int			find_env_var(char *name, char **env, int strict);
 int			mini_env(t_command *command, t_data *data);
 char		*strjoin_three(char const *s1, char const *s2, char const *s3);
 int			mini_echo(t_command *command, t_data *data);
+int			mini_unset(t_command *command, t_data *data);
+int			mini_export(t_command *command, t_data *data);
 
 // Utils
 

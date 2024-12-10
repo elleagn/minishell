@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:10:54 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 08:21:20 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 13:44:33 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	is_valid(char *var)
 	{
 		if (var[i] == '=')
 			return (var[i + 1]);
+		i++;
 	}
 	return (0);
 }
@@ -52,7 +53,7 @@ int	mini_unset(t_command *command, t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (command->av[i])
 	{
 		remove_var(command->av[i], data);

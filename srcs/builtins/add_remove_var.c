@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:36:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 11:25:26 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 13:43:34 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**expand_env(t_data *data)
 		return (perror("minishell"), NULL);
 	data->env_size = new_size;
 	i = 0;
-	while (data->env[i])
+	while (data->env && data->env[i])
 	{
 		new_env[i] = data->env[i];
 		i++;

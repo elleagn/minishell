@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:14:39 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 11:45:27 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 13:41:04 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	array_size(char **env)
 	int	i;
 
 	i = 0;
+	if (!env)
+		return (0);
 	while (env[i])
 		i++;
 	return (i);

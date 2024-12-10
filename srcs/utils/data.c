@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:04:48 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 11:44:56 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 13:47:50 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	clear_data(t_data *data)
 	free_char_array(data->env);
 	free_char_array(data->path);
 	clear_token_list(&(data->lexer_list));
+	free(data);
 }

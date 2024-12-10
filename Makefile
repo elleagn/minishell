@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/10 11:44:22 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/10 12:47:47 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRC_FILES =	lexer/lexer.c \
 			builtins/builtin_utils.c \
 			builtins/echo.c \
 			builtins/env.c \
-			tests/main_env.c
+			builtins/export_unset.c \
+			builtins/add_remove_var.c \
+			tests/main_export_unset.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
