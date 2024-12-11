@@ -6,13 +6,13 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/10 12:47:47 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/11 10:17:59 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 SRC_DIR = srcs
 LIBFT = libft/libft.a
 SRC_FILES =	lexer/lexer.c \
@@ -29,6 +29,8 @@ SRC_FILES =	lexer/lexer.c \
 			builtins/echo.c \
 			builtins/env.c \
 			builtins/export_unset.c \
+			builtins/export_utils.c \
+			builtins/pwd_cd.c \
 			builtins/add_remove_var.c \
 			tests/main_export_unset.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

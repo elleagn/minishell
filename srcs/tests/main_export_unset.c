@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:31:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 13:51:48 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/11 10:10:38 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(void)
 	char		*av4[] = {"env", "PLOUF=plouf", "PLOP=plop", NULL};
 	char		*av5[] = {"env", NULL};
 	char		*av6[] = {"unset", "PLOUF", "BLBL", NULL};
+	char		*av7[] = {"env", "1BLBL", "BL$BL", NULL};
 	char		*env[] = {"BLBL=bl", "BLBLBL=bl", NULL};
 	// int			fd;
 	// t_redir		*redir;
@@ -51,6 +52,9 @@ int	main(void)
 	mini_unset(command, data);
 	command->av = av5;
 	mini_env(command, data);
+	write(1, "---------- INVALID -------\n", 28);
+	command->av = av7;
+	mini_export(command, data);
 	free(command);
 	clear_data(data);
 	return (0);
