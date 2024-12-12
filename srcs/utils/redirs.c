@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 09:36:14 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/07 09:43:03 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:17:46 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_redir	*init_redir(void)
 
 	redir = malloc(sizeof(t_redir));
 	if (!redir)
-		return (NULL);
+		return (perror("minishell"), NULL);
 	redir->filename = NULL;
 	redir->fd = -2;
 	redir->next = NULL;

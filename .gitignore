@@ -2,4 +2,6 @@
 *.o
 a.out
 */*.a
-srcs/tests
+minishell
+out*
+in*

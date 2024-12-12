@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 07:32:20 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/09 09:35:42 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 13:40:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	find_env_var(char *name, char **env)
+int	find_env_var(char *name, char **env, int strict)
 {
 	int	i;
-	int	nlen;
+	int	len;
 
 	i = 0;
-	nlen = 0;
-	while (name[nlen] && name[nlen] != '=')
-		nlen++;
+	if (!env)
+		return (-1);
+	if (strict == 1)
+		len = ft_strlen(name);
+	else
+	{
+		len = 0;
+		while (name[len] && name[len] != '=')
+			len++;
+	}
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], name, nlen) && env[i][nlen] == '=')
+		if (!ft_strncmp(env[i], name, len) && env[i][len] == '=')
 			return (i);
 		i++;
 	}
@@ -42,7 +49,7 @@ char	*strjoin_three(char const *s1, char const *s2, char const *s3)
 	len3 = ft_strlen(s3);
 	res = malloc((len1 + len2 + len3 + 1) * sizeof(char));
 	if (res == NULL)
-		return (NULL);
+		return (perror("minishell"), NULL);
 	ft_strlcpy(res, s1, len1 + 1);
 	ft_strlcat(res, s2, len1 + len2 + 1);
 	ft_strlcat(res, s3, len1 + len2 + len3 + 1);

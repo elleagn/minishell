@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:10:30 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/08 07:52:04 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:21:03 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	print_env(char **env, int fd)
 	while (env[i])
 	{
 		if (write(fd, env[i], ft_strlen(env[i])) < 0)
-			return (1);
+			return (perror("minishell"), 1);
 		if (write(fd, "\n", 1) < 0)
-			return (1);
+			return (perror("minishell"), 1);
 		i++;
 	}
 	return (0);
