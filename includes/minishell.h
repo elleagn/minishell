@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 13:23:19 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/12 14:20:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int			find_closing_quote(char *input, int start, char quote_type);
 void		update_word_literal(t_token *token, char *input);
 void		update_str_literal(t_token *token, char *input);
 int			is_separator(char c);
+
+// Executor
+
+int			setup_files(t_command *command_list);
+int			command_lookup(t_command *command, t_data *data);
 
 // Builtins
 
