@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 09:07:56 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/11 10:28:11 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/12 08:31:59 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int	is_non_empty(char *var)
 	return (0);
 }
 
-int	print_not_valid_identifier(char *var)
+int	print_not_valid_identifier(char *var, int error)
 {
 	char	*str;
 
+	if (error)
+		return (1);
 	str = strjoin_three("minishell: export: '", var,
 			"': not a valid identifier\n");
 	if (!str)
@@ -37,20 +39,20 @@ int	print_not_valid_identifier(char *var)
 	if (write(2, str, ft_strlen(str)) < 0)
 		return (free(str), -1);
 	free(str);
-	return (0);
+	return (1);
 }
 
-int	is_invalid(char *var)
+int	is_invalid(char *var, int error)
 {
 	int	i;
 
 	if (!ft_isalpha(var[0]) && var[0] != '_')
-		return (print_not_valid_identifier(var));
+		return (print_not_valid_identifier(var, error));
 	i = 1;
 	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalpha(var[i]) && var[i] != '_' && !ft_isdigit(var[i]))
-			return (print_not_valid_identifier(var));
+			return (print_not_valid_identifier(var, error));
 		i++;
 	}
 	return (0);
@@ -65,16 +67,16 @@ int	handle_path(char *var, t_data *data)
 	new_path = ft_split(&var[5], ':');
 	if (!new_path)
 		return (-1);
-	free(data->path);
+	free_char_array(data->path);
 	data->path = new_path;
 	return (0);
 }
 
-int	handle_var(char *var, t_data *data)
+int	handle_var(char *var, t_data *data, int error)
 {
 	int	invalid;
 
-	invalid = is_invalid(var);
+	invalid = is_invalid(var, error);
 	if (invalid == -1)
 		return (-1);
 	if (invalid)

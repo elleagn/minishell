@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/11 10:00:46 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/12 08:16:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char		*strjoin_three(char const *s1, char const *s2, char const *s3);
 int			mini_echo(t_command *command, t_data *data);
 int			mini_unset(t_command *command, t_data *data);
 int			mini_export(t_command *command, t_data *data);
-int			handle_var(char *var, t_data *data);
+int			handle_var(char *var, t_data *data, int error);
 int			mini_cd(t_command *command, t_data *data);
 int			mini_pwd(t_command *command, t_data *data);
 
