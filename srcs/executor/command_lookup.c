@@ -6,17 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 13:03:18 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:35:51 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	replace_string(char **str1, char *str2)
-{
-	free(*str1);
-	*str1 = str2;
-}
 
 int	is_directory(char *file)
 {
@@ -29,20 +23,40 @@ int	is_directory(char *file)
 	return (1);
 }
 
-int	find_bin(char **cmd, char **path)
+int	check_builtin(char *cmd)
+{
+	char	*cmd;
+
+	if (!ft_strncmp(cmd, "echo", 5))
+		return (0);
+	if (!ft_strncmp(cmd, "env", 4))
+		return (1);
+	if (!ft_strncmp(cmd, "export", 7))
+		return (2);
+	if (!ft_strncmp(cmd, "unset", 6))
+		return (3);
+	if (!ft_strncmp(cmd, "cd", 3))
+		return (4);
+	if (!ft_strncmp(cmd, "pwd", 4))
+		return (5);
+	if (!ft_strncmp(cmd, "exit", 5))
+		return (6);
+	return (7);
+}
+
+int	test_command(t_command *command, t_data *data)
 {
 	char	*bin;
 	int		i;
+	char	*cmd;
+	char	**path;
 
-	if (ft_strnstr(*cmd, "/", ft_strlen(*cmd)))
-	{
-		if (access(*cmd, X_OK))
-			return (perror(*cmd), 127);
-		if (is_directory(*cmd))
-			return (ft_printf("%s: is a directory\n"), 126);
-		return (0);
-	}
 	i = 0;
+	path = data->path;
+	cmd = command->av;
+	command->builtin = data->builtin[check_builtin(cmd)];
+	if (command->builtin)
+		return (0);
 	while (path[i])
 	{
 		bin = strjoin_three(path[i], "/", *cmd);
@@ -54,12 +68,41 @@ int	find_bin(char **cmd, char **path)
 		i++;
 	}
 	ft_printf("%s: command not found\n", *cmd);
-	return (127);
 }
 
-int	command_lookup(t_command *command,t_data *data)
+int	find_bin(t_command *command, t_data *data)
+{
+	char	*bin;
+	char	**cmd;
+	char	**path;
+
+	path = data->path;
+	cmd = command->av;
+	if (ft_strnstr(*cmd, "/", ft_strlen(*cmd)))
+	{
+		if (access(*cmd, X_OK))
+			return (perror(*cmd), 126);
+		if (is_directory(*cmd))
+			return (ft_printf("%s: is a directory\n"), 126);
+		return (0);
+	}
+	return (test_command(command, data));
+}
+
+int	command_lookup(t_command *command, t_data *data)
 {
 	int	exit_code;
 
-	while ()
+	while (command)
+	{
+		if (!command->errornb)
+		{
+			exit_code = find_bin(command, data);
+			if (exit_code == -1)
+				return (-1);
+			else
+				command->errornb = exit_code;
+		}
+	}
+	return (0);
 }

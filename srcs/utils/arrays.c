@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:14:39 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 13:41:04 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:14:27 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,10 @@ char	**dup_env_array(char **envp, t_data *data)
 	}
 	data->env = new_env;
 	return (new_env);
+}
+
+void	replace_string(char **str1, char *str2)
+{
+	free(*str1);
+	*str1 = str2;
 }

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 08:16:29 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:23:19 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 	char			**env;
 	int				env_size;
 	char			**path;
+	int				(*builtin[8])(struct s_command *command, t_data *data);
 	struct s_token	*lexer_list;
 	int				exit_code;
 }	t_data;
@@ -117,5 +118,6 @@ t_data		*init_data(void);
 void		clear_data(t_data *data);
 int			array_size(char **env);
 char		**dup_env_array(char **envp, t_data *data);
+void		replace_string(char **str1, char *str2);
 
 #endif
