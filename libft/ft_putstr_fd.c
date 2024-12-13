@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_operator.c                                  :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 10:20:46 by gozon             #+#    #+#             */
-/*   Updated: 2024/11/28 10:20:58 by gozon            ###   ########.fr       */
+/*   Created: 2024/05/23 12:11:45 by gozon             #+#    #+#             */
+/*   Updated: 2024/12/08 08:04:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	update_operator_type(t_token *token, char *input)
+void	ft_putstr_fd(char *s, int fd)
 {
-	if (ft_strncmp(input, "<<", 2))
-		token->type = LESSLESS;
-	else if (ft_strncmp(input, "<", 1))
-		token->type = LESS;
-	else if (ft_strncmp(input, ">>", 2))
-		token->type = GREATERGREATER;
-	else if (ft_strncmp(input, ">", 1))
-		token->type = GREATER;
-	else if (ft_strncmp(input, "|", 1))
-		token->type = PIPE;
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
 }

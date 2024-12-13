@@ -1,54 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 13:33:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 08:20:24 by gozon            ###   ########.fr       */
+/*   Created: 2024/12/07 17:10:30 by gozon             #+#    #+#             */
+/*   Updated: 2024/12/10 08:21:03 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	print_args(char **args, int n_opt, int fd)
+int	print_env(char **env, int fd)
 {
 	int	i;
 
 	i = 0;
-	while (args[i])
+	if (!env)
+		return (0);
+	while (env[i])
 	{
-		if (write(fd, args[i], ft_strlen(args[i])) < 0)
+		if (write(fd, env[i], ft_strlen(env[i])) < 0)
 			return (perror("minishell"), 1);
-		i++;
-		if (args[i])
-		{
-			if (write(fd, " ", 1) < 0)
-				return (perror("minishell"), 1);
-		}
-	}
-	if (!n_opt)
-	{
 		if (write(fd, "\n", 1) < 0)
 			return (perror("minishell"), 1);
+		i++;
 	}
 	return (0);
 }
 
-int	mini_echo(t_command *command, t_data *data)
+int	mini_env(t_command *command, t_data *data)
 {
-	int	n_opt;
 	int	out_fd;
 
-	(void)	*data;
-	n_opt = 0;
+	if (!command || !command->av || !command->av[0])
+		return (1);
+	if (command->av[1])
+	{
+		write(2, "minishell: env: too many arguments\n", 36);
+		return (1);
+	}
 	out_fd = find_out_fd(command);
 	if (out_fd < 0)
 		return (1);
-	if (!ft_strncmp(command->av[1], "-n", 3))
-		n_opt = 1;
-	if (print_args(&command->av[1 + n_opt], n_opt, out_fd))
+	if (print_env(data->env, out_fd))
 		return (1);
 	return (0);
 }

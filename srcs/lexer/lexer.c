@@ -12,29 +12,42 @@
 
 #include <minishell.h>
 
-int	count_words(char *str)
+int	check_unclosed_quotes(char *input)
 {
-	int	i;
-	int	res;
-	int	in_word;
+	int		i;
+	int		closing_quote;
+	char	quote_type;
 
 	i = 0;
-	res = 0;
-	in_word = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	while (input[i])
 	{
-		if (in_word && str[i] == ' ')
-			in_word = 0;
-		if (!in_word && str[i] != ' ')
+		if (input[i] == '\'' || input[i] == '\"')
 		{
-			res += 1;
-			in_word = 1;
+			quote_type = input[i];
+			closing_quote = find_closing_quote(input, i, quote_type);
+			if (closing_quote > 0)
+				i = closing_quote;
+			else
+			{
+				write(2, "minishell: unclosed quotes\n", 28);
+				return (1);
+			}
 		}
 		i++;
 	}
-	return (res);
+	return (0);
+}
+
+void	go_to_next_word(char *input, int *i, t_token *token)
+{
+	if (token->literal)
+		*i += ft_strlen(token->literal);
+	else if (token->type == GREATERGREATER || token->type == LESSLESS)
+		*i += 2;
+	else
+		*i += 1;
+	while (input[*i] == ' ')
+		*i += 1;
 }
 
 t_token	*create_next_token(char *input)
@@ -60,23 +73,23 @@ t_token	*create_next_token(char *input)
 	return (token);
 }
 
-// t_list	*lexer(char *input)
-// {
-// 	int		i;
-// 	t_list	*token_list;
-// 	t_token	*token;
+t_token	*lexer(char *input)
+{
+	int		i;
+	t_token	*token_list;
+	t_token	*token;
 
-// 	token_list = NULL;
-// 	i = 0;
-// 	while (input[i])
-// 	{
-// 		token = create_next_token(&input[i]);
-// 		if (!token)
-// 			return (ft_lstclear(&token_list, clear_token), NULL);
-// 		if (add_token_to_list(&token_list, token))
-// 			return (ft_lstclear(&token_list, clear_token), clear_token(token),
-// 				NULL);
-// 		go_to_next_word(input, &i, token);
-// 	}
-// 	return (token_list);
-// }
+	if (check_unclosed_quotes(input))
+		return (NULL);
+	token_list = NULL;
+	i = 0;
+	while (input[i])
+	{
+		token = create_next_token(&input[i]);
+		if (!token)
+			return (clear_token_list(&token_list), NULL);
+		add_token_to_list(&token_list, token);
+		go_to_next_word(input, &i, token);
+	}
+	return (token_list);
+}

@@ -6,42 +6,60 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/04 13:00:17 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/11 10:17:59 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 SRC_DIR = srcs
-SRC_FILES =	main.c
-			lexer/char_between.c \
-			lexer/strdup_space.c \
-			lexer/lexer.c \
-			lexer/tokens.c \
-			lexer/update_operator.c \
+LIBFT = libft/libft.a
+SRC_FILES =	lexer/lexer.c \
+			lexer/lexer_utils.c \
 			lexer/update_str_literal.c \
 			lexer/update_token_type.c \
-			lexer/update_word_literal.c
+			lexer/update_word_literal.c \
+			utils/commands.c \
+			utils/tokens.c \
+			utils/redirs.c \
+			utils/data.c \
+			utils/arrays.c \
+			builtins/builtin_utils.c \
+			builtins/echo.c \
+			builtins/env.c \
+			builtins/export_unset.c \
+			builtins/export_utils.c \
+			builtins/pwd_cd.c \
+			builtins/add_remove_var.c \
+			tests/main_export_unset.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ = $(SRC_FILES:%.c=$(OBJ_DIR)/%.o)
 
 # Symboles Unicode
 CHECK_MARK = ✔
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) $(OBJ) -lpthread -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT)
+	@$(CC) $(OBJ) -Llibft -lft -lreadline -o $(NAME)
 	@echo "$(NAME) a été créé avec succès ($(CHECK_MARK))"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -Iincludes -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -Iincludes -Ilibft -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
+	@mkdir $(OBJ_DIR)/lexer
+	@mkdir $(OBJ_DIR)/utils
+	@mkdir $(OBJ_DIR)/tests
+	@mkdir $(OBJ_DIR)/builtins
+
+$(LIBFT):
+	@make -C libft --silent --no-print-directory
+	@echo "Compilation de la Libft ($(CHECK_MARK))"
 
 clean:
 	@rm -rf $(OBJ_DIR)

@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 12:11:45 by gozon             #+#    #+#             */
-/*   Updated: 2024/05/23 12:13:30 by gozon            ###   ########.fr       */
+/*   Created: 2024/12/10 08:23:48 by gozon             #+#    #+#             */
+/*   Updated: 2024/12/10 08:24:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef TESTS_H
+# define TESTS_H
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
+# include <minishell.h>
 
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
-}
+#endif
