@@ -6,52 +6,77 @@
 /*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:13:53 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/12/13 01:15:20 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2024/12/13 01:48:41 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	parse_heredoc(t_data *data, t_token *token)
+void    get_heredoc(t_command *command, t_data *data)
 {
-	t_token	*tmp;
-	t_token	*prev;
-	t_token	*next;
-	t_token	*heredoc;
+    t_redir *redir;
+    t_token *token;
 
-	tmp = token;
-	while (tmp)
-	{
-		if (tmp->type == LESSLESS)
-		{
-			prev = tmp->prev;
-			next = tmp->next;
-			tmp->prev->next = NULL;
-			tmp->next->prev = NULL;
-			tmp->prev = NULL;
-			tmp->next = NULL;
-			heredoc = tmp->next;
-			while (heredoc && heredoc->type != LESSLESS)
-				heredoc = heredoc->next;
-			if (heredoc)
-				heredoc->prev = NULL;
-			parse_heredoc(data, tmp);
-			tmp->prev = prev;
-			tmp->next = next;
-		}
-		tmp = tmp->next;
-	}
+    redir = init_redir();
+    redir->type = HEREDOC; // HEREDOC is not defined in the enum t_type + HEREDOC is not used in the struct s_redir = find a way to fix this
+    redir->filename = ft_strdup("heredoc");
+    redir->fd = -1;
+    token = data->lexer_list;
+    while (token && token->type != LESSLESS)
+        token = token->next;
+    token = token->next;
+    while (token && token->type != PIPE)
+    {
+        if (token->type == WORD)
+        {
+            if (redir->fd == -1)
+                redir->fd = open(redir->filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
+            write(redir->fd, token->literal, ft_strlen(token->literal));
+            write(redir->fd, "\n", 1);
+        }
+        token = token->next;
+    }
+    if (redir->fd != -1)
+        close(redir->fd);
+    add_redir_to_list(&command->redirs, redir);
 }
 
-void	parse_heredoc(t_data *data)
+static char *get_heredoc_filename(t_data *data)
 {
-	t_token	*tmp;
+    t_token *token;
 
-	tmp = data->lexer_list;
-	while (tmp)
-	{
-		if (tmp->type == LESSLESS)
-			parse_heredoc(data, tmp);
-		tmp = tmp->next;
-	}
+    token = data->lexer_list;
+    while (token && token->type != LESSLESS)
+        token = token->next;
+    token = token->next;
+    if (token && token->type == WORD)
+        return (ft_strdup(token->literal));
+    return (NULL);
+}
+
+void    parse_heredoc(t_data *data)
+{
+    t_command   *command;
+    t_redir     *redir;
+    char        *filename;
+
+    command = data->command_list;
+    while (command)
+    {
+        redir = command->redirs;
+        while (redir)
+        {
+            if (redir->type == LESSLESS)
+            {
+                filename = get_heredoc_filename(data);
+                if (filename)
+                {
+                    redir->filename = filename;
+                    get_heredoc(command, data);
+                }
+            }
+            redir = redir->next;
+        }
+        command = command->next;
+    }
 }

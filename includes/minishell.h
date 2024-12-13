@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/04 14:46:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 01:46:55 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef enum e_type
 
 typedef struct s_data
 {
-	char	**env;
-	char	**path;
-	char	*pwd;
-	t_list	*lexer_list;
-}	t_data;
+    char            **env;
+    int             env_size;
+    char            **path;
+    struct s_token  *lexer_list;
+    struct s_command    *command_list;
+    int             exit_code;
+}   t_data;
 
 typedef struct s_token
 {
