@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 12:43:36 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 10:17:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	open_redirections(t_command *command)
 			unlink(redir->filename);
 		if (redir->fd == -1)
 		{
-			command->errornb = 1;
+			command->status = 1;
 			break ;
 		}
 	}

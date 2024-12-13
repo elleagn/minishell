@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	printf("%i\n", open("srcs", O_WRONLY));
-	perror(NULL);
+	malloc(15 * sizeof(char));
+	exit(EXIT_SUCCESS);
 	return (0);
 }

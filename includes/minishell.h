@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 14:20:32 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 12:58:37 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ typedef enum e_type
 	WORD
 }	t_type;
 
-typedef struct s_data
-{
-	char			**env;
-	int				env_size;
-	char			**path;
-	int				(*builtin[8])(struct s_command *command, t_data *data);
-	struct s_token	*lexer_list;
-	int				exit_code;
-}	t_data;
-
 typedef struct s_token
 {
 	t_type				type;
@@ -67,13 +57,22 @@ typedef struct s_redir
 typedef struct s_command
 {
 	char				**av;
-	int					(*builtin)(struct s_command *command, t_data *data);
 	t_redir				*redirs;
 	int					pipe[2];
 	pid_t				pid;
-	int					errornb;
+	int					status;
 	struct s_command	*next;
 }	t_command;
+
+typedef struct s_data
+{
+	char			**env;
+	int				env_size;
+	char			**path;
+	int				(*builtin[8])(struct s_command *command, struct s_data *data);
+	struct s_token	*lexer_list;
+	int				exit_code;
+}	t_data;
 
 // Lexer
 
@@ -87,6 +86,7 @@ int			is_separator(char c);
 
 int			setup_files(t_command *command_list);
 int			command_lookup(t_command *command, t_data *data);
+void		close_all_files(t_command *command_list);
 
 // Builtins
 
