@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 08:04:11 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 13:00:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 13:28:45 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_command	*init_comand(void)
 	command->next = NULL;
 	command->pid = -1;
 	command->redirs = NULL;
+	command->builtin = -1;
 	command->pipe[0] = 0;
 	command->pipe[1] = 1;
 	return (command);

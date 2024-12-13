@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 10:29:16 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 13:29:42 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_builtin(char *cmd)
 		return (5);
 	if (!ft_strncmp(cmd, "exit", 5))
 		return (6);
-	return (7);
+	return (-1);
 }
 
 int	test_command(t_command *command, t_data *data)
@@ -54,7 +54,7 @@ int	test_command(t_command *command, t_data *data)
 	i = 0;
 	path = data->path;
 	cmd = command->av;
-	command->builtin = data->builtin[check_builtin(cmd)];
+	command->builtin = check_builtin(cmd);
 	if (command->builtin)
 		return (0);
 	while (path[i])

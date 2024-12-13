@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 12:58:37 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 13:28:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_command
 	t_redir				*redirs;
 	int					pipe[2];
 	pid_t				pid;
+	int					builtin;
 	int					status;
 	struct s_command	*next;
 }	t_command;

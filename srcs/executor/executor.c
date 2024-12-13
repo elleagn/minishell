@@ -6,13 +6,13 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 11:04:47 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 14:59:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	handle_subshells(t_command *cmdlist, t_data *data)
+int	fork_and_execute(t_command *cmdlist, t_data *data)
 {
 	t_command	*cmd;
 	int			error_code;
@@ -50,6 +50,6 @@ int	executor(t_command *cmdlist, t_data *data)
 	if (!cmdlist->next && cmdlist->builtin)
 		error_code = handle_builtin(cmdlist, data);
 	else
-		error_code = handle_subshells(cmdlist, data);
+		error_code = fork_and_execute(cmdlist, data);
 	return (error_code);
 }
