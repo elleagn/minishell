@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 13:29:42 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 09:41:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ int	command_lookup(t_command *command, t_data *data)
 
 	while (command)
 	{
-		if (!command->status)
+		if (!command->exit_code)
 		{
 			exit_code = find_bin(command, data);
 			if (exit_code == -1)
 				return (-1);
 			else
-				command->status = exit_code;
+				command->exit_code = exit_code;
 		}
 	}
 	return (0);

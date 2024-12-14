@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 14:59:43 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 09:41:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	fork_and_execute(t_command *cmdlist, t_data *data)
 	error_code = 0;
 	while (cmd)
 	{
-		if (!cmd->status)
+		if (!cmd->exit_code)
 		{
 			cmd->pid = fork();
 			if (cmd->pid == 0)

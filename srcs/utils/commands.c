@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 08:04:11 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 13:28:45 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 09:41:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_command	*init_comand(void)
 	if (!command)
 		return (perror("minishell"), NULL);
 	command->av = NULL;
-	command->status = 0;
+	command->exit_code = 0;
 	command->next = NULL;
 	command->pid = -1;
 	command->redirs = NULL;

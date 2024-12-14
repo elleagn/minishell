@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 10:17:18 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 09:54:45 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	open_redirections(t_command *command)
 			unlink(redir->filename);
 		if (redir->fd == -1)
 		{
-			command->status = 1;
+			command->exit_code = 1;
 			break ;
 		}
 	}
@@ -52,25 +52,32 @@ int	setup_pipes(t_command *command)
 	return (0);
 }
 
+void	close_cmd_files(t_command *command)
+{
+	t_redir	*redir;
+
+	if (command->pipe[0] > 2)
+		close(command->pipe[0]);
+	if (command->pipe[1] > 2)
+		close(command->pipe[1]);
+	redir = command->redirs;
+	while (redir)
+	{
+		if (redir->fd > 2)
+			close(redir->fd);
+		redir = redir->next;
+	}
+	command = command->next;
+}
+
 void	close_all_files(t_command *command_list)
 {
 	t_command	*command;
-	t_redir		*redir;
 
 	command = command_list;
 	while (command)
 	{
-		if (command->pipe[0] > 2)
-			close(command->pipe[0]);
-		if (command->pipe[1] > 2)
-			close(command->pipe[1]);
-		redir = command->redirs;
-		while (redir)
-		{
-			if (redir->fd > 2)
-				close(redir->fd);
-			redir = redir->next;
-		}
+		close_cmd_files(command);
 		command = command->next;
 	}
 }

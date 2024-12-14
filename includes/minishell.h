@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 13:28:20 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 09:40:34 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <signal.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <stdlib.h>
 # include <libft.h>
 # include <fcntl.h>
@@ -61,7 +62,7 @@ typedef struct s_command
 	int					pipe[2];
 	pid_t				pid;
 	int					builtin;
-	int					status;
+	int					exit_code;
 	struct s_command	*next;
 }	t_command;
 
@@ -70,7 +71,8 @@ typedef struct s_data
 	char			**env;
 	int				env_size;
 	char			**path;
-	int				(*builtin[8])(struct s_command *command, struct s_data *data);
+	int				(*builtin[8])(struct s_command *command,
+			struct s_data *data);
 	struct s_token	*lexer_list;
 	int				exit_code;
 }	t_data;
