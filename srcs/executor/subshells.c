@@ -6,11 +6,29 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:07:06 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/14 09:49:01 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 10:35:28 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	find_in_fd(t_command *command)
+{
+	t_redir	*redirs;
+	int		in_fd;
+
+	if (!command)
+		return (-1);
+	redirs = command->redirs;
+	in_fd = command->pipe[0];
+	while (redirs)
+	{
+		if (redirs->type == LESS || redirs->type == LESSLESS)
+			in_fd = redirs->fd;
+		redirs = redirs->next;
+	}
+	return (in_fd);
+}
 
 void	execute_command(t_command *command, t_data *data)
 {
@@ -23,6 +41,7 @@ void	execute_command(t_command *command, t_data *data)
 	if (command->builtin >= 0)
 	{
 		status = data->builtin[command->builtin](command, data);
+		close_all_files(command);
 		exit(status);
 	}
 	out = find_out_fd(command);
@@ -37,7 +56,7 @@ void	execute_command(t_command *command, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-int	wait_for_children(t_command *cmd, t_data *data)
+int	wait_for_children(t_command *cmd, t_data *data, int error_code)
 {
 	int	status;
 
@@ -55,5 +74,7 @@ int	wait_for_children(t_command *cmd, t_data *data)
 		if (!cmd->next)
 			data->exit_code = cmd->exit_code;
 	}
+	if (error_code)
+		return (error_code);
 	return (0);
 }

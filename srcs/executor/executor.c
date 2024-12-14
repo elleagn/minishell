@@ -6,11 +6,32 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/14 09:41:22 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 10:05:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	handle_builtin(t_command *command, t_data *data)
+{
+	int	error_code;
+
+	error_code = 0;
+	if (command->builtin == 6)
+	{
+		command->exit_code = mini_exit(command, data);
+		error_code = -2;
+	}
+	else
+	{
+		command->exit_code = data->builtin[command->builtin](command, data);
+		if (command->exit_code < 0)
+			error_code = -1;
+	}
+	if (error_code != -1)
+		data->exit_code = command->exit_code;
+	return (error_code);
+}
 
 int	fork_and_execute(t_command *cmdlist, t_data *data)
 {

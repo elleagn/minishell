@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/14 09:40:34 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/14 10:37:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ int			is_separator(char c);
 
 int			setup_files(t_command *command_list);
 int			command_lookup(t_command *command, t_data *data);
+void		close_cmd_files(t_command *command);
 void		close_all_files(t_command *command_list);
+void		execute_command(t_command *command, t_data *data);
+int			wait_for_children(t_command *cmd, t_data *data, int error_code);
 
 // Builtins
 
