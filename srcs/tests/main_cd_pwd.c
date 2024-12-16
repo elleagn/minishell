@@ -11,7 +11,7 @@ int	main(void)
 	char		*av5[] = {"env", "srcs", NULL};
 	char		*av6[] = {"env", "/home/gozon", NULL};
 
-	command = init_comand();
+	command = init_command();
 	data = init_data();
 	if (!command)
 		return (1);
