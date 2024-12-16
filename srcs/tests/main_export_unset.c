@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:31:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 08:35:11 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(void)
 	int			i;
 	// t_redir		*redir;
 
-	command = init_comand();
+	command = init_command();
 	data = init_data();
 	if (!command)
 		return (1);

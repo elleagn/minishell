@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 08:15:36 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 09:42:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 int	main(void)
 {
-	char		*av[]={"./Makefile", "Makefile", NULL};
+	char		*av[]={"echo", "Makefile", NULL};
+	char		*av2[]={"cat", "-e", "Makefile", NULL};
 	char		*path[] = {"/usr/bin", NULL};
 	t_command	*command;
 	int			exit_code;
 	t_data		*data;
 
-	command = init_comand();
+	command = init_command();
 	data = init_data();
 	command->av = av;
 	av[0] = ft_strdup(av[0]);
+	av2[0] = ft_strdup(av2[0]);
+	command->next = init_command();
 	data->path = path;
 	write(1, "---------- ONE COMMAND, NO REDIR, NO BUILTIN ----------\n", 56);
 	executor(command, data);

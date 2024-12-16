@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 10:04:00 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char		*delim_strdup(const char *str, char delimiter);
 void		clear_redir_list(t_redir *redir);
 void		remove_var(char *var, t_data *data);
 int			add_var(char *var, t_data *data);
-t_command	*init_comand(void);
+t_command	*init_command(void);
 void		clear_command(t_command *command);
 void		clear_command_list(t_command *command);
 t_redir		*init_redir(void);
