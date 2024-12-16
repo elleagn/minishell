@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/14 09:41:22 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/16 08:56:15 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	is_directory(char *file)
 
 int	check_builtin(char *cmd)
 {
-	char	*cmd;
-
 	if (!ft_strncmp(cmd, "echo", 5))
 		return (0);
 	if (!ft_strncmp(cmd, "env", 4))
@@ -48,14 +46,14 @@ int	test_command(t_command *command, t_data *data)
 {
 	char	*bin;
 	int		i;
-	char	*cmd;
+	char	**cmd;
 	char	**path;
 
 	i = 0;
 	path = data->path;
 	cmd = command->av;
-	command->builtin = check_builtin(cmd);
-	if (command->builtin)
+	command->builtin = check_builtin(*cmd);
+	if (command->builtin >= 0)
 		return (0);
 	while (path[i])
 	{
@@ -73,7 +71,6 @@ int	test_command(t_command *command, t_data *data)
 
 int	find_bin(t_command *command, t_data *data)
 {
-	char	*bin;
 	char	**cmd;
 	char	**path;
 
@@ -104,6 +101,7 @@ int	command_lookup(t_command *command, t_data *data)
 			else
 				command->exit_code = exit_code;
 		}
+		command = command->next;
 	}
 	return (0);
 }

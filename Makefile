@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/11 10:17:59 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/16 08:39:04 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,12 @@ SRC_FILES =	lexer/lexer.c \
 			builtins/export_utils.c \
 			builtins/pwd_cd.c \
 			builtins/add_remove_var.c \
-			tests/main_export_unset.c
+			builtins/exit.c \
+			executor/executor.c \
+			executor/command_lookup.c \
+			executor/files.c \
+			executor/subshells.c \
+			tests/main_executor.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
@@ -56,6 +61,7 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)/utils
 	@mkdir $(OBJ_DIR)/tests
 	@mkdir $(OBJ_DIR)/builtins
+	@mkdir $(OBJ_DIR)/executor
 
 $(LIBFT):
 	@make -C libft --silent --no-print-directory

@@ -6,11 +6,24 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:04:48 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 13:47:50 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/16 10:08:38 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	create_builtin_array(int (*builtins[8])(t_command *, t_data *))
+{
+	builtins[0] = mini_echo;
+	builtins[1] = mini_env;
+	builtins[2] = mini_export;
+	builtins[3] = mini_unset;
+	builtins[4] = mini_cd;
+	builtins[5] = mini_pwd;
+	builtins[6] = mini_exit;
+	builtins[7] = NULL;
+
+}
 
 t_data	*init_data(void)
 {
@@ -21,6 +34,7 @@ t_data	*init_data(void)
 		return (perror("minishell"), NULL);
 	data->env = NULL;
 	data->env_size = 0;
+	create_builtin_array(data->builtin);
 	data->path = 0;
 	data->lexer_list = NULL;
 	data->exit_code = 0;

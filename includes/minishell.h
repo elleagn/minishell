@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/14 10:37:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/16 10:04:00 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		close_cmd_files(t_command *command);
 void		close_all_files(t_command *command_list);
 void		execute_command(t_command *command, t_data *data);
 int			wait_for_children(t_command *cmd, t_data *data, int error_code);
+int			executor(t_command *cmdlist, t_data *data);
 
 // Builtins
 
@@ -106,6 +107,7 @@ int			mini_export(t_command *command, t_data *data);
 int			handle_var(char *var, t_data *data, int error);
 int			mini_cd(t_command *command, t_data *data);
 int			mini_pwd(t_command *command, t_data *data);
+int			mini_exit(t_command *command, t_data *data);
 
 // Utils
 

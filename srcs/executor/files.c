@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/14 09:54:45 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/16 09:03:37 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	close_cmd_files(t_command *command)
 			close(redir->fd);
 		redir = redir->next;
 	}
-	command = command->next;
 }
 
 void	close_all_files(t_command *command_list)
