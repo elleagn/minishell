@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 15:03:41 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/12/16 10:57:18 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <signal.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <stdlib.h>
 # include <libft.h>
 # include <fcntl.h>
@@ -60,7 +61,12 @@ typedef struct s_command
 	t_redir				*redirs;
 	int					pipe[2];
 	pid_t				pid;
+<<<<<<< HEAD
 	int					status;
+=======
+	int					builtin;
+	int					exit_code;
+>>>>>>> master
 	struct s_command	*next;
 	char				*cmd;
 	char				**args;
@@ -75,15 +81,23 @@ typedef struct s_data
 	char			**env;
 	int				env_size;
 	char			**path;
+<<<<<<< HEAD
+=======
+	int				(*builtin[8])(struct s_command *command,
+			struct s_data *data);
+>>>>>>> master
 	struct s_token	*lexer_list;
 	int				exit_code;
 }	t_data;
 
+<<<<<<< HEAD
 typedef struct s_shell {
 	t_command	*commands;
 	int			num_commands;
 }	t_shell;
 
+=======
+>>>>>>> master
 // Lexer
 
 void		update_token_type(t_token *token, char *input);
@@ -96,7 +110,15 @@ int			is_separator(char c);
 
 int			setup_files(t_command *command_list);
 int			command_lookup(t_command *command, t_data *data);
+<<<<<<< HEAD
 void		close_all_files(t_command *command_list);
+=======
+void		close_cmd_files(t_command *command);
+void		close_all_files(t_command *command_list);
+void		execute_command(t_command *command, t_data *data);
+int			wait_for_children(t_command *cmd, t_data *data, int error_code);
+int			executor(t_command *cmdlist, t_data *data);
+>>>>>>> master
 
 // Builtins
 
@@ -110,6 +132,7 @@ int			mini_export(t_command *command, t_data *data);
 int			handle_var(char *var, t_data *data, int error);
 int			mini_cd(t_command *command, t_data *data);
 int			mini_pwd(t_command *command, t_data *data);
+int			mini_exit(t_command *command, t_data *data);
 
 // Utils
 
@@ -123,7 +146,7 @@ char		*delim_strdup(const char *str, char delimiter);
 void		clear_redir_list(t_redir *redir);
 void		remove_var(char *var, t_data *data);
 int			add_var(char *var, t_data *data);
-t_command	*init_comand(void);
+t_command	*init_command(void);
 void		clear_command(t_command *command);
 void		clear_command_list(t_command *command);
 t_redir		*init_redir(void);

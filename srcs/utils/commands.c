@@ -6,13 +6,13 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 08:04:11 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/13 14:53:04 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/12/16 10:56:47 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_command	*init_comand(void)
+t_command	*init_command(void)
 {
 	t_command	*command;
 

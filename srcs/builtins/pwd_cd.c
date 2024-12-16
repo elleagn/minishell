@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:10:09 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/11 06:32:40 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/13 10:11:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	mini_pwd(t_command *command, t_data *data)
 	ft_bzero(buffer, 4096);
 	if (!getcwd(buffer, 4096))
 		return (1);
-	if (write(out_fd, buffer, ft_strlen(buffer)) < 0 || write(out_fd, "\n", 1) < 0)
+	if (write(out_fd, buffer, ft_strlen(buffer)) < 0
+		|| write(out_fd, "\n", 1) < 0)
 		return (perror("minishell"), 1);
 	return (0);
 }
@@ -48,6 +49,7 @@ int	mini_cd(t_command *command, t_data *data)
 	}
 	if (chdir(command->av[1]) < 0)
 		return (perror("minishell: cd"), 1);
+	ft_bzero(buf, 4096);
 	if (!getcwd(buf, 4096))
 		return (perror("minishell"), 1);
 	pwd = strjoin_three("PWD", "=", buf);
