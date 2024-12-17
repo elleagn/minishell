@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:07:06 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 09:21:12 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/17 09:53:12 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,31 @@ int	find_in_fd(t_command *command)
 	return (in_fd);
 }
 
-void	execute_command(t_command *command, t_data *data)
+void	replace_stds(t_command *command, t_data *data)
 {
 	int	in;
 	int	out;
+
+	out = find_out_fd(command);
+	in = find_in_fd(command);
+	if (in != 0 && dup2(in, 0) < 0)
+	{
+		perror("minishell");
+		close_all_files(command);
+		full_cleanup(command, data);
+		exit(EXIT_FAILURE);
+	}
+	if (out != 1 && dup2(out, 1) < 0)
+	{
+		perror("minishell");
+		close_all_files(command);
+		full_cleanup(command, data);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	execute_command(t_command *command, t_data *data)
+{
 	int	status;
 
 	signal(SIGINT, SIG_DFL);
@@ -42,17 +63,14 @@ void	execute_command(t_command *command, t_data *data)
 	{
 		status = data->builtin[command->builtin](command, data);
 		close_all_files(command);
+		full_cleanup(command, data);
 		exit(status);
 	}
-	out = find_out_fd(command);
-	in = find_in_fd(command);
-	if (dup2(in, 0) < 0 || dup2(out, 1) < 0)
-	{
-		close_all_files(command);
-		exit(EXIT_FAILURE);
-	}
+	replace_stds(command, data);
 	close_all_files(command);
 	execve(*(command->av), command->av, data->env);
+	perror("minishell:");
+	full_cleanup(command, data);
 	exit(EXIT_FAILURE);
 }
 
@@ -72,7 +90,11 @@ int	wait_for_children(t_command *cmd, t_data *data, int error_code)
 				cmd->exit_code = 128 + WTERMSIG(status);
 		}
 		if (!cmd->next)
+		{
 			data->exit_code = cmd->exit_code;
+			if (cmd->exit_code == 131)
+				write(1, "Quit (core dumped)\n", 20);
+		}
 		cmd = cmd->next;
 	}
 	if (error_code)

@@ -6,36 +6,56 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 08:15:36 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 14:08:29 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/17 09:34:05 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+char	**duplicate_tab(char **tab)
+{
+	int		size;
+	char	**copy;
+	int		i;
+
+	size = 0;
+	while (tab[size])
+		size++;
+	copy = ft_calloc(size + 1, sizeof(char *));
+	i = 0;
+	while (tab[i])
+	{
+		copy[i] = ft_strdup(tab[i]);
+		i++;
+	}
+	return (copy);
+}
+
 int	main(void)
 {
-	char		*av[]={"echo", "Makefile", NULL};
-//	char		*av2[]={"cat", "-e", "Makefile", NULL};
+	char		*av[]={"yes", NULL};
+	char		*av2[]={"cat", "-e", NULL};
 	char		*path[] = {"/usr/bin", NULL};
 	t_command	*command;
 	int			exit_code;
 	t_data		*data;
+	t_redir		*redir;
 
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	command = init_command();
 	data = init_data();
-	command->av = av;
-	av[0] = ft_strdup(av[0]);
-//	av2[0] = ft_strdup(av2[0]);
+	command->av = duplicate_tab(av);
 	command->next = init_command();
-	//command->next->av = av2;
-	data->path = path;
+	command->next->av = duplicate_tab(av2);
+	redir = init_redir();
+	redir->type = GREATER;
+	redir->filename = ft_strdup("out");
+	command->next->redirs = redir;
+	data->path = duplicate_tab(path);
 	write(1, "---------- ONE COMMAND, NO REDIR, NO BUILTIN ----------\n", 56);
 	executor(command, data);
-//	free(av2[0]);
-	free(av[0]);
-	free(command->next);
-	free(command);
 	exit_code = data->exit_code;
-	free(data);
+	full_cleanup(command, data);
 	return (exit_code);
 }

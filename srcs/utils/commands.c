@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 08:04:11 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/17 09:07:55 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_command	*init_command(void)
 	command->av = NULL;
 	command->exit_code = 0;
 	command->next = NULL;
+	command->previous = NULL;
 	command->pid = -1;
 	command->redirs = NULL;
 	command->builtin = -1;
@@ -45,6 +46,8 @@ void	clear_command_list(t_command *command)
 
 	if (!command)
 		return ;
+	while (command->previous)
+		command = command->previous;
 	tmp = command->next;
 	while (tmp)
 	{

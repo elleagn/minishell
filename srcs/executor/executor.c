@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 14:13:47 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/17 09:02:06 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	fork_and_execute(t_command *cmdlist, t_data *data)
 				error_code = -1;
 			}
 		}
-		close_all_files(cmd);
 		cmd = cmd->next;
 	}
 	error_code = wait_for_children(cmdlist, data, error_code);

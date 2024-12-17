@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/17 08:22:49 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_command
 	int					builtin;
 	int					exit_code;
 	struct s_command	*next;
+	struct s_command	*previous;
 }	t_command;
 
 typedef struct s_data
@@ -132,5 +133,6 @@ void		clear_data(t_data *data);
 int			array_size(char **env);
 char		**dup_env_array(char **envp, t_data *data);
 void		replace_string(char **str1, char *str2);
+void		full_cleanup(t_command *command, t_data *data);
 
 #endif
