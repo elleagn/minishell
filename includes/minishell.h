@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 10:02:14 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 12:33:50 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void		execute_command(t_command *command, t_data *data);
 void		wait_for_children(t_command *cmd, t_data *data);
 void		executor(t_command *cmdlist, t_data *data);
 void		wait_and_exit(t_command *cmdlist, t_data *data);
+void		handle_last_command(t_command *command, t_data *data);
 
 // Builtins
 

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 08:15:36 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 11:24:03 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 12:35:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ char	**duplicate_tab(char **tab)
 
 int	main(void)
 {
-	char		*av2[]={"cd", "srcs", NULL};
-	char		*av[]={"", NULL};
+	char		*av2[]={"yes", NULL};
+	char		*av[]={"cat", NULL};
 	char		*path[] = {"/usr/bin", NULL};
 	t_command	*command;
 	int			exit_code;
@@ -54,7 +54,6 @@ int	main(void)
 //	redir->filename = ft_strdup("out");
 //	command->next->redirs = redir;
 	data->path = duplicate_tab(path);
-	write(1, "---------- ONE COMMAND, NO REDIR, NO BUILTIN ----------\n", 56);
 	executor(command, data);
 	exit_code = data->exit_code;
 	full_cleanup(command, data);
