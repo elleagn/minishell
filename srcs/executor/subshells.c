@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:07:06 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/17 09:53:12 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 11:41:02 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,50 @@ void	execute_command(t_command *command, t_data *data)
 	replace_stds(command, data);
 	close_all_files(command);
 	execve(*(command->av), command->av, data->env);
-	perror("minishell:");
+	perror("minishell");
 	full_cleanup(command, data);
 	exit(EXIT_FAILURE);
 }
 
-int	wait_for_children(t_command *cmd, t_data *data, int error_code)
+void	handle_last_command(t_command *command, t_data *data)
 {
-	int	status;
+	data->exit_code = command->exit_code;
+	if (command->exit_code == 131)
+	{
+		if (write(1, "Quit (core dumped)\n", 20))
+		{
+			perror("minishell");
+			critical_exit(command, data);
+		}
+	}
+	if (command->exit_code == 130)
+	{
+		if (write(1, "\n", 1))
+		{
+			perror("minishell");
+			critical_exit(command, data);
+		}
+	}
+}
+
+void	wait_for_children(t_command *cmd, t_data *data)
+{
+	int			status;
 
 	while (cmd)
 	{
 		if (!cmd->exit_code)
 		{
 			if (waitpid(cmd->pid, &status, 0) == -1)
-				return (-1);
+				wait_and_exit(cmd, data);
 			if (WIFEXITED(status))
 				cmd->exit_code = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 				cmd->exit_code = 128 + WTERMSIG(status);
+			cmd->pid = -1;
 		}
+		if (cmd->exit_code == -1)
+			wait_and_exit(cmd, data);
 		if (!cmd->next)
 		{
 			data->exit_code = cmd->exit_code;
@@ -97,7 +121,4 @@ int	wait_for_children(t_command *cmd, t_data *data, int error_code)
 		}
 		cmd = cmd->next;
 	}
-	if (error_code)
-		return (error_code);
-	return (0);
 }

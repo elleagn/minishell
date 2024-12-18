@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 13:53:27 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 08:40:00 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	test_command(t_command *command, t_data *data)
 	{
 		bin = strjoin_three(path[i], "/", *cmd);
 		if (!bin)
-			return (perror("minishell"), -1);
+			critical_exit(command, data);
 		if (!access(bin, X_OK))
 			return (replace_string(cmd, bin), 0);
 		free(bin);
@@ -89,21 +89,12 @@ int	find_bin(t_command *command, t_data *data)
 	return (test_command(command, data));
 }
 
-int	command_lookup(t_command *command, t_data *data)
+void	command_lookup(t_command *command, t_data *data)
 {
-	int	exit_code;
-
 	while (command)
 	{
 		if (!command->exit_code)
-		{
-			exit_code = find_bin(command, data);
-			if (exit_code == -1)
-				return (-1);
-			else
-				command->exit_code = exit_code;
-		}
+			command->exit_code = find_bin(command, data);
 		command = command->next;
 	}
-	return (0);
 }

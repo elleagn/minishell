@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:10:30 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 08:21:03 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 08:57:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,14 @@ int	mini_env(t_command *command, t_data *data)
 {
 	int	out_fd;
 
-	if (!command || !command->av || !command->av[0])
-		return (1);
 	if (command->av[1])
 	{
-		write(2, "minishell: env: too many arguments\n", 36);
+		if (write(2, "minishell: env: too many arguments\n", 36) < 0)
+			return (perror("minishell"), -1);
 		return (1);
 	}
 	out_fd = find_out_fd(command);
-	if (out_fd < 0)
-		return (1);
 	if (print_env(data->env, out_fd))
-		return (1);
+		return (-1);
 	return (0);
 }
