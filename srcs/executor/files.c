@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 09:03:37 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 08:30:31 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	open_redirections(t_command *command)
 			command->exit_code = 1;
 			break ;
 		}
+		redir = redir->next;
 	}
 }
 

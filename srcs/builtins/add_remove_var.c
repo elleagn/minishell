@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:36:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/11 09:06:52 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 08:53:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	add_var(char *var, t_data *data)
 		if (!(env_index < data->env_size))
 		{
 			if (!expand_env(data))
-				return (1);
+				return (-1);
 		}
 		data->env[env_index] = var;
 		return (0);

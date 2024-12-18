@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/16 08:39:04 by gozon            ###   ########.fr        #
+#    Updated: 2024/12/18 12:50:15 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_FILES =	lexer/lexer.c \
 			utils/redirs.c \
 			utils/data.c \
 			utils/arrays.c \
+			utils/cleanup.c \
 			builtins/builtin_utils.c \
 			builtins/echo.c \
 			builtins/env.c \
@@ -37,6 +38,7 @@ SRC_FILES =	lexer/lexer.c \
 			executor/command_lookup.c \
 			executor/files.c \
 			executor/subshells.c \
+			executor/last_command.c \
 			tests/main_executor.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects

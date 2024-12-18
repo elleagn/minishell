@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 12:33:50 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <fcntl.h>
 
 # define ENV_SIZE 3
+# define CRITICAL_ERROR -1
 
 typedef enum e_type
 {
@@ -64,6 +65,7 @@ typedef struct s_command
 	int					builtin;
 	int					exit_code;
 	struct s_command	*next;
+	struct s_command	*previous;
 }	t_command;
 
 typedef struct s_data
@@ -88,12 +90,14 @@ int			is_separator(char c);
 // Executor
 
 int			setup_files(t_command *command_list);
-int			command_lookup(t_command *command, t_data *data);
+void		command_lookup(t_command *command, t_data *data);
 void		close_cmd_files(t_command *command);
 void		close_all_files(t_command *command_list);
 void		execute_command(t_command *command, t_data *data);
-int			wait_for_children(t_command *cmd, t_data *data, int error_code);
-int			executor(t_command *cmdlist, t_data *data);
+void		wait_for_children(t_command *cmd, t_data *data);
+void		executor(t_command *cmdlist, t_data *data);
+void		wait_and_exit(t_command *cmdlist, t_data *data);
+void		handle_last_command(t_command *command, t_data *data);
 
 // Builtins
 
@@ -132,5 +136,7 @@ void		clear_data(t_data *data);
 int			array_size(char **env);
 char		**dup_env_array(char **envp, t_data *data);
 void		replace_string(char **str1, char *str2);
+void		full_cleanup(t_command *command, t_data *data);
+void		critical_exit(t_command *command, t_data *data);
 
 #endif

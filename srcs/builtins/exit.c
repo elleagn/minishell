@@ -6,11 +6,18 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 10:06:58 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/14 10:28:00 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 09:12:05 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	normal_exit(t_command *command, t_data *data, int exit_code)
+{
+	close_all_files(command);
+	full_cleanup(command, data);
+	exit(exit_code);
+}
 
 int	is_numeric(char *str)
 {
@@ -34,12 +41,12 @@ int	mini_exit(t_command *command, t_data *data)
 			return (perror("minishell"), -1);
 	}
 	if (!command->av[1])
-		return (data->exit_code);
+		normal_exit(command, data, data->exit_code);
 	if (!is_numeric(command->av[1]))
 	{
 		if (write(2, "minishell: exit: numeric argument required\n", 44) < 0)
 			return (perror("minishell"), -1);
-		return (2);
+		normal_exit(command, data, 2);
 	}
 	if (command->av[2])
 	{
@@ -47,5 +54,6 @@ int	mini_exit(t_command *command, t_data *data)
 			return (perror("minishell"), -1);
 		return (1);
 	}
-	return (ft_atoi(command->av[1]));
+	normal_exit(command, data, ft_atoi(command->av[1]));
+	return (-1);
 }
