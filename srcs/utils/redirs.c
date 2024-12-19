@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 09:36:14 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 08:17:46 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/19 11:31:35 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_redir	*init_redir(void)
 	redir->filename = NULL;
 	redir->fd = -2;
 	redir->next = NULL;
+	redir->backup = NULL;
 	redir->type = UNDEFINED;
 	return (redir);
 }
@@ -31,6 +32,7 @@ void	clear_redir(t_redir *redir)
 	if (!redir)
 		return ;
 	free(redir->filename);
+	free(redir->backup);
 	free(redir);
 }
 

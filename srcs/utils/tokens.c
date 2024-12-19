@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:23:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 08:14:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/19 11:31:55 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_token	*init_token(void)
 	token->literal = NULL;
 	token->type = UNDEFINED;
 	token->position = -1;
+	token->backup = NULL;
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
@@ -35,6 +36,7 @@ void	clear_token(void *vtoken)
 	if (!token)
 		return ;
 	free(token->literal);
+	free(token->backup);
 	free(token);
 }
 

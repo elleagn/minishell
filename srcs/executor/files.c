@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 08:30:31 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/19 09:19:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,16 @@ void	open_redirections(t_command *command)
 	redir = command->redirs;
 	while (redir)
 	{
-		if (redir->type == LESS || redir->type == LESSLESS)
-			redir->fd = open(redir->filename, O_RDONLY);
-		if (redir->type == GREATER)
-			redir->fd = open(redir->filename,
-					O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		if (redir->type == GREATERGREATER)
-			redir->fd = open(redir->filename,
-					O_WRONLY | O_APPEND | O_CREAT, 0644);
-		if (redir->fd == -1)
-			perror("minishell");
-		if (redir->type == LESSLESS)
-			unlink(redir->filename);
+		if (redir->filename[0] == 0)
+		{
+			command->exit_code = 1;
+			ft_printf()
+		}
+		redir->fd = open_redirections;
 		if (redir->fd == -1)
 		{
 			command->exit_code = 1;
-			break ;
+			return ;
 		}
 		redir = redir->next;
 	}
