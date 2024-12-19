@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 12:33:50 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/19 11:30:26 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_token
 {
 	t_type				type;
 	char				*literal;
+	char				*backup;
 	int					position;
 	struct s_token		*next;
 	struct s_token		*prev;
@@ -52,6 +53,7 @@ typedef struct s_redir
 {
 	t_type			type;
 	char			*filename;
+	char			*backup;
 	int				fd;
 	struct s_redir	*next;
 }	t_redir;
@@ -98,6 +100,7 @@ void		wait_for_children(t_command *cmd, t_data *data);
 void		executor(t_command *cmdlist, t_data *data);
 void		wait_and_exit(t_command *cmdlist, t_data *data);
 void		handle_last_command(t_command *command, t_data *data);
+int			open_redirections(t_type type, char *filename);
 
 // Builtins
 
