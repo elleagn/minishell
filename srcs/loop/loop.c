@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/23 07:22:54 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/23 07:40:23 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ int	mini_loop(t_data *data)
 		command = process_line(input, data);
 		free(input);
 		if (!command)
+		{
+			data->exit_code = 1;
 			break ;
+		}
 		executor(command, data);
+		clear_command_list(command);
 	}
-	return (1);
+	return (data->exit_code);
 }

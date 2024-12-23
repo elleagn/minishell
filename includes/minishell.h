@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/23 07:18:27 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/23 07:24:23 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ typedef struct s_data
 	struct s_token	*lexer_list;
 	int				exit_code;
 }	t_data;
+
+// Loop
+
+int			mini_loop(t_data *data);
 
 // Lexer
 
