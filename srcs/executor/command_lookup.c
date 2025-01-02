@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_lookup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 08:56:15 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/02 15:44:07 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,6 @@ int	is_directory(char *file)
 	return (1);
 }
 
-int	check_builtin(char *cmd)
-{
-	if (!ft_strncmp(cmd, "echo", 5))
-		return (0);
-	if (!ft_strncmp(cmd, "env", 4))
-		return (1);
-	if (!ft_strncmp(cmd, "export", 7))
-		return (2);
-	if (!ft_strncmp(cmd, "unset", 6))
-		return (3);
-	if (!ft_strncmp(cmd, "cd", 3))
-		return (4);
-	if (!ft_strncmp(cmd, "pwd", 4))
-		return (5);
-	if (!ft_strncmp(cmd, "exit", 5))
-		return (6);
-	return (-1);
-}
-
 int	test_command(t_command *command, t_data *data)
 {
 	char	*bin;
@@ -52,14 +33,11 @@ int	test_command(t_command *command, t_data *data)
 	i = 0;
 	path = data->path;
 	cmd = command->av;
-	command->builtin = check_builtin(*cmd);
-	if (command->builtin >= 0)
-		return (0);
 	while (path[i])
 	{
 		bin = strjoin_three(path[i], "/", *cmd);
 		if (!bin)
-			return (perror("minishell"), -1);
+			critical_exit(command, data);
 		if (!access(bin, X_OK))
 			return (replace_string(cmd, bin), 0);
 		free(bin);
@@ -72,36 +50,29 @@ int	test_command(t_command *command, t_data *data)
 int	find_bin(t_command *command, t_data *data)
 {
 	char	**cmd;
-	char	**path;
 
-	path = data->path;
 	cmd = command->av;
-	if (ft_strnstr(*cmd, "/", ft_strlen(*cmd)))
+	if (!cmd)
+		return (ft_printf("minishell:  : command not found\n"), 127);
+	if (ft_strnstr(*cmd, "/", ft_strlen(*cmd)) || !data->path)
 	{
+		if (access(*cmd, F_OK))
+			return (write(2, "minishell:", 11), perror(*cmd), 127);
 		if (access(*cmd, X_OK))
-			return (perror(*cmd), 126);
+			return (write(2, "minishell:", 11), perror(*cmd), 126);
 		if (is_directory(*cmd))
-			return (ft_printf("%s: is a directory\n"), 126);
+			return (ft_printf("minishell: %s: is a directory\n"), 126);
 		return (0);
 	}
 	return (test_command(command, data));
 }
 
-int	command_lookup(t_command *command, t_data *data)
+void	command_lookup(t_command *command, t_data *data)
 {
-	int	exit_code;
-
 	while (command)
 	{
-		if (!command->exit_code)
-		{
-			exit_code = find_bin(command, data);
-			if (exit_code == -1)
-				return (-1);
-			else
-				command->exit_code = exit_code;
-		}
+		if (!command->exit_code && !command->builtin)
+			command->exit_code = find_bin(command, data);
 		command = command->next;
 	}
-	return (0);
 }

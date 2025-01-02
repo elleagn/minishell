@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 10:58:37 by lcluzan          ###   ########.fr       */
+/*   Created: 2025/01/02 15:42:55 by nouillebobb       #+#    #+#             */
+/*   Updated: 2025/01/02 15:43:00 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <fcntl.h>
 
 # define ENV_SIZE 3
+# define CRITICAL_ERROR -1
 
 typedef enum e_type
 {
@@ -42,6 +43,7 @@ typedef struct s_token
 {
 	t_type				type;
 	char				*literal;
+	char				*backup;
 	int					position;
 	struct s_token		*next;
 	struct s_token		*prev;
@@ -51,6 +53,7 @@ typedef struct s_redir
 {
 	t_type			type;
 	char			*filename;
+	char			*backup;
 	int				fd;
 	struct s_redir	*next;
 }	t_redir;
@@ -61,14 +64,10 @@ typedef struct s_command
 	t_redir				*redirs;
 	int					pipe[2];
 	pid_t				pid;
-	int					status;
+	int					builtin;
+	int					exit_code;
 	struct s_command	*next;
-	char				*cmd;
-	char				**args;
-	char				**env_redirects;
-	int					input_fd;
-	int					output_fd;
-	int					is_builtin;
+	struct s_command	*previous;
 }	t_command;
 
 typedef struct s_data
@@ -76,14 +75,15 @@ typedef struct s_data
 	char			**env;
 	int				env_size;
 	char			**path;
+	int				(*builtin[8])(struct s_command *command,
+			struct s_data *data);
 	struct s_token	*lexer_list;
 	int				exit_code;
 }	t_data;
 
-typedef struct s_shell {
-	t_command	*commands;
-	int			num_commands;
-}	t_shell;
+// Loop
+
+int			mini_loop(t_data *data);
 
 // Lexer
 
@@ -92,12 +92,20 @@ int			find_closing_quote(char *input, int start, char quote_type);
 void		update_word_literal(t_token *token, char *input);
 void		update_str_literal(t_token *token, char *input);
 int			is_separator(char c);
+t_token		*lexer(char *input);
 
 // Executor
 
 int			setup_files(t_command *command_list);
-int			command_lookup(t_command *command, t_data *data);
+void		command_lookup(t_command *command, t_data *data);
+void		close_cmd_files(t_command *command);
 void		close_all_files(t_command *command_list);
+void		execute_command(t_command *command, t_data *data);
+void		wait_for_children(t_command *cmd, t_data *data);
+void		executor(t_command *cmdlist, t_data *data);
+void		wait_and_exit(t_command *cmdlist, t_data *data);
+void		handle_last_command(t_command *command, t_data *data);
+int			open_file(t_type type, char *filename);
 
 // Builtins
 
@@ -128,7 +136,7 @@ int			add_var(char *var, t_data *data);
 t_command	*init_command(void);
 void		clear_command(t_command *command);
 void		clear_command_list(t_command *command);
-t_redir		*init_redir(void);
+t_redir		*init_redir(t_type type, t_token *filename);
 void		clear_redir_list(t_redir *redir);
 void		free_char_array(char **array);
 t_data		*init_data(void);
@@ -136,5 +144,22 @@ void		clear_data(t_data *data);
 int			array_size(char **env);
 char		**dup_env_array(char **envp, t_data *data);
 void		replace_string(char **str1, char *str2);
+void		full_cleanup(t_command *command, t_data *data);
+void		critical_exit(t_command *command, t_data *data);
+
+// Parser
+
+t_command	*parser(t_token *tokens);
+int			handle_redirection(t_command *current, t_token **token);
+int			handle_pipe(t_command **current);
+void		add_arg(t_command *cmd, char *arg);
+
+// Expander
+
+int			expander(t_command *command, t_data *data);
+
+// Tests
+
+void    print_command(t_command *command);
 
 #endif

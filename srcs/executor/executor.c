@@ -3,79 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 09:22:40 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/02 15:54:50 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	handle_builtin(t_command *command, t_data *data)
+void	handle_builtin(t_command *command, t_data *data)
 {
-	int	error_code;
-
-	error_code = 0;
-	if (command->builtin == 6)
-	{
-		command->exit_code = mini_exit(command, data);
-		error_code = -2;
-	}
-	else
-	{
-		command->exit_code = data->builtin[command->builtin](command, data);
-		if (command->exit_code < 0)
-			error_code = -1;
-	}
-	if (error_code != -1)
-		data->exit_code = command->exit_code;
-	return (error_code);
+	command->exit_code = data->builtin[command->builtin](command, data);
+	if (command->exit_code < 0)
+		critical_exit(command, data);
+	data->exit_code = command->exit_code;
 }
 
-int	fork_and_execute(t_command *cmdlist, t_data *data)
+void	wait_and_exit(t_command *cmdlist, t_data *data)
+{
+	t_command	*command;
+	int			status;
+
+	command = cmdlist;
+	while (command->previous)
+		command = command->previous;
+	while (command)
+	{
+		if (command->pid > 0)
+			waitpid(command->pid, &status, 0);
+		command = command->next;
+	}
+	full_cleanup(cmdlist, data);
+	exit(EXIT_FAILURE);
+}
+
+void	fork_and_execute(t_command *cmdlist, t_data *data)
 {
 	t_command	*cmd;
-	int			error_code;
 
 	cmd = cmdlist;
-	error_code = 0;
 	while (cmd)
 	{
 		if (!cmd->exit_code)
 		{
 			cmd->pid = fork();
 			if (cmd->pid == 0)
-			{
 				execute_command(cmd, data);
-			}
-			if (cmd->pid > 0)
-				close_cmd_files(cmd);
 			if (cmd->pid < 0)
 			{
 				close_all_files(cmd);
-				error_code = -1;
+				wait_and_exit(cmdlist, data);
 			}
 		}
+		close_cmd_files(cmd);
 		cmd = cmd->next;
 	}
-	error_code = wait_for_children(cmdlist, data, error_code);
-	return (error_code);
+	wait_for_children(cmdlist, data);
 }
 
-int	executor(t_command *cmdlist, t_data *data)
+void	executor(t_command *cmdlist, t_data *data)
 {
-	int	error_code;
-
 	if (setup_files(cmdlist))
-		return (-1);
-	if (command_lookup(cmdlist, data))
-		return (-1);
-	if (!cmdlist->next && cmdlist->builtin >= 0)
-		error_code = handle_builtin(cmdlist, data);
+		critical_exit(cmdlist, data);
+	command_lookup(cmdlist, data);
+	if (!cmdlist->next && cmdlist->builtin)
+		handle_builtin(cmdlist, data);
 	else
-	{
-		error_code = fork_and_execute(cmdlist, data);
-	}
-	return (error_code);
+		fork_and_execute(cmdlist, data);
 }
