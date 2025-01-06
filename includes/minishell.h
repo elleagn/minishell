@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/19 11:30:26 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/23 07:24:23 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ typedef struct s_data
 	int				exit_code;
 }	t_data;
 
+// Loop
+
+int			mini_loop(t_data *data);
+
 // Lexer
 
 void		update_token_type(t_token *token, char *input);
@@ -88,6 +92,7 @@ int			find_closing_quote(char *input, int start, char quote_type);
 void		update_word_literal(t_token *token, char *input);
 void		update_str_literal(t_token *token, char *input);
 int			is_separator(char c);
+t_token		*lexer(char *input);
 
 // Executor
 
@@ -100,7 +105,7 @@ void		wait_for_children(t_command *cmd, t_data *data);
 void		executor(t_command *cmdlist, t_data *data);
 void		wait_and_exit(t_command *cmdlist, t_data *data);
 void		handle_last_command(t_command *command, t_data *data);
-int			open_redirections(t_type type, char *filename);
+int			open_file(t_type type, char *filename);
 
 // Builtins
 

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:14:39 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 13:14:27 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/23 07:42:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**dup_env_array(char **envp, t_data *data)
 	if (!new_env)
 		return (perror("minishell"), NULL);
 	i = 0;
-	while (envp[i])
+	while (envp && envp[i])
 	{
 		new_env[i] = ft_strdup(envp[i]);
 		if (!new_env)

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/19 09:19:44 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/19 12:37:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	open_redirections(t_command *command)
 	redir = command->redirs;
 	while (redir)
 	{
-		if (redir->filename[0] == 0)
+		if (redir->filename == NULL)
 		{
 			command->exit_code = 1;
-			ft_printf()
+			ft_printf("minishell: %s: ambiguous redirect", redir->backup);
+			return ;
 		}
-		redir->fd = open_redirections;
+		redir->fd = open_file(redir->type, redir->filename);
 		if (redir->fd == -1)
 		{
 			command->exit_code = 1;
