@@ -6,17 +6,28 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:24:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 15:15:25 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 16:30:15 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	**path(t_data *data)
+int	prepare_path(t_data *data)
 {
-	int	path_index;
+	int		path_index;
+	char	**path;
+	char	*path_var;
 
-	
+	path_index = find_env_var("PATH", data->env, 1);
+	if (path_index >= 0)
+	{
+		path_var = data->env[path_index];
+		path = ft_split(&path_var[5], ':');
+		if (!path)
+			return (perror("minishell"), 1);
+		data->path = path;
+	}
+	return (0);
 }
 
 t_data	*prepare_shell(char **envp)
@@ -28,7 +39,7 @@ t_data	*prepare_shell(char **envp)
 		return (NULL);
 	if (!dup_env_array(envp, data))
 		return (clear_data(data), NULL);
-	if (!prepare_path(data))
+	if (prepare_path(data))
 		return (clear_data(data), NULL);
 	return (data);
 }

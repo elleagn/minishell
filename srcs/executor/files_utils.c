@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 09:07:10 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/19 12:36:41 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 16:39:37 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	open_file(t_type type, char *filename)
 	if (type == GREATERGREATER)
 		fd = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd == -1)
-		perror("minishell");
+	{
+		ft_printf("minishell: ");
+		perror(filename);
+	}
 	if (type == LESSLESS)
 		unlink(filename);
 	return (fd);

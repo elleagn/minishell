@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 09:07:56 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/12 08:31:59 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 16:16:50 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	handle_path(char *var, t_data *data)
 		return (0);
 	new_path = ft_split(&var[5], ':');
 	if (!new_path)
-		return (-1);
+		return (perror("minishell"), -1);
 	free_char_array(data->path);
 	data->path = new_path;
 	return (0);
