@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:55:39 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/02 15:56:07 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2025/01/07 10:38:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	expander(t_command *command, t_data *data)
 
 	// TODO(lcluzan): Implement expander
 
-	print_command(command);
+	// print_command(command);
 
 	return (1);
 }

@@ -3,29 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:20:47 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/02 15:22:39 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2025/01/07 10:56:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_redir	*init_redir(t_type type, t_token *filename)
+t_redir	*init_and_fill_redir(t_type type, t_token *filename)
 {
 	t_redir	*redir;
 
 	if (!type || !filename)
 		return (NULL);
-	redir = malloc(sizeof(t_redir));
+	redir = init_redir();
 	if (!redir)
 		return (NULL);
 	redir->type = type;
 	redir->filename = ft_strdup(filename->literal);
-	redir->backup = ft_strdup(filename->literal); // Store original for error messages
-	redir->fd = -1; // Will be set during execution
-	redir->next = NULL;
+	if (!redir->filename)
+		return (perror("minishell"), clear_redir(redir), NULL);
+	redir->backup = ft_strdup(filename->literal);
+	if (!redir->filename)
+		return (perror("minishell"), clear_redir(redir), NULL);
 	return (redir);
 }
 
@@ -36,7 +38,7 @@ void	add_redir(t_command *cmd, t_redir *redir)
 	if (!cmd->redirs)
 	{
 		cmd->redirs = redir;
-		return;
+		return ;
 	}
 	current = cmd->redirs;
 	while (current->next)
@@ -50,10 +52,10 @@ int	handle_redirection(t_command *current, t_token **token)
 
 	if (!(*token)->next)
 		return (0);
-	redir = init_redir((*token)->type, (*token)->next);
+	redir = init_and_fill_redir((*token)->type, (*token)->next);
 	if (!redir)
 		return (0);
 	add_redir(current, redir);
-	*token = (*token)->next; // Skip filename token
+	*token = (*token)->next;
 	return (1);
 }

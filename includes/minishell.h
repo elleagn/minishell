@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:42:55 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/02 15:43:00 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2025/01/07 10:53:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,8 @@ int			add_var(char *var, t_data *data);
 t_command	*init_command(void);
 void		clear_command(t_command *command);
 void		clear_command_list(t_command *command);
-t_redir		*init_redir(t_type type, t_token *filename);
+t_redir		*init_redir(void);
+void		clear_redir(t_redir *redir);
 void		clear_redir_list(t_redir *redir);
 void		free_char_array(char **array);
 t_data		*init_data(void);
