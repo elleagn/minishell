@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/23 07:51:11 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/02 16:05:26 by nouillebobb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_command	*process_line(char *input, t_data *data)
 	if (!tokens)
 		return (NULL);
 	command = parse_and_expand(tokens, data);
-	clear_token_list(tokens);
+	clear_token_list(&tokens);
 	if (!command)
 		return (NULL);
 	return (command);

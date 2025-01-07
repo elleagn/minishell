@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   command_lookup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
 /*   Updated: 2024/12/19 12:54:01 by gozon            ###   ########.fr       */
@@ -23,25 +23,6 @@ int	is_directory(char *file)
 	return (1);
 }
 
-int	check_builtin(char *cmd)
-{
-	if (!ft_strncmp(cmd, "echo", 5))
-		return (0);
-	if (!ft_strncmp(cmd, "env", 4))
-		return (1);
-	if (!ft_strncmp(cmd, "export", 7))
-		return (2);
-	if (!ft_strncmp(cmd, "unset", 6))
-		return (3);
-	if (!ft_strncmp(cmd, "cd", 3))
-		return (4);
-	if (!ft_strncmp(cmd, "pwd", 4))
-		return (5);
-	if (!ft_strncmp(cmd, "exit", 5))
-		return (6);
-	return (-1);
-}
-
 int	test_command(t_command *command, t_data *data)
 {
 	char	*bin;
@@ -52,9 +33,6 @@ int	test_command(t_command *command, t_data *data)
 	i = 0;
 	path = data->path;
 	cmd = command->av;
-	command->builtin = check_builtin(*cmd);
-	if (command->builtin >= 0)
-		return (0);
 	while (path[i])
 	{
 		bin = strjoin_three(path[i], "/", *cmd);
@@ -72,9 +50,7 @@ int	test_command(t_command *command, t_data *data)
 int	find_bin(t_command *command, t_data *data)
 {
 	char	**cmd;
-	char	**path;
 
-	path = data->path;
 	cmd = command->av;
 	if (!cmd)
 		return (ft_printf("minishell:  : command not found\n"), 127);

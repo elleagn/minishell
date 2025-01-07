@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/23 07:24:23 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 10:53:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ t_command	*init_command(void);
 void		clear_command(t_command *command);
 void		clear_command_list(t_command *command);
 t_redir		*init_redir(void);
+void		clear_redir(t_redir *redir);
 void		clear_redir_list(t_redir *redir);
 void		free_char_array(char **array);
 t_data		*init_data(void);
@@ -146,5 +147,20 @@ char		**dup_env_array(char **envp, t_data *data);
 void		replace_string(char **str1, char *str2);
 void		full_cleanup(t_command *command, t_data *data);
 void		critical_exit(t_command *command, t_data *data);
+
+// Parser
+
+t_command	*parser(t_token *tokens);
+int			handle_redirection(t_command *current, t_token **token);
+int			handle_pipe(t_command **current);
+void		add_arg(t_command *cmd, char *arg);
+
+// Expander
+
+int			expander(t_command *command, t_data *data);
+
+// Tests
+
+void    print_command(t_command *command);
 
 #endif
