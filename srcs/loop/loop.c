@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/02 16:05:26 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2025/01/07 14:08:36 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	mini_loop(t_data *data)
 		input = readline("minishell $ ");
 		if (!input)
 			break ;
+		add_history(input);
 		command = process_line(input, data);
 		free(input);
 		if (!command)
@@ -59,5 +60,6 @@ int	mini_loop(t_data *data)
 		executor(command, data);
 		clear_command_list(command);
 	}
+	rl_clear_history();
 	return (data->exit_code);
 }

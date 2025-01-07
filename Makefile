@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/19 12:36:00 by gozon            ###   ########.fr        #
+#    Updated: 2025/01/07 13:08:59 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,13 @@ SRC_FILES =	lexer/lexer.c \
 			executor/subshells.c \
 			executor/last_command.c \
 			executor/files_utils.c \
-			tests/main_executor.c
+			expander/expander.c \
+			parser/arguments.c \
+			parser/parser.c \
+			parser/pipes.c \
+			parser/redirections.c \
+			loop/loop.c \
+			main.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
@@ -65,6 +71,9 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)/tests
 	@mkdir $(OBJ_DIR)/builtins
 	@mkdir $(OBJ_DIR)/executor
+	@mkdir $(OBJ_DIR)/expander
+	@mkdir $(OBJ_DIR)/parser
+	@mkdir $(OBJ_DIR)/loop
 
 $(LIBFT):
 	@make -C libft --silent --no-print-directory

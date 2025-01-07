@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_lookup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/19 12:54:01 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 14:34:08 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	find_bin(t_command *command, t_data *data)
 	if (ft_strnstr(*cmd, "/", ft_strlen(*cmd)) || !data->path)
 	{
 		if (access(*cmd, F_OK))
-			return (write(2, "minishell:", 11), perror(*cmd), 127);
+			return (write(2, "minishell: ", 12), perror(*cmd), 127);
 		if (access(*cmd, X_OK))
-			return (write(2, "minishell:", 11), perror(*cmd), 126);
+			return (write(2, "minishell: ", 12), perror(*cmd), 126);
 		if (is_directory(*cmd))
 			return (ft_printf("minishell: %s: is a directory\n"), 126);
 		return (0);
@@ -71,7 +71,7 @@ void	command_lookup(t_command *command, t_data *data)
 {
 	while (command)
 	{
-		if (!command->exit_code)
+		if (!command->exit_code && command->builtin < 0)
 			command->exit_code = find_bin(command, data);
 		command = command->next;
 	}

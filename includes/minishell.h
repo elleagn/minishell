@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 10:53:29 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 14:28:25 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_data
 	char			**env;
 	int				env_size;
 	char			**path;
-	int				(*builtin[8])(struct s_command *command,
+	int				(*builtin[7])(struct s_command *command,
 			struct s_data *data);
 	struct s_token	*lexer_list;
 	int				exit_code;

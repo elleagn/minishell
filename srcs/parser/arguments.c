@@ -6,30 +6,30 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:24:37 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/07 10:45:00 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 14:34:41 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// int	check_builtin(char *cmd)
-// {
-// 	if (!ft_strncmp(cmd, "echo", 5))
-// 		return (1);
-// 	if (!ft_strncmp(cmd, "env", 4))
-// 		return (2);
-// 	if (!ft_strncmp(cmd, "export", 7))
-// 		return (3);
-// 	if (!ft_strncmp(cmd, "unset", 6))
-// 		return (4);
-// 	if (!ft_strncmp(cmd, "cd", 3))
-// 		return (5);
-// 	if (!ft_strncmp(cmd, "pwd", 4))
-// 		return (6);
-// 	if (!ft_strncmp(cmd, "exit", 5))
-// 		return (7);
-// 	return (0);
-// }
+int	check_builtin(char *cmd)
+{
+	if (!ft_strncmp(cmd, "echo", 5))
+		return (0);
+	if (!ft_strncmp(cmd, "env", 4))
+		return (1);
+	if (!ft_strncmp(cmd, "export", 7))
+		return (2);
+	if (!ft_strncmp(cmd, "unset", 6))
+		return (3);
+	if (!ft_strncmp(cmd, "cd", 3))
+		return (4);
+	if (!ft_strncmp(cmd, "pwd", 4))
+		return (5);
+	if (!ft_strncmp(cmd, "exit", 5))
+		return (6);
+	return (-1);
+}
 
 void	add_arg(t_command *cmd, char *arg)
 {
@@ -52,8 +52,6 @@ void	add_arg(t_command *cmd, char *arg)
 	new_av[i + 1] = NULL;
 	free(cmd->av);
 	cmd->av = new_av;
-
-// Check if it's a builtin when adding the first argument
-	// if (i == 0)
-	// 	cmd->builtin = check_builtin(new_av[0]);
+	if (i == 0)
+		cmd->builtin = check_builtin(new_av[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 10:06:58 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 09:12:05 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/07 15:02:21 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_numeric(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] < '0' && str[i] > '9')
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}
@@ -35,13 +35,16 @@ int	is_numeric(char *str)
 
 int	mini_exit(t_command *command, t_data *data)
 {
+	int	exit_code;
+
+	exit_code = data->exit_code;
 	if (command->pid == -1)
 	{
 		if (write(1, "exit\n", 6) < 0)
 			return (perror("minishell"), -1);
 	}
 	if (!command->av[1])
-		normal_exit(command, data, data->exit_code);
+		normal_exit(command, data, exit_code);
 	if (!is_numeric(command->av[1]))
 	{
 		if (write(2, "minishell: exit: numeric argument required\n", 44) < 0)
