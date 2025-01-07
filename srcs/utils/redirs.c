@@ -23,6 +23,7 @@ t_redir	*init_redir(void)
 	redir->backup = NULL;
 	redir->fd = -2;
 	redir->next = NULL;
+	redir->backup = NULL;
 	redir->type = UNDEFINED;
 	return (redir);
 }
@@ -32,6 +33,7 @@ void	clear_redir(t_redir *redir)
 	if (!redir)
 		return ;
 	free(redir->filename);
+	free(redir->backup);
 	free(redir);
 }
 

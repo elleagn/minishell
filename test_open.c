@@ -1,9 +1,9 @@
 #include <minishell.h>
 
 
-int main(void)
+int	main(void)
 {
-	malloc(15 * sizeof(char));
-	exit(EXIT_SUCCESS);
+	access("xshosh", F_OK);
+	perror(NULL);
 	return (0);
 }

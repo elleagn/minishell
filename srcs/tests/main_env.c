@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 09:59:45 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
+/*   Updated: 2024/12/18 11:23:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	t_command	*command;
 	t_data		*data;
 	char		*av1[] = {"env", "hello", NULL};
-	char		*av2[] = {"env", NULL};
+	char		*av2[] = {"", NULL};
 	char		*env[] = {"BLBL=bl", "BLBL=bl", NULL};
 	int			fd;
 	t_redir		*redir;

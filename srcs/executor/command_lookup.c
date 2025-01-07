@@ -6,7 +6,7 @@
 /*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/02 15:44:07 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2024/12/19 12:54:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	command_lookup(t_command *command, t_data *data)
 {
 	while (command)
 	{
-		if (!command->exit_code && !command->builtin)
+		if (!command->exit_code)
 			command->exit_code = find_bin(command, data);
 		command = command->next;
 	}

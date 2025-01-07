@@ -6,7 +6,7 @@
 /*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/02 15:54:50 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2024/12/18 11:19:34 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	executor(t_command *cmdlist, t_data *data)
 	if (setup_files(cmdlist))
 		critical_exit(cmdlist, data);
 	command_lookup(cmdlist, data);
-	if (!cmdlist->next && cmdlist->builtin)
+	if (!cmdlist->next && cmdlist->builtin >= 0)
 		handle_builtin(cmdlist, data);
 	else
 		fork_and_execute(cmdlist, data);

@@ -21,6 +21,7 @@ t_command	*init_command(void)
 		return (perror("minishell"), NULL);
 	command->av = NULL;
 	command->next = NULL;
+	command->previous = NULL;
 	command->pid = -1;
 	command->builtin = -1;
 	command->redirs = NULL;
@@ -44,6 +45,8 @@ void	clear_command_list(t_command *command)
 
 	if (!command)
 		return ;
+	while (command->previous)
+		command = command->previous;
 	tmp = command->next;
 	while (tmp)
 	{
