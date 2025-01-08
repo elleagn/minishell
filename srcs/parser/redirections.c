@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:20:47 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/07 10:56:20 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 11:12:27 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_redir	*init_and_fill_redir(t_type type, t_token *filename)
 	if (!redir)
 		return (NULL);
 	redir->type = type;
+	// insert heredoc here
 	redir->filename = ft_strdup(filename->literal);
 	if (!redir->filename)
 		return (perror("minishell"), clear_redir(redir), NULL);
