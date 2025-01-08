@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 14:28:25 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 12:04:49 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void		critical_exit(t_command *command, t_data *data);
 
 // Parser
 
-t_command	*parser(t_token *tokens);
+t_command	*parser(t_token *tokens, int *exit_code);
 int			handle_redirection(t_command *current, t_token **token);
 int			handle_pipe(t_command **current);
 void		add_arg(t_command *cmd, char *arg);

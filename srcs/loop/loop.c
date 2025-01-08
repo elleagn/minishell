@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 14:08:36 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 12:15:45 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_command	*parse_and_expand(t_token *tokens, t_data *data)
 {
 	t_command	*commands;
 
-	commands = parser(tokens);
+	commands = parser(tokens, &(data->exit_code));
 	if (!commands)
 		return (NULL);
 	if (!expander(commands, data))
@@ -39,26 +39,36 @@ t_command	*process_line(char *input, t_data *data)
 	return (command);
 }
 
+int	process_and_execute(char *input, t_data *data)
+{
+	t_command	*command;
+
+	add_history(input);
+	command = process_line(input, data);
+	free(input);
+	if (!command)
+	{
+		if (data->exit_code == 2)
+			return (0);
+		data->exit_code = 1;
+		return (1);
+	}
+	executor(command, data);
+	clear_command_list(command);
+	return (0);
+}
+
 int	mini_loop(t_data *data)
 {
 	char		*input;
-	t_command	*command;
 
 	while (1)
 	{
 		input = readline("minishell $ ");
 		if (!input)
 			break ;
-		add_history(input);
-		command = process_line(input, data);
-		free(input);
-		if (!command)
-		{
-			data->exit_code = 1;
+		if (process_and_execute(input, data))
 			break ;
-		}
-		executor(command, data);
-		clear_command_list(command);
 	}
 	rl_clear_history();
 	return (data->exit_code);
