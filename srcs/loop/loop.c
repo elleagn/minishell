@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 16:22:14 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 17:05:51 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	process_and_execute(char *input, t_data *data)
 	free(input);
 	if (!command)
 	{
-		if (data->exit_code == 2)
+		if (data->exit_code == 2 || data->exit_code == 130)
 			return (0);
 		data->exit_code = 1;
 		return (1);
