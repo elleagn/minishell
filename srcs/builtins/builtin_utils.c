@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 07:32:20 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/10 13:40:01 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 14:20:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	find_out_fd(t_command *command)
 	out_fd = command->pipe[1];
 	while (redirs)
 	{
-		if (redirs->type == GREATER || redirs->type == GREATERGREATER)
+		if (redirs->type == OUTFILE || redirs->type == APPEND)
 			out_fd = redirs->fd;
 		redirs = redirs->next;
 	}

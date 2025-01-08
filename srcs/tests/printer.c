@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 16:48:41 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/02 16:51:58 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2025/01/08 14:20:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	print_command(t_command *cmd)
 			printf("  Type: ");
 			switch(redir->type)
 			{
-				case LESS:			printf("LESS (<)\n"); break;
-				case LESSLESS:		printf("LESSLESS (<<)\n"); break;
-				case GREATER:		printf("GREATER (>)\n"); break;
-				case GREATERGREATER: printf("GREATERGREATER (>>)\n"); break;
+				case INFILE:			printf("INFILE (<)\n"); break;
+				case HERE_DOC:		printf("HERE_DOC (<<)\n"); break;
+				case OUTFILE:		printf("OUTFILE (>)\n"); break;
+				case APPEND: printf("APPEND (>>)\n"); break;
 				default:			printf("UNKNOWN\n");
 			}
 			printf("    Filename: '%s'\n", redir->filename);

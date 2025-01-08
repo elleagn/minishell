@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:48:27 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/06 08:17:17 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 14:19:38 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // 	printf("------ CREATE_NEXT_TOKEN ----\n");
 // 	printf("------ operators ------\n");
 // 	token = create_next_token(input1);
-// 	if (token->type == LESS)
+// 	if (token->type == INFILE)
 // 		printf("OK\n");
 // 	else
 // 		printf("KO\n");
@@ -43,7 +43,7 @@
 // 	else
 // 		printf("KO\n");
 // 	token = create_next_token(input3);
-// 	if (token->type == LESSLESS)
+// 	if (token->type == HERE_DOC)
 // 		printf("OK\n");
 // 	else
 // 		printf("KO\n");

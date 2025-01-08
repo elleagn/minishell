@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 08:40:46 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/16 10:22:58 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 14:20:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(void)
 	redir = command->redirs;
 	if (!redir)
 		return (1);
-	redir->type = GREATER;
+	redir->type = OUTFILE;
 	redir->fd = fd;
 	mini_echo(command, NULL);
 	close(fd);
@@ -43,13 +43,13 @@ int	main(void)
 	redir = redir->next;
 	if (!redir)
 		return (1);
-	redir->type = GREATERGREATER;
+	redir->type = APPEND;
 	redir->fd = fd;
 	redir->next = init_redir();
 	redir = redir->next;
 	if (!redir)
 		return (1);
-	redir->type = LESS;
+	redir->type = INFILE;
 	redir->fd = fd;
 	mini_echo(command, NULL);
 	close(fd);
@@ -58,7 +58,7 @@ int	main(void)
 	redir = redir->next;
 	if (!redir)
 		return (1);
-	redir->type = GREATERGREATER;
+	redir->type = APPEND;
 	redir->fd = fd;
 	mini_echo(command, NULL);
 	close(fd);

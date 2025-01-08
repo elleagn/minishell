@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 08:15:36 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 12:35:29 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 14:20:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(void)
 	command->next->av = duplicate_tab(av2);
 	command->next->previous = command;
 //	redir = init_redir();
-//	redir->type = GREATER;
+//	redir->type = OUTFILE;
 //	redir->filename = ft_strdup("out");
 //	command->next->redirs = redir;
 	data->path = duplicate_tab(path);

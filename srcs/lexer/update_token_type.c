@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/12/08 07:29:43 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 14:20:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	update_token_type(t_token *token, char *input)
 	if (!token || !input)
 		return ;
 	if (ft_strncmp(input, "<<", 2) == 0)
-		token->type = LESSLESS;
+		token->type = HERE_DOC;
 	else if (ft_strncmp(input, "<", 1) == 0)
-		token->type = LESS;
+		token->type = INFILE;
 	else if (ft_strncmp(input, ">>", 2) == 0)
-		token->type = GREATERGREATER;
+		token->type = APPEND;
 	else if (ft_strncmp(input, ">", 1) == 0)
-		token->type = GREATER;
+		token->type = OUTFILE;
 	else if (ft_strncmp(input, "|", 1) == 0)
 		token->type = PIPE;
 	else if (is_string(input))

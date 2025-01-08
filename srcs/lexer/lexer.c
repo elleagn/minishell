@@ -42,7 +42,7 @@ void	go_to_next_word(char *input, int *i, t_token *token)
 {
 	if (token->literal)
 		*i += ft_strlen(token->literal);
-	else if (token->type == GREATERGREATER || token->type == LESSLESS)
+	else if (token->type == APPEND || token->type == HERE_DOC)
 		*i += 2;
 	else
 		*i += 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:06 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/08 12:15:55 by lcluzan          ###   ########.fr       */
+/*   Updated: 2025/01/08 14:20:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ char	*separator_literal(t_token *token)
 
 	if (!token)
 		literal = ft_strdup("newline");
-	else if (token->type == LESS)
+	else if (token->type == INFILE)
 		literal = ft_strdup("<");
-	else if (token->type == LESSLESS)
+	else if (token->type == HERE_DOC)
 		literal = ft_strdup("<<");
 	else if (token->type == PIPE)
 		literal = ft_strdup("|");
-	else if (token->type == GREATER)
+	else if (token->type == OUTFILE)
 		literal = ft_strdup(">");
 	else
 		literal = ft_strdup(">>");
@@ -70,8 +70,8 @@ int	process_token(t_command **current, t_token **token, int *exit_code)
 		if (!handle_pipe(current))
 			return (clear_command_list(*current), 0);
 	}
-	else if ((*token)->type == LESS || (*token)->type == LESSLESS
-		|| (*token)->type == GREATER || (*token)->type == GREATERGREATER)
+	else if ((*token)->type == INFILE || (*token)->type == HERE_DOC
+		|| (*token)->type == OUTFILE || (*token)->type == APPEND)
 	{
 		if (!handle_redirection(*current, token))
 			return (clear_command_list(*current), 0);

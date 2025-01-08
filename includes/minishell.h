@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 12:04:49 by lcluzan          ###   ########.fr       */
+/*   Updated: 2025/01/08 14:21:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef enum e_type
 {
 	UNDEFINED,
 	STRING,
-	LESS,
-	LESSLESS,
-	GREATER,
-	GREATERGREATER,
+	INFILE,
+	HERE_DOC,
+	OUTFILE,
+	APPEND,
 	PIPE,
 	WORD
 }	t_type;

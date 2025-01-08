@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:07:06 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 12:37:36 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 14:19:38 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	find_in_fd(t_command *command)
 	in_fd = command->pipe[0];
 	while (redirs)
 	{
-		if (redirs->type == LESS || redirs->type == LESSLESS)
+		if (redirs->type == INFILE || redirs->type == HERE_DOC)
 			in_fd = redirs->fd;
 		redirs = redirs->next;
 	}
