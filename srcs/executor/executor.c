@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 14:32:29 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 13:56:43 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <minishell.h>
 
@@ -66,7 +67,6 @@ void	executor(t_command *cmdlist, t_data *data)
 {
 	if (setup_files(cmdlist))
 		critical_exit(cmdlist, data);
-	command_lookup(cmdlist, data);
 	if (!cmdlist->next && cmdlist->builtin >= 0)
 		handle_builtin(cmdlist, data);
 	else
