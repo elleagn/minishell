@@ -6,11 +6,13 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:24:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 16:30:15 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 15:35:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+sig_atomic_t	g_flag;
 
 int	prepare_path(t_data *data)
 {
@@ -27,6 +29,15 @@ int	prepare_path(t_data *data)
 			return (perror("minishell"), 1);
 		data->path = path;
 	}
+	return (0);
+}
+
+int	prepare_signals(void)
+{
+	if (signal(SIGINT, signal_handler) < 0)
+		return (perror("minishell"), 1);
+	if (signal(SIGQUIT, SIG_IGN))
+		return (perror("minishell"), 1);
 	return (0);
 }
 
@@ -55,6 +66,8 @@ int	main(int ac, char **av, char **envp)
 		ft_printf("minishell doesn't accept any arguments");
 		return (0);
 	}
+	if (prepare_signals())
+		return (1);
 	data = prepare_shell(envp);
 	if (!data)
 		return (1);

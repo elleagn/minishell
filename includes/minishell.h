@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 14:21:43 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 16:22:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define ENV_SIZE 3
 # define CRITICAL_ERROR -1
+
+extern sig_atomic_t	g_flag;
 
 typedef enum e_type
 {
@@ -72,6 +74,7 @@ typedef struct s_command
 
 typedef struct s_data
 {
+	int				stdin_fd;
 	char			**env;
 	int				env_size;
 	char			**path;
@@ -84,6 +87,7 @@ typedef struct s_data
 // Loop
 
 int			mini_loop(t_data *data);
+int			check_signal(int stdin_fd, char *input, int *init_readline);
 
 // Lexer
 
@@ -147,6 +151,7 @@ char		**dup_env_array(char **envp, t_data *data);
 void		replace_string(char **str1, char *str2);
 void		full_cleanup(t_command *command, t_data *data);
 void		critical_exit(t_command *command, t_data *data);
+void		signal_handler(int signum);
 
 // Parser
 

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:20:47 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/08 14:17:46 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/08 15:02:19 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_redir	*init_and_fill_redir(t_type type, t_token *filename)
 	if (!redir)
 		return (NULL);
 	redir->type = type;
-	redir->filename = ft_strdup(filename->literal);
+	// if (type == HERE_DOC)
+	// 	redir->filename = handle_here_doc(filename);
+	// else
+		redir->filename = ft_strdup(filename->literal);
 	if (!redir->filename)
 		return (perror("minishell"), clear_redir(redir), NULL);
 	redir->backup = ft_strdup(filename->literal);

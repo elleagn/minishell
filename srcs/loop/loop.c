@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 12:15:45 by lcluzan          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:22:14 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,22 @@ int	process_and_execute(char *input, t_data *data)
 int	mini_loop(t_data *data)
 {
 	char		*input;
+	int			signal;
+	int			init_readline;
 
+	init_readline = 0;
 	while (1)
 	{
 		input = readline("minishell $ ");
-		if (!input)
+		signal = check_signal(data->stdin_fd, input, &init_readline);
+		if (signal == -1)
+		{
+			data->exit_code = 1;
 			break ;
-		if (process_and_execute(input, data))
+		}
+		if (!signal && !input)
+			break ;
+		if (!signal && process_and_execute(input, data))
 			break ;
 	}
 	rl_clear_history();
