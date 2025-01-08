@@ -101,7 +101,6 @@ t_token		*lexer(char *input);
 // Executor
 
 int			setup_files(t_command *command_list);
-void		command_lookup(t_command *command, t_data *data);
 void		close_cmd_files(t_command *command);
 void		close_all_files(t_command *command_list);
 void		execute_command(t_command *command, t_data *data);
@@ -148,10 +147,12 @@ t_data		*init_data(void);
 void		clear_data(t_data *data);
 int			array_size(char **env);
 char		**dup_env_array(char **envp, t_data *data);
-void		replace_string(char **str1, char *str2);
 void		full_cleanup(t_command *command, t_data *data);
 void		critical_exit(t_command *command, t_data *data);
 void		signal_handler(int signum);
+size_t		extract_var_name(const char *str, char **var_name);
+char		*get_env_value(const char *name, t_data *data);
+char		*ft_strjoin_free(char *s1, const char *s2);
 
 // Parser
 
@@ -163,6 +164,9 @@ void		add_arg(t_command *cmd, char *arg);
 // Expander
 
 int			expander(t_command *command, t_data *data);
+char		*expand_string(char *str, t_data *data);
+int			expand_command_args(t_command *cmd, t_data *data);
+char		*find_in_path(const char *cmd, t_data *data);
 
 // Tests
 

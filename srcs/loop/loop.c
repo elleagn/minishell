@@ -79,6 +79,6 @@ int	mini_loop(t_data *data)
 		if (!signal && process_and_execute(input, data))
 			break ;
 	}
-	rl_clear_history();
+	// rl_clear_history();
 	return (data->exit_code);
 }

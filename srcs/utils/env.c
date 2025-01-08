@@ -1,24 +1,26 @@
 #include <minishell.h>
 
 // Extracts variable name from string after $
-char *extract_var_name(const char *str, int *i)
+size_t extract_var_name(const char *str, char **var_name)
 {
-    int start;
-    int len;
+    size_t  len;
 
-    start = 0;  // Now start at 0 since we're working with str directly
+    len = 0;
+    *var_name = NULL;
 
-    // First character must be alphabetic or underscore
-    if (!ft_isalpha(str[start]) && str[start] != '_')
-        return (NULL);
+    // Empty string or not a valid variable start character
+    if (!str || (!ft_isalpha(str[0]) && str[0] != '_'))
+        return (0);
 
-    // Continue while character is alphanumeric or underscore
-    while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
-        (*i)++;
+    // Count length of variable name (alphanumeric or underscore)
+    while (str[len] && (ft_isalnum(str[len]) || str[len] == '_'))
+        len++;
 
-    len = *i;  // Length is now just the final position of i
-    (*i)++;
-    return (ft_substr(str, start, len));
+    // If we found a valid name, extract it
+    if (len > 0)
+        *var_name = ft_substr(str, 0, len);
+
+    return (len);
 }
 
 // Gets environment variable value

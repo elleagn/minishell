@@ -62,9 +62,3 @@ char	**dup_env_array(char **envp, t_data *data)
 	data->env = new_env;
 	return (new_env);
 }
-
-void	replace_string(char **str1, char *str2)
-{
-	free(*str1);
-	*str1 = str2;
-}
