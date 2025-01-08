@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouillebobby <nouillebobby@student.42.f    +#+  +:+       +#+        */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 16:48:41 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/02 16:51:58 by nouillebobb      ###   ########.fr       */
+/*   Updated: 2025/01/08 13:59:31 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_command(t_command *cmd)
 
 		// Print process info
 		printf("PID: %d\n", cmd->pid);
-		printf("Builtin: %s\n", cmd->builtin ? "Yes" : "No");
+		printf("Builtin: %s\n", cmd->builtin >= 0 ? "Yes" : "No");
 		printf("Exit code: %d\n", cmd->exit_code);
 
 		// Print linking info

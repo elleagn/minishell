@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
+#    By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/12/19 12:36:00 by gozon            ###   ########.fr        #
+#    Updated: 2025/01/08 13:55:42 by lcluzan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,22 @@ SRC_FILES =	lexer/lexer.c \
 			builtins/add_remove_var.c \
 			builtins/exit.c \
 			executor/executor.c \
-			executor/command_lookup.c \
 			executor/files.c \
 			executor/subshells.c \
 			executor/last_command.c \
 			executor/files_utils.c \
-			tests/main_executor.c
+			expander/expander.c \
+			parser/arguments.c \
+			parser/parser.c \
+			parser/pipes.c \
+			parser/redirections.c \
+			loop/loop.c \
+			tests/printer.c \
+			utils/strings.c \
+			utils/env.c \
+			expander/commands.c \
+			expander/args.c \
+			main.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
