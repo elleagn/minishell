@@ -6,7 +6,7 @@
 #    By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2025/01/08 13:55:42 by lcluzan          ###   ########.fr        #
+#    Updated: 2025/01/09 15:54:19 by lcluzan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC_FILES =	lexer/lexer.c \
 			utils/env.c \
 			expander/commands.c \
 			expander/args.c \
+			expander/redirections.c \
 			main.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects

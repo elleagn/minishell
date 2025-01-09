@@ -6,11 +6,16 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:51:26 by lcluzan           #+#    #+#             */
-/*   Updated: 2025/01/09 13:07:44 by lcluzan          ###   ########.fr       */
+/*   Updated: 2025/01/09 15:57:21 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	ft_is_space(char c)
+{
+	return (c == ' ');
+}
 
 int	is_ambiguous_redirect(char *expanded)
 {
@@ -21,7 +26,7 @@ int	is_ambiguous_redirect(char *expanded)
 	i = 0;
 	while (expanded[i])
 	{
-		if (isspace(expanded[i]))
+		if (ft_is_space(expanded[i]))
 			return (1);
 		i++;
 	}
@@ -37,7 +42,7 @@ int	expand_redirections(t_redir *redir, t_data *data)
 		if (redir->type != HERE_DOC)
 		{
 			if (!redir->backup)
-				redir->backup = strdup(redir->filename);
+				redir->backup = ft_strdup(redir->filename);
 			expanded = expand_string(redir->filename, data);
 			if (!expanded)
 				return (0);
