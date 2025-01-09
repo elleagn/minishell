@@ -26,16 +26,16 @@ return (len);
 // Gets environment variable value
 char *get_env_value(const char *name, t_data *data)
 {
-int     i;
-size_t  len;
+    int     i;
+    size_t  len;
 
-len = ft_strlen(name);
-i = 0;
-while (data->env[i])
-{
-	if (!ft_strncmp(data->env[i], name, len) && data->env[i][len] == '=')
-		return (data->env[i] + len + 1);
-	i++;
-}
-return (NULL);
+    len = ft_strlen(name);
+    i = 0;
+    while (data->env[i])
+    {
+        if (!ft_strncmp(data->env[i], name, len) && data->env[i][len] == '=')
+            return (data->env[i] + len + 1);
+        i++;
+    }
+    return (NULL);
 }
