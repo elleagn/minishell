@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 16:22:32 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/09 13:18:32 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,10 @@ int			expander(t_command *command, t_data *data);
 char		*expand_string(char *str, t_data *data);
 int			expand_command_args(t_command *cmd, t_data *data);
 char		*find_in_path(const char *cmd, t_data *data);
+int			expand_redirections(t_redir *redir, t_data *data);
 
 // Tests
 
-void    print_command(t_command *command);
+void		print_command(t_command *command);
 
 #endif
