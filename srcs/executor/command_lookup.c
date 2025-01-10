@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:48:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 16:38:19 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 15:10:13 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	find_bin(t_command *command, t_data *data)
 
 	cmd = command->av;
 	if (!cmd)
-		return (ft_printf("minishell:  : command not found\n"), 127);
+		return (0);
 	if (ft_strnstr(*cmd, "/", ft_strlen(*cmd)) || !data->path)
 	{
 		if (access(*cmd, F_OK))

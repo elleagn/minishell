@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 13:36:27 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 14:53:51 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	process_and_execute(char *input, t_data *data)
 	free(input);
 	if (!command)
 	{
-		if (data->exit_code == 2 || data->exit_code == 130)
+		if (data->exit_code != -1)
 			return (0);
 		data->exit_code = 1;
 		return (1);
@@ -69,12 +69,9 @@ int	mini_loop(t_data *data)
 		input = readline("minishell $ ");
 		if (!g_flag && !input)
 			break ;
-		data->exit_code = check_signal(data->stdin_fd, input, &init_readline);
+		data->exit_code = check_signal(data, &init_readline);
 		if (data->exit_code == -1)
-		{
-			data->exit_code = 1;
 			break ;
-		}
 		if (!data->exit_code && process_and_execute(input, data))
 			break ;
 	}

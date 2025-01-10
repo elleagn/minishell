@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:07:06 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 14:19:38 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 15:13:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	wait_for_children(t_command *cmd, t_data *data)
 
 	while (cmd)
 	{
-		if (!cmd->exit_code)
+		if (!cmd->exit_code && cmd->av)
 		{
 			if (waitpid(cmd->pid, &status, 0) == -1)
 				wait_and_exit(cmd, data);

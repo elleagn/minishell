@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 11:30:14 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 14:44:14 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_data
 // Loop
 
 int			mini_loop(t_data *data);
-int			check_signal(int stdin_fd, char *input, int *init_readline);
+int			check_signal(t_data *data, int *init_readline);
 
 // Lexer
 
