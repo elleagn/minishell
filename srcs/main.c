@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:24:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 15:35:20 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 19:10:03 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	prepare_path(t_data *data)
 
 int	prepare_signals(void)
 {
-	if (signal(SIGINT, signal_handler) < 0)
+	if (signal(SIGINT, signal_handler) == SIG_ERR)
 		return (perror("minishell"), 1);
 	if (signal(SIGQUIT, SIG_IGN))
 		return (perror("minishell"), 1);

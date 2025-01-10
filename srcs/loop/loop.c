@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 15:35:51 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 20:15:45 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,17 @@ int	mini_loop(t_data *data)
 	init_readline = 0;
 	while (1)
 	{
-		input = readline("minishell $ ");
+		input = readline("minishell$ ");
 		data->line += 1;
 		if (!g_flag && !input)
 			break ;
 		data->exit_code = check_signal(data, &init_readline);
 		if (data->exit_code == -1)
+		{
+			data->exit_code = 1;
 			break ;
-		if (!data->exit_code && process_and_execute(input, data))
+		}
+		if (input && process_and_execute(input, data))
 			break ;
 	}
 	rl_clear_history();

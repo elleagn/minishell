@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:06 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/10 11:28:01 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 20:22:15 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int	unexpected_token(t_token *token)
 {
 	char	*token_literal;
 
-	if (is_redir(token)
-		&& (token->next == NULL || is_redir(token->next)))
+	if ((is_redir(token)
+			&& (token->next == NULL || is_redir(token->next)))
+		|| (token->type == PIPE && token->next->type == PIPE))
 	{
 		token_literal = separator_literal(token->next);
 		if (!token_literal)

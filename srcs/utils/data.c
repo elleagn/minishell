@@ -6,13 +6,13 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:04:48 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 15:30:10 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 19:06:26 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	create_builtin_array(int (*builtins[8])(t_command *, t_data *))
+void	create_builtin_array(int (*builtins[7])(t_command *, t_data *))
 {
 	builtins[0] = mini_echo;
 	builtins[1] = mini_env;

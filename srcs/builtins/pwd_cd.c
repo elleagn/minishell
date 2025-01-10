@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:10:09 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 14:48:11 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 19:08:00 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	mini_cd(t_command *command, t_data *data)
 		return (0);
 	if (command->av[2])
 	{
-		if (write(2, "minishell: cd: too many arguments\n", 36) < 0)
+		if (write(2, "minishell: cd: too many arguments\n", 35) < 0)
 			return (perror("minishell"), -1);
 		return (1);
 	}
