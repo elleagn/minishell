@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:23:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/19 11:31:55 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 08:14:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token	*init_token(void)
 		return (perror("minishell"), NULL);
 	token->literal = NULL;
 	token->type = UNDEFINED;
-	token->position = -1;
+	token->position = 0;
 	token->backup = NULL;
 	token->next = NULL;
 	token->prev = NULL;
@@ -72,6 +72,7 @@ void	add_token_to_list(t_token **token_lst, t_token *new_token)
 		while (token->next)
 			token = token->next;
 		token->next = new_token;
+		new_token->position = token->position + 1;
 		new_token->prev = token;
 	}
 }

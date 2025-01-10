@@ -6,15 +6,15 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:06 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/08 14:20:44 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 09:46:55 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	is_separator_type(t_token *token)
+int	is_redir(t_token *token)
 {
-	if (token->type != WORD && token->type != STRING)
+	if (token->type != WORD && token->type != STRING && token->type != PIPE)
 		return (1);
 	return (0);
 }
@@ -44,8 +44,8 @@ int	unexpected_token(t_token *token)
 {
 	char	*token_literal;
 
-	if (is_separator_type(token)
-		&& (token->next == NULL || is_separator_type(token->next)))
+	if (is_redir(token)
+		&& (token->next == NULL || is_redir(token->next)))
 	{
 		token_literal = separator_literal(token->next);
 		if (!token_literal)

@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2025/01/08 15:57:37 by gozon            ###   ########.fr        #
+#    Updated: 2025/01/10 09:28:25 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_FILES =	lexer/lexer.c \
 			parser/parser.c \
 			parser/pipes.c \
 			parser/redirections.c \
+			parser/here_doc.c \
 			loop/loop.c \
 			loop/signals.c \
 			main.c

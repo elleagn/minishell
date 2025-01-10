@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 17:05:51 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 10:24:14 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,21 @@ int	process_and_execute(char *input, t_data *data)
 int	mini_loop(t_data *data)
 {
 	char		*input;
-	int			signal;
 	int			init_readline;
 
 	init_readline = 0;
 	while (1)
 	{
 		input = readline("minishell $ ");
-		signal = check_signal(data->stdin_fd, input, &init_readline);
-		if (signal == -1)
+		data->exit_code = check_signal(data->stdin_fd, input, &init_readline);
+		if (data->exit_code == -1)
 		{
 			data->exit_code = 1;
 			break ;
 		}
-		if (!signal && !input)
+		if (!data->exit_code && !input)
 			break ;
-		if (!signal && process_and_execute(input, data))
+		if (!data->exit_code && process_and_execute(input, data))
 			break ;
 	}
 	rl_clear_history();
