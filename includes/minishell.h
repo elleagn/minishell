@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 14:44:14 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 15:29:49 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_data
 	char			**path;
 	int				(*builtin[7])(struct s_command *command,
 			struct s_data *data);
-	struct s_token	*lexer_list;
+	int				line;
 	int				exit_code;
 }	t_data;
 

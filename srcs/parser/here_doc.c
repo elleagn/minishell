@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:34:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 14:52:24 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 15:41:53 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ char	*generate_file_name(int i)
 	return (filename);
 }
 
-char	*get_stdin(t_data *data, char *limiter, int *init_readline, int line)
+char	*get_stdin(t_data *data, char *limiter, int *init_readline)
 {
 	char	*input;
 
 	input = readline("> ");
 	if (!g_flag && !input)
 		ft_printf("minishell: warning: here-document at line %i delimited by "
-			"end-of-file (wanted `%s')\n", line, limiter);
+			"end-of-file (wanted `%s')\n", data->line, limiter);
 	data->exit_code = check_signal(data, init_readline);
 	return (input);
 }
@@ -60,17 +60,18 @@ int	fill_file(int fd, char *limiter, t_data *data)
 
 	len = ft_strlen(limiter);
 	init_readline = 0;
-	line = 1;
-	str = get_stdin(data, limiter, &init_readline, line);
+	line = 0;
+	str = get_stdin(data, limiter, &init_readline);
 	while (str && ft_strncmp(str, limiter, len))
 	{
+		line += 1;
 		if (write(fd, str, ft_strlen(str)) == -1 || write(fd, "\n", 1) == -1)
 			return (-1);
 		free(str);
-		str = get_stdin(data, limiter, &init_readline, line);
-		line += 1;
+		str = get_stdin(data, limiter, &init_readline);
 	}
 	free(str);
+	data->line += line;
 	return (data->exit_code);
 }
 

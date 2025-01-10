@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:04:48 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 15:19:50 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 15:30:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_data	*init_data(void)
 	data->env_size = 0;
 	create_builtin_array(data->builtin);
 	data->path = 0;
-	data->lexer_list = NULL;
+	data->line = 0;
 	data->exit_code = 0;
 	return (data);
 }
@@ -47,6 +47,5 @@ void	clear_data(t_data *data)
 	close(data->stdin_fd);
 	free_char_array(data->env);
 	free_char_array(data->path);
-	clear_token_list(&(data->lexer_list));
 	free(data);
 }
