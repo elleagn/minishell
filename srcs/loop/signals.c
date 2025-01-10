@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:36:27 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 16:24:06 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 13:16:17 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int	check_signal(int stdin_fd, char *input, int *init_readline)
 	if (g_flag == 0)
 	{
 		*init_readline = 0;
+		return (0);
+	}
+	if (g_flag == SIGQUIT)
+	{
+		g_flag = 0;
 		return (0);
 	}
 	g_flag = 0;

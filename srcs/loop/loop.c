@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 10:24:14 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 13:36:27 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_command	*parse_and_expand(t_token *tokens, t_data *data)
 {
 	t_command	*commands;
 
-	commands = parser(tokens, &(data->exit_code));
+	commands = parser(tokens, data);
 	if (!commands)
 		return (NULL);
 	if (!expander(commands, data))
@@ -67,14 +67,14 @@ int	mini_loop(t_data *data)
 	while (1)
 	{
 		input = readline("minishell $ ");
+		if (!g_flag && !input)
+			break ;
 		data->exit_code = check_signal(data->stdin_fd, input, &init_readline);
 		if (data->exit_code == -1)
 		{
 			data->exit_code = 1;
 			break ;
 		}
-		if (!data->exit_code && !input)
-			break ;
 		if (!data->exit_code && process_and_execute(input, data))
 			break ;
 	}

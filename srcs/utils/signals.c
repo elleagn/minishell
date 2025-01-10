@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:11:01 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/08 16:09:59 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 13:14:08 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	signal_handler(int signum)
 {
-	g_flag = 1;
-	(void)signum;
-	close(0);
+	g_flag = signum;
+	if (g_flag == SIGINT)
+		close(0);
 }

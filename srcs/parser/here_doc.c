@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:34:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 11:33:08 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 13:25:47 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	fill_file(int fd, char *limiter)
 			return (-1);
 		free(str);
 		str = get_next_line(STDIN_FILENO);
+		ft_printf("hello\n");
 	}
 	free(str);
 	return (0);
