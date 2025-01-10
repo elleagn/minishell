@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 09:27:52 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 11:30:14 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,11 +155,12 @@ void		signal_handler(int signum);
 
 // Parser
 
-t_command	*parser(t_token *tokens, int *exit_code);
-int			handle_redirection(t_command *current, t_token **token);
+t_command	*parser(t_token *tokens, t_data *data);
+int			handle_redirection(t_command *current, t_token **token,
+				t_data *data);
 int			handle_pipe(t_command **current);
 void		add_arg(t_command *cmd, char *arg);
-char		*here_doc(t_token *lim);
+char		*here_doc(t_token *lim, t_data *data);
 
 // Expander
 
@@ -167,6 +168,6 @@ int			expander(t_command *command, t_data *data);
 
 // Tests
 
-void    print_command(t_command *command);
+void		print_command(t_command *command);
 
 #endif

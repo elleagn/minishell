@@ -6,13 +6,31 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:20:47 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/10 09:26:51 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 11:33:53 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_redir	*init_and_fill_redir(t_type type, t_token *filename)
+int	add_filename(t_redir *redir, t_data *data, t_token *filename)
+{
+	if (redir->type == HERE_DOC)
+		redir->filename = here_doc(filename, data);
+	else
+	{
+		redir->filename = ft_strdup(filename->literal);
+		if (!redir->filename)
+		{
+			perror("minishell");
+			data->exit_code = -1;
+		}
+	}
+	if (!redir->filename)
+		return (1);
+	return (0);
+}
+
+t_redir	*init_and_fill_redir(t_type type, t_token *filename, t_data *data)
 {
 	t_redir	*redir;
 
@@ -22,12 +40,8 @@ t_redir	*init_and_fill_redir(t_type type, t_token *filename)
 	if (!redir)
 		return (NULL);
 	redir->type = type;
-	if (type == HERE_DOC)
-		redir->filename = here_doc(filename);
-	else
-		redir->filename = ft_strdup(filename->literal);
-	if (!redir->filename)
-		return (clear_redir(redir), NULL);
+	if (add_filename(redir, data, filename))
+		return (clear_redir_list(redir), NULL);
 	redir->backup = ft_strdup(filename->literal);
 	if (!redir->filename)
 		return (perror("minishell"), clear_redir(redir), NULL);
@@ -49,13 +63,13 @@ void	add_redir(t_command *cmd, t_redir *redir)
 	current->next = redir;
 }
 
-int	handle_redirection(t_command *current, t_token **token)
+int	handle_redirection(t_command *current, t_token **token, t_data *data)
 {
 	t_redir	*redir;
 
 	if (!(*token)->next)
 		return (0);
-	redir = init_and_fill_redir((*token)->type, (*token)->next);
+	redir = init_and_fill_redir((*token)->type, (*token)->next, data);
 	if (!redir)
 		return (0);
 	add_redir(current, redir);

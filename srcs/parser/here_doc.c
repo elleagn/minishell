@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:34:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 10:05:07 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 11:33:08 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ int	fill_file(int fd, char *limiter)
 	return (0);
 }
 
-char	*here_doc(t_token *lim)
+char	*here_doc(t_token *lim, t_data *data)
 {
 	char	*filename;
 	int		fd;
 
+	(void)data;
 	filename = generate_file_name(lim->position);
 	if (!filename)
 		return (NULL);

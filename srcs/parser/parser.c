@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:06 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/10 09:46:55 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/10 11:28:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,25 @@ int	unexpected_token(t_token *token)
 	return (0);
 }
 
-int	process_token(t_command **current, t_token **token, int *exit_code)
+int	process_token(t_command **current, t_token **token, t_data *data)
 {
 	if (unexpected_token(*token))
 	{
-		*exit_code = 2;
+		data->exit_code = 2;
 		return (clear_command_list(*current), 0);
 	}
 	if ((*token)->type == PIPE)
 	{
 		if (!handle_pipe(current))
+		{
+			data->exit_code = -1;
 			return (clear_command_list(*current), 0);
+		}
 	}
 	else if ((*token)->type == INFILE || (*token)->type == HERE_DOC
 		|| (*token)->type == OUTFILE || (*token)->type == APPEND)
 	{
-		if (!handle_redirection(*current, token))
+		if (!handle_redirection(*current, token, data))
 			return (clear_command_list(*current), 0);
 	}
 	else if ((*token)->type == WORD || (*token)->type == STRING)
@@ -81,7 +84,7 @@ int	process_token(t_command **current, t_token **token, int *exit_code)
 	return (1);
 }
 
-t_command	*parser(t_token *tokens, int *exit_code)
+t_command	*parser(t_token *tokens, t_data *data)
 {
 	t_command	*cmd_list;
 	t_command	*current;
@@ -96,7 +99,7 @@ t_command	*parser(t_token *tokens, int *exit_code)
 	token = tokens;
 	while (token)
 	{
-		if (!process_token(&current, &token, exit_code))
+		if (!process_token(&current, &token, data))
 			return (NULL);
 		token = token->next;
 	}
