@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 15:29:49 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 12:06:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void		replace_string(char **str1, char *str2);
 void		full_cleanup(t_command *command, t_data *data);
 void		critical_exit(t_command *command, t_data *data);
 void		signal_handler(int signum);
+char		*mini_getenv(char *name, char **env);
 
 // Parser
 
@@ -164,7 +165,7 @@ char		*here_doc(t_token *lim, t_data *data);
 
 // Expander
 
-int			expander(t_command *command, t_data *data);
+// int			expander(t_command *command, t_data *data);
 
 // Tests
 

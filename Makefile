@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2025/01/10 09:28:25 by gozon            ###   ########.fr        #
+#    Updated: 2025/01/12 11:47:10 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ SRC_FILES =	lexer/lexer.c \
 			executor/subshells.c \
 			executor/last_command.c \
 			executor/files_utils.c \
-			expander/expander.c \
 			parser/arguments.c \
 			parser/parser.c \
 			parser/pipes.c \

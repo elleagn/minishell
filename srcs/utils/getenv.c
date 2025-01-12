@@ -41,10 +41,3 @@ char	*mini_getenv(char *name, char **env)
 	}
 	return (NULL);
 }
-
-int	main(int ac, char **av, char **envp)
-{
-	(void)ac;
-	printf("%s\n", mini_getenv(av[1], envp));
-	return (0);
-}

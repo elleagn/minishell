@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 08:43:53 by gozon             #+#    #+#             */
-/*   Updated: 2024/05/22 09:47:16 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 12:33:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s)
 	char	*dup;
 	size_t	i;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	dup = malloc((len + 1) * sizeof(char));
 	if (dup == NULL)

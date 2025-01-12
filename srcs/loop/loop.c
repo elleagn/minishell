@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 20:15:45 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 11:45:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_command	*parse_and_expand(t_token *tokens, t_data *data)
 	commands = parser(tokens, data);
 	if (!commands)
 		return (NULL);
-	if (!expander(commands, data))
-		return (clear_command_list(commands), NULL);
+	// if (!expander(commands, data))
+	// 	return (clear_command_list(commands), NULL);
 	return (commands);
 }
 

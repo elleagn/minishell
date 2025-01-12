@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:43:03 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/10 08:47:59 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 12:32:37 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*res;
 
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
 	res = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (res == NULL)
 		return (NULL);
