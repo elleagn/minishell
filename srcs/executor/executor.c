@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 15:10:05 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 16:03:38 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	handle_builtin(t_command *command, t_data *data)
 {
-	command->exit_code = data->builtin[command->builtin](command, data);
+	if (!command->exit_code)
+		command->exit_code = data->builtin[command->builtin](command, data);
 	if (command->exit_code < 0)
 		critical_exit(command, data);
 	data->exit_code = command->exit_code;

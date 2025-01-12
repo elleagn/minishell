@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:20:47 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/10 11:33:53 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 15:54:03 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 int	add_filename(t_redir *redir, t_data *data, t_token *filename)
 {
 	if (redir->type == HERE_DOC)
+	{
 		redir->filename = here_doc(filename, data);
+		if (!redir->filename)
+			return (1);
+	}
 	else
 	{
 		redir->filename = ft_strdup(filename->literal);
-		if (!redir->filename)
+		if (!redir->filename && filename->literal)
 		{
 			perror("minishell");
 			data->exit_code = -1;
 		}
 	}
-	if (!redir->filename)
-		return (1);
 	return (0);
 }
 
@@ -42,8 +44,8 @@ t_redir	*init_and_fill_redir(t_type type, t_token *filename, t_data *data)
 	redir->type = type;
 	if (add_filename(redir, data, filename))
 		return (clear_redir_list(redir), NULL);
-	redir->backup = ft_strdup(filename->literal);
-	if (!redir->filename)
+	redir->backup = ft_strdup(filename->backup);
+	if (!redir->filename && filename->literal)
 		return (perror("minishell"), clear_redir(redir), NULL);
 	return (redir);
 }

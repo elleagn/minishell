@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/12 12:06:10 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 14:55:49 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,9 @@ char		*here_doc(t_token *lim, t_data *data);
 
 // Expander
 
-// int			expander(t_command *command, t_data *data);
+int			expander(t_token **tokens, t_data *data);
+char		*expand_var(char *word, t_data *data);
+void		split_words(t_token *token, t_data *data);
 
 // Tests
 

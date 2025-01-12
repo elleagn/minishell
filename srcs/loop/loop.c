@@ -6,37 +6,25 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/12 11:45:01 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 15:59:30 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_command	*parse_and_expand(t_token *tokens, t_data *data)
-{
-	t_command	*commands;
-
-	commands = parser(tokens, data);
-	if (!commands)
-		return (NULL);
-	// if (!expander(commands, data))
-	// 	return (clear_command_list(commands), NULL);
-	return (commands);
-}
-
 t_command	*process_line(char *input, t_data *data)
 {
 	t_token		*tokens;
-	t_command	*command;
+	t_command	*commands;
 
 	tokens = lexer(input);
 	if (!tokens)
 		return (NULL);
-	command = parse_and_expand(tokens, data);
+	if (expander(&tokens, data))
+		return (clear_token_list(&tokens), NULL);
+	commands = parser(tokens, data);
 	clear_token_list(&tokens);
-	if (!command)
-		return (NULL);
-	return (command);
+	return (commands);
 }
 
 int	process_and_execute(char *input, t_data *data)

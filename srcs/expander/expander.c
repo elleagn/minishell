@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:55:39 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/12 11:50:28 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 16:06:54 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@ t_token	*expand_token(t_token **token, t_data *data)
 
 	next = (*token)->next;
 	word = (*token)->literal;
-	if (word && word[0] == '$' && (*token)->prev
-		&& (*token)->prev->type == HERE_DOC)
+	if ((word && word[0] != '$') || ((*token)->prev
+			&& (*token)->prev->type == HERE_DOC))
 		return (next);
 	(*token)->literal = expand_var(word, data);
-	free(word);
-	if ((*token)->literal && (!(*token)->prev || (*token)->prev->type == WORD
-			|| (*token)->prev->type == PIPE))
-		split_words(token, data);
+	(*token)->backup = word;
+	if (!(*token)->prev || (*token)->prev->type == WORD
+		|| (*token)->prev->type == STRING || (*token)->prev->type == PIPE)
+	{
+		if (!(*token)->literal)
+			del_token_from_list(token, *token);
+		else
+			split_words(*token, data);
+	}
 	return (next);
 }
 
@@ -39,8 +44,10 @@ int	expander(t_token **tokens, t_data *data)
 	{
 		if (current->type == WORD)
 			current = expand_token(&current, data);
-		if (current->type == STRING)
-			current = remove_quotes(&current, data);
+		// if (current->type == STRING)
+		// 	current = remove_quotes(&current, data);
+		else
+			current = current->next;
 		if (data->exit_code == -1)
 			return (1);
 	}
