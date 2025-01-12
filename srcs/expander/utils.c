@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:49:50 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/12 14:53:15 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/12 16:26:56 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,17 @@ char	*join_var_name(char *expanded, char *var_name, t_data *data)
 {
 	char	*var;
 
-	var = mini_getenv(var_name, data->env);
+	if (!ft_strncmp(var_name, "?", 2))
+	{
+		var = ft_itoa(data->exit_code);
+		if (!var)
+		{
+			data->exit_code = -1;
+			return (NULL);
+		}
+	}
+	else
+		var = mini_getenv(var_name, data->env);
 	if (!var)
 		return (expanded);
 	expanded = ft_strjoin(expanded, var);
