@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:55:39 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/12 16:06:54 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/13 08:48:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,18 @@ int	expander(t_token **tokens, t_data *data)
 {
 	t_token	*current;
 
-	current = *tokens;
+	if ((*tokens)->type == WORD)
+		current = expand_token(tokens, data);
+	else
+		current = *tokens;
+	if (data->exit_code == -1)
+		return (1);
 	while (current)
 	{
 		if (current->type == WORD)
 			current = expand_token(&current, data);
 		// if (current->type == STRING)
-		// 	current = remove_quotes(&current, data);
+		// 	current = remove_quotes(current, data);
 		else
 			current = current->next;
 		if (data->exit_code == -1)
