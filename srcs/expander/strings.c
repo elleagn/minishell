@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 08:33:40 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/13 13:27:50 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/13 13:42:51 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	no_quotes(char **expanded, char *str, t_data *data)
 	int	i;
 
 	i = 0;
-//	ft_printf("str = %s\n", str);
 	while (str[i] && str[i] != '"' && str[i] != '\'')
 	{
 		if (str[i] == '$')
@@ -72,6 +71,29 @@ int	no_quotes(char **expanded, char *str, t_data *data)
 	return (i);
 }
 
+void	remove_quotes_without_expand(t_token *token, t_data *data)
+{
+	char	*literal;
+	char	*unquoted;
+	int		i;
+
+	i = 0;
+	unquoted = NULL;
+	literal = token->literal;
+	while (literal[i])
+	{
+		if (literal[i] == '\'')
+			i += add_until_char(&unquoted, &literal[i + 1], data, "'") + 2;
+		else if (literal[i] == '"')
+			i += add_until_char(&unquoted, &literal[i + 1], data, "\"") + 2;
+		else
+			i += add_until_char(&unquoted, &literal[i], data, "\"'");
+		if (data->exit_code == -1)
+			return ;
+	}
+	replace_string(&token->literal, unquoted);
+}
+
 t_token	*remove_quotes(t_token *token, t_data *data)
 {
 	int		i;
@@ -81,6 +103,8 @@ t_token	*remove_quotes(t_token *token, t_data *data)
 	i = 0;
 	expanded = NULL;
 	literal = token->literal;
+	if (token->prev && token->prev->type == HERE_DOC)
+		return (remove_quotes_without_expand(token, data), token->next);
 	while (literal[i])
 	{
 		if (literal[i] == '\'')
