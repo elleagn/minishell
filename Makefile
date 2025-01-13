@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2025/01/13 08:41:59 by gozon            ###   ########.fr        #
+#    Updated: 2025/01/13 11:26:12 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,8 @@ SRC_FILES =	lexer/lexer.c \
 			loop/signals.c \
 			expander/expander.c \
 			expander/words.c \
+			expander/strings.c \
+			expander/string_utils.c \
 			main.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
