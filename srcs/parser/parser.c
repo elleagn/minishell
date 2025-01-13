@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:06 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/12 15:43:56 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/13 14:46:17 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,14 @@ int	unexpected_token(t_token *token)
 {
 	char	*token_literal;
 
-	if ((is_redir(token)
-			&& (token->next == NULL || is_redir(token->next)))
-		|| (token->type == PIPE && token->next->type == PIPE))
+	if (token->type == PIPE && (!token->prev || !token->next
+			|| token->next->type == PIPE))
+	{
+		ft_printf("minishell: syntax error near unexpected token `|'\n");
+		return (1);
+	}
+	if ((is_redir(token) && (token->next == NULL
+				|| is_redir(token->next) || token->next->type == PIPE)))
 	{
 		token_literal = separator_literal(token->next);
 		if (!token_literal)
@@ -74,8 +79,7 @@ int	process_token(t_command **current, t_token **token, t_data *data)
 			return (clear_command_list(*current), 0);
 		}
 	}
-	else if ((*token)->type == INFILE || (*token)->type == HERE_DOC
-		|| (*token)->type == OUTFILE || (*token)->type == APPEND)
+	else if (is_redir(*token))
 	{
 		if (!handle_redirection(*current, token, data))
 			return (clear_command_list(*current), 0);
