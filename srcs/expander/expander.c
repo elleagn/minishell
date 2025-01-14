@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:55:39 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/14 08:37:56 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 09:27:39 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,5 @@ int	expander(t_token **tokens, t_data *data)
 		if (data->exit_code == -1)
 			return (1);
 	}
-	if (!(*tokens)->next && !(*tokens)->literal)
-		ft_printf("hello\n");
 	return (0);
 }

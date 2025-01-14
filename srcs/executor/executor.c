@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:17 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/14 07:56:32 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 09:35:08 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	fork_and_execute(t_command *cmdlist, t_data *data)
 
 void	executor(t_command *cmdlist, t_data *data)
 {
+	signal(SIGINT, SIG_IGN);
 	if (setup_files(cmdlist))
 		critical_exit(cmdlist, data);
 	command_lookup(cmdlist, data);
@@ -73,4 +74,5 @@ void	executor(t_command *cmdlist, t_data *data)
 		handle_builtin(cmdlist, data);
 	else
 		fork_and_execute(cmdlist, data);
+	signal(SIGINT, signal_handler);
 }
