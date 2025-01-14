@@ -46,7 +46,7 @@ void	go_to_next_word(char *input, int *i, t_token *token)
 		*i += 2;
 	else
 		*i += 1;
-	while (input[*i] == ' ')
+	while (input[*i] == ' ' || input[*i] == '\t')
 		*i += 1;
 }
 

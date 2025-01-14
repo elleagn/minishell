@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/13 14:33:48 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 10:55:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_command	*process_line(char *input, t_data *data)
 	tokens = lexer(input);
 	if (!tokens)
 		return (NULL);
-	if (!tokens->next && tokens->type == WORD && tokens->literal[0] == ' ')
+	if (!tokens->next && tokens->type == WORD && (tokens->literal[0] == ' '
+			|| tokens->literal[0] == '\t'))
 		return (clear_token(tokens), NULL);
 	if (expander(&tokens, data))
 		return (clear_token_list(&tokens), NULL);

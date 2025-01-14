@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:10:09 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 19:08:00 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 10:17:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	mini_pwd(t_command *command, t_data *data)
 	}
 	out_fd = find_out_fd(command);
 	ft_bzero(buffer, 4096);
-	if (!getcwd(buffer, 4096) || write(out_fd, buffer, ft_strlen(buffer)) < 0
+	if (!getcwd(buffer, 4096))
+		return (perror("minishell: getcwd"), 1);
+	if (write(out_fd, buffer, ft_strlen(buffer)) < 0
 		|| write(out_fd, "\n", 1) < 0)
 		return (perror("minishell"), -1);
 	return (0);
@@ -46,7 +48,7 @@ int	mini_cd(t_command *command, t_data *data)
 		return (1);
 	}
 	if (chdir(command->av[1]) < 0)
-		return (perror("minishell: cd"), 1);
+		return (ft_printf("minishell: cd: "), perror(command->av[1]), 1);
 	ft_bzero(buf, 4096);
 	if (!getcwd(buf, 4096))
 		return (perror("minishell"), -1);

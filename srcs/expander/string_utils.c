@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:45:49 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/13 13:27:17 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 10:51:54 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	join_var(char **expanded, char *str, t_data *data)
 	char	*tmp;
 	int		len;
 
-	var_name = delims_strdup(&str[1], " $\"'");
+	var_name = delims_strdup(&str[1], "\t $\"'");
 	if (!var_name)
 	{
 		data->exit_code = -1;
