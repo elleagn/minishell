@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:34:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 15:41:53 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 13:05:04 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	fill_file(int fd, char *limiter, t_data *data)
 	int		init_readline;
 	int		line;
 
-	len = ft_strlen(limiter);
+	len = ft_strlen(limiter) + 1;
 	init_readline = 0;
 	line = 0;
 	str = get_stdin(data, limiter, &init_readline);

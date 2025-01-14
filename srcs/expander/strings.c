@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 08:33:40 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/13 13:42:51 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 13:13:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	add_until_char(char **expanded, char *str, t_data *data, char *delim)
 	int		end;
 	char	*tmp;
 
+	if (ft_strchr(delim, str[0]))
+		return (0);
 	segment = delims_strdup(str, delim);
 	if (!segment)
 	{
