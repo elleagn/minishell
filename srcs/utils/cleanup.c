@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 08:14:38 by gozon             #+#    #+#             */
-/*   Updated: 2024/12/18 10:48:33 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 08:03:59 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	full_cleanup(t_command *command, t_data *data)
 {
+	rl_clear_history();
 	clear_command_list(command);
 	clear_data(data);
 }

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:07:06 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/12 15:57:06 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 08:04:40 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	execute_command(t_command *command, t_data *data)
 	}
 	replace_stds(command, data);
 	close_all_files(command);
+	close(data->stdin_fd);
+	rl_clear_history();
 	execve(*(command->av), command->av, data->env);
 	perror("minishell");
 	full_cleanup(command, data);

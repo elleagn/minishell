@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   words.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:49:50 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/12 16:26:56 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/14 08:48:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 char	*join_var_name(char *expanded, char *var_name, t_data *data)
 {
 	char	*var;
+	int		itoa;
 
+	itoa = 0;
 	if (!ft_strncmp(var_name, "?", 2))
 	{
 		var = ft_itoa(data->exit_code);
+		itoa = 1;
 		if (!var)
 		{
 			data->exit_code = -1;
@@ -30,6 +33,8 @@ char	*join_var_name(char *expanded, char *var_name, t_data *data)
 	if (!var)
 		return (expanded);
 	expanded = ft_strjoin(expanded, var);
+	if (itoa)
+		free(var);
 	if (!expanded)
 		data->exit_code = -1;
 	return (expanded);
