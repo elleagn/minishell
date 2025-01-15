@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:24:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/10 19:10:03 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/15 10:41:56 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ int	prepare_path(t_data *data)
 	return (0);
 }
 
-int	prepare_signals(void)
+void	prepare_signals(void)
 {
-	if (signal(SIGINT, signal_handler) == SIG_ERR)
-		return (perror("minishell"), 1);
-	if (signal(SIGQUIT, SIG_IGN))
-		return (perror("minishell"), 1);
-	return (0);
+	sigint_interactive();
+	ignore_signal(SIGQUIT);
 }
 
 t_data	*prepare_shell(char **envp)
@@ -66,8 +63,7 @@ int	main(int ac, char **av, char **envp)
 		ft_printf("minishell doesn't accept any arguments");
 		return (0);
 	}
-	if (prepare_signals())
-		return (1);
+	prepare_signals();
 	data = prepare_shell(envp);
 	if (!data)
 		return (1);
