@@ -27,8 +27,6 @@
 # define ENV_SIZE 3
 # define CRITICAL_ERROR -1
 
-extern sig_atomic_t	g_flag;
-
 typedef enum e_type
 {
 	UNDEFINED,
@@ -84,10 +82,17 @@ typedef struct s_data
 	int				exit_code;
 }	t_data;
 
+typedef struct s_global
+{
+	int8_t	flag;
+	int8_t	in_heredoc;
+}	t_global;
+
+t_global	g_global;
+
 // Loop
 
 int			mini_loop(t_data *data);
-int			check_signal(t_data *data, int *init_readline);
 
 // Lexer
 

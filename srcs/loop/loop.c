@@ -49,19 +49,29 @@ int	process_and_execute(char *input, t_data *data)
 	return (0);
 }
 
+void check_signal(t_data *data)
+{
+	if (g_global.flag)
+	{
+		g_global.flag = 0;
+		data->exit_code = 130;
+	}
+}
+
 int	mini_loop(t_data *data)
 {
 	char		*input;
-	int			init_readline;
 
-	init_readline = 0;
 	while (1)
 	{
 		input = readline("minishell$ ");
 		data->line += 1;
-		if (!g_flag && !input)
+		check_signal(data);
+		if (!input) {
+            if (!getenv("TERM"))
+                write(STDOUT_FILENO, "\n", 1);
 			break ;
-		data->exit_code = check_signal(data, &init_readline);
+		}
 		if (data->exit_code == -1)
 		{
 			data->exit_code = 1;

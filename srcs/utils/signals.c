@@ -14,7 +14,13 @@
 
 void	signal_handler(int signum)
 {
-	g_flag = 1;
 	(void)signum;
-	close(0);
+	g_global.flag = 1;
+	write(STDERR_FILENO, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+    if (g_global.in_heredoc)
+		close(0);
+	else
+		rl_redisplay();
 }

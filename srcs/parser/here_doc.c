@@ -39,40 +39,51 @@ char	*generate_file_name(int i)
 	return (filename);
 }
 
-char	*get_stdin(t_data *data, char *limiter, int *init_readline)
+char	*get_stdin(t_data *data, char *limiter)
 {
 	char	*input;
 
+	g_global.in_heredoc = 1;
 	input = readline("> ");
-	if (!g_flag && !input)
+	g_global.in_heredoc = 0;
+	if (!g_global.flag && !input)
 		ft_printf("minishell: warning: here-document at line %i delimited by "
 			"end-of-file (wanted `%s')\n", data->line, limiter);
-	data->exit_code = check_signal(data, init_readline);
+	if (g_global.flag)
+	{
+		g_global.flag = 0;
+		data->exit_code = 130;
+		dup2(data->stdin_fd, 0); // je vous laisse sécuriser ça, moi je vais dormir wallah
+	}
 	return (input);
 }
 
-int	fill_file(int fd, char *limiter, t_data *data)
+int fill_file(int fd, char *limiter, t_data *data)
 {
-	char	*str;
-	int		len;
-	int		init_readline;
-	int		line;
+    char *str;
+    int len;
+    int line;
 
-	len = ft_strlen(limiter) + 1;
-	init_readline = 0;
-	line = 0;
-	str = get_stdin(data, limiter, &init_readline);
-	while (str && ft_strncmp(str, limiter, len))
-	{
-		line += 1;
-		if (write(fd, str, ft_strlen(str)) == -1 || write(fd, "\n", 1) == -1)
-			return (-1);
-		free(str);
-		str = get_stdin(data, limiter, &init_readline);
-	}
+    len = ft_strlen(limiter) + 1;
+    line = 0;
+    while (1)
+    {
+        str = get_stdin(data, limiter);
+        if (!str)
+            return (data->exit_code);
+        if (!ft_strncmp(str, limiter, len))
+            break;
+        line += 1;
+        if (write(fd, str, ft_strlen(str)) == -1 || write(fd, "\n", 1) == -1)
+        {
+            free(str);
+            return (-1);
+        }
+        free(str);
+    }
 	free(str);
-	data->line += line;
-	return (data->exit_code);
+    data->line += line;
+    return (0);
 }
 
 char	*here_doc(t_token *lim, t_data *data)

@@ -48,7 +48,6 @@ SRC_FILES =	lexer/lexer.c \
 			parser/redirections.c \
 			parser/here_doc.c \
 			loop/loop.c \
-			loop/signals.c \
 			expander/expander.c \
 			expander/words.c \
 			expander/strings.c \
@@ -64,11 +63,11 @@ CHECK_MARK = ✔
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(OBJ) -Llibft -lft -lreadline -o $(NAME)
+	@$(CC) $(OBJ) -Llibft -lft -L/opt/homebrew/Cellar/readline/8.2.13/lib -lreadline -o $(NAME)
 	@echo "$(NAME) a été créé avec succès ($(CHECK_MARK))"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -Iincludes -Ilibft -c $< -o $@
+	@$(CC) $(CFLAGS) -Iincludes -Ilibft -I/opt/homebrew/Cellar/readline/8.2.13/include -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
