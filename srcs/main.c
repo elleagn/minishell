@@ -30,8 +30,14 @@ int	prepare_path(t_data *data)
 	return (0);
 }
 
+int	event(void)
+{
+	return (EXIT_SUCCESS);
+}
+
 void	prepare_signals(void)
 {
+	rl_event_hook = event;
 	sigint_interactive();
 	ignore_signal(SIGQUIT);
 }

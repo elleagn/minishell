@@ -15,14 +15,11 @@
 void	signal_handler(int signum)
 {
 	(void)signum;
-	g_global.flag = 1;
-	write(STDERR_FILENO, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-    if (g_global.in_heredoc)
-		close(0);
-	else
-		rl_redisplay();
+	g_flag = 1;
+	// write(STDERR_FILENO, "\n", 1);
+	// rl_replace_line("", 0);
+	// rl_on_new_line();
+	rl_done = 1;
 }
 
 void	sigint_interactive(void)
