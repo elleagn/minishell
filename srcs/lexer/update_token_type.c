@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 10:43:58 by lcluzan           #+#    #+#             */
-/*   Updated: 2025/01/16 13:20:15 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/16 13:38:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_string(char *input)
 	i = 0;
 	while (input[i] && !is_separator(input[i]))
 	{
-		if (input[i] == '\'' || input[i] == '\"' || input[i] == '$')
+		if (input[i] == '\'' || input[i] == '\"')
 			return (1);
 		i++;
 	}
