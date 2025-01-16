@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/14 10:55:09 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:20:33 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	process_and_execute(char *input, t_data *data)
 	return (0);
 }
 
-void check_signal(t_data *data)
+void	check_signal(t_data *data)
 {
 	if (g_flag)
 	{
@@ -67,9 +67,10 @@ int	mini_loop(t_data *data)
 		input = readline("minishell$ ");
 		data->line += 1;
 		check_signal(data);
-		if (!input) {
-            if (!getenv("TERM"))
-                write(STDOUT_FILENO, "\n", 1);
+		if (!input)
+		{
+			if (!getenv("TERM"))
+				write(STDOUT_FILENO, "\n", 1);
 			break ;
 		}
 		if (data->exit_code == -1)
