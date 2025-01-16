@@ -43,17 +43,17 @@ char	*get_stdin(t_data *data, char *limiter)
 {
 	char	*input;
 
-	g_global.in_heredoc = 1;
 	input = readline("> ");
-	g_global.in_heredoc = 0;
-	if (!g_global.flag && !input)
+	if (!g_flag && !input)
 		ft_printf("minishell: warning: here-document at line %i delimited by "
 			"end-of-file (wanted `%s')\n", data->line, limiter);
-	if (g_global.flag)
+	if (g_flag)
 	{
-		g_global.flag = 0;
+		g_flag = 0;
 		data->exit_code = 130;
 		dup2(data->stdin_fd, 0); // je vous laisse sécuriser ça, moi je vais dormir wallah
+		free(input);
+		return (NULL);
 	}
 	return (input);
 }

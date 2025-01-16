@@ -82,13 +82,7 @@ typedef struct s_data
 	int				exit_code;
 }	t_data;
 
-typedef struct s_global
-{
-	int8_t	flag;
-	int8_t	in_heredoc;
-}	t_global;
-
-t_global	g_global;
+sig_atomic_t	g_flag;
 
 // Loop
 

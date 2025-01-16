@@ -30,8 +30,14 @@ int	prepare_path(t_data *data)
 	return (0);
 }
 
+int	event(void)
+{
+	return (EXIT_SUCCESS);
+}
+
 int	prepare_signals(void)
 {
+	rl_event_hook = event;
 	if (signal(SIGINT, signal_handler) == SIG_ERR)
 		return (perror("minishell"), 1);
 	if (signal(SIGQUIT, SIG_IGN))

@@ -51,9 +51,9 @@ int	process_and_execute(char *input, t_data *data)
 
 void check_signal(t_data *data)
 {
-	if (g_global.flag)
+	if (g_flag)
 	{
-		g_global.flag = 0;
+		g_flag = 0;
 		data->exit_code = 130;
 	}
 }
