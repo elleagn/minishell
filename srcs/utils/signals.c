@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:11:01 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/16 11:20:42 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:12:03 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	signal_handler(int signum)
 	(void)signum;
 	g_flag = 1;
 	rl_done = 1;
+	rl_replace_line("", 0);
 }
 
 void	sigint_interactive(void)
