@@ -12,8 +12,6 @@
 
 #include <minishell.h>
 
-sig_atomic_t	g_flag;
-
 int	prepare_path(t_data *data)
 {
 	int		path_index;
