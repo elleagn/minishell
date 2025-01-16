@@ -6,11 +6,13 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:24:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/15 10:41:56 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/16 10:56:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+sig_atomic_t	g_flag;
 
 int	prepare_path(t_data *data)
 {

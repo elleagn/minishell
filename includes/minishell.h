@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/15 11:38:11 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/16 10:55:54 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_data
 	int				exit_code;
 }	t_data;
 
-sig_atomic_t	g_flag;
+extern sig_atomic_t	g_flag;
 
 // Loop
 

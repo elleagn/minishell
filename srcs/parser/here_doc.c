@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:34:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/14 13:05:04 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:07:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,39 +51,43 @@ char	*get_stdin(t_data *data, char *limiter)
 	{
 		g_flag = 0;
 		data->exit_code = 130;
-		dup2(data->stdin_fd, 0); // je vous laisse sécuriser ça, moi je vais dormir wallah
+		if (dup2(data->stdin_fd, 0))
+		{
+			data->exit_code = -1;
+			perror("minishell");
+		}
 		free(input);
 		return (NULL);
 	}
 	return (input);
 }
 
-int fill_file(int fd, char *limiter, t_data *data)
+int	fill_file(int fd, char *limiter, t_data *data)
 {
-    char *str;
-    int len;
-    int line;
+	char	*str;
+	int		len;
+	int		line;
 
-    len = ft_strlen(limiter) + 1;
-    line = 0;
-    while (1)
-    {
-        str = get_stdin(data, limiter);
-        if (!str)
-            return (data->exit_code);
-        if (!ft_strncmp(str, limiter, len))
-            break;
-        line += 1;
-        if (write(fd, str, ft_strlen(str)) == -1 || write(fd, "\n", 1) == -1)
-        {
-            free(str);
-            return (-1);
-        }
-        free(str);
-    }
+	len = ft_strlen(limiter) + 1;
+	line = 0;
+	while (1)
+	{
+		str = get_stdin(data, limiter);
+		if (!str)
+		{
+			data->line += line;
+			return (data->exit_code);
+		}
+		line += 1;
+		if (!ft_strncmp(str, limiter, len))
+			break ;
+		if (write(fd, str, ft_strlen(str)) == -1 || write(fd, "\n", 1) == -1)
+			return (free(str), -1);
+		free(str);
+	}
 	free(str);
-    data->line += line;
-    return (0);
+	data->line += line;
+	return (0);
 }
 
 char	*here_doc(t_token *lim, t_data *data)
