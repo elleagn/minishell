@@ -6,13 +6,13 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2025/01/14 13:10:05 by gozon            ###   ########.fr        #
+#    Updated: 2025/01/16 15:30:17 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 SRC_DIR = srcs
 LIBFT = libft/libft.a
 SRC_FILES =	lexer/lexer.c \
@@ -56,6 +56,7 @@ SRC_FILES =	lexer/lexer.c \
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 OBJ = $(SRC_FILES:%.c=$(OBJ_DIR)/%.o)
+DEPS = $(OBJ:.o=.d)
 
 # Symboles Unicode
 CHECK_MARK = ✔
@@ -63,11 +64,11 @@ CHECK_MARK = ✔
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(OBJ) -Llibft -lft -L/opt/homebrew/Cellar/readline/8.2.13/lib -lreadline -o $(NAME)
+	@$(CC) $(OBJ) -Llibft -lft -lreadline -o $(NAME)
 	@echo "$(NAME) a été créé avec succès ($(CHECK_MARK))"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -Iincludes -Ilibft -I/opt/homebrew/Cellar/readline/8.2.13/include -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -Iincludes -Ilibft -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
@@ -96,3 +97,5 @@ fclean:
 re: fclean all
 
 .PHONY: all clean fclean re
+
+-include $(DEPS)
