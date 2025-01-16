@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:16:02 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/13 11:29:55 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/15 11:38:11 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <libft.h>
 # include <fcntl.h>
 
-# define ENV_SIZE 3
+# define ENV_SIZE 100
 # define CRITICAL_ERROR -1
 
 typedef enum e_type
@@ -152,6 +152,9 @@ void		full_cleanup(t_command *command, t_data *data);
 void		critical_exit(t_command *command, t_data *data);
 void		signal_handler(int signum);
 char		*mini_getenv(char *name, char **env);
+void		sigint_interactive(void);
+void		ignore_signal(int signum);
+void		restore_defaults(void);
 
 // Parser
 

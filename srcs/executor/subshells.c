@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:07:06 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/14 08:04:40 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/15 10:42:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ void	execute_command(t_command *command, t_data *data)
 {
 	int	status;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	restore_defaults();
 	if (command->builtin >= 0)
 	{
 		status = data->builtin[command->builtin](command, data);
