@@ -1,4 +1,5 @@
 */*.o
+objects
 *.o
 a.out
 */*.a
