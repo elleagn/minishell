@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:34:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/16 11:07:43 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/18 06:43:25 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*generate_file_name(int i)
 	number = ft_itoa(i);
 	if (!number)
 		return (NULL);
-	filename = ft_strjoin(".heredoc_", number);
+	filename = ft_strjoin("/tmp/.heredoc_", number);
 	if (!filename)
 		return (NULL);
 	while (!access(filename, F_OK))
