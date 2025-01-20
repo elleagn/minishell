@@ -6,26 +6,41 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:55:39 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/14 09:27:39 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/20 09:53:19 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+void	expand_word(t_token *token, t_data *data)
+{
+	char	*word;
+
+	word = ft_strdup(token->literal);
+	if (!word)
+		data->exit_code = -1;
+	token->backup = word;
+	if (!word || !ft_strchr(word, '$') || (token->prev
+			&& token->prev->type == HERE_DOC))
+		return ;
+	if (word[0] == '$')
+	{
+		free(token->literal);
+		token->literal = expand_var(word, data);
+	}
+	else
+		remove_quotes(token, data);
+}
+
 t_token	*expand_token(t_token **token, t_data *data)
 {
 	t_token	*next;
-	char	*word;
 
 	next = (*token)->next;
-	word = (*token)->literal;
-	if ((word && word[0] != '$') || ((*token)->prev
-			&& (*token)->prev->type == HERE_DOC))
-		return (next);
-	(*token)->literal = expand_var(word, data);
-	(*token)->backup = word;
-	if (!(*token)->prev || (*token)->prev->type == WORD
-		|| (*token)->prev->type == STRING || (*token)->prev->type == PIPE)
+	expand_word(*token, data);
+	if (data->exit_code != -1 && (!(*token)->prev
+			|| (*token)->prev->type == WORD || (*token)->prev->type == STRING
+			|| (*token)->prev->type == PIPE))
 	{
 		if (!(*token)->literal)
 			del_token_from_list(token, *token);

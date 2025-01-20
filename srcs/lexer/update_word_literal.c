@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:09:48 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/16 13:40:59 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/20 09:28:39 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,4 @@ void	update_word_literal(t_token *token, char *input)
 	word = begin_str(end_index, input);
 	if (word)
 		token->literal = word;
-	if (ft_strchr(word, '$') && word[0] != '$')
-		token->type = STRING;
 }
