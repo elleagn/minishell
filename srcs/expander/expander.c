@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:55:39 by nouillebobb       #+#    #+#             */
-/*   Updated: 2025/01/20 09:53:19 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/20 10:28:42 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	expand_word(t_token *token, t_data *data)
 
 	word = ft_strdup(token->literal);
 	if (!word)
+	{
 		data->exit_code = -1;
-	token->backup = word;
-	if (!word || !ft_strchr(word, '$') || (token->prev
-			&& token->prev->type == HERE_DOC))
 		return ;
+	}
+	token->backup = word;
 	if (word[0] == '$')
 	{
 		free(token->literal);
@@ -37,6 +37,9 @@ t_token	*expand_token(t_token **token, t_data *data)
 	t_token	*next;
 
 	next = (*token)->next;
+	if (!(*token)->literal || !ft_strchr((*token)->literal, '$')
+		|| ((*token)->prev && (*token)->prev->type == HERE_DOC))
+		return (next);
 	expand_word(*token, data);
 	if (data->exit_code != -1 && (!(*token)->prev
 			|| (*token)->prev->type == WORD || (*token)->prev->type == STRING

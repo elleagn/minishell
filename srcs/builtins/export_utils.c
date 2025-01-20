@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 09:07:56 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/07 16:16:50 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/20 10:02:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	print_not_valid_identifier(char *var, int error)
 
 	if (error)
 		return (1);
-	str = strjoin_three("minishell: export: '", var,
+	str = strjoin_three("minishell: export: `", var,
 			"': not a valid identifier\n");
 	if (!str)
 		return (-1);
