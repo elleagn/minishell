@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:49:50 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/16 13:32:36 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/20 09:17:08 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int	insert_word(char *literal, t_token *tlst)
 	token->next = tlst->next;
 	token->prev = tlst;
 	tlst->next = token;
-	token->next->prev = token;
+	if (token->next)
+		token->next->prev = token;
 	token->position = tlst->position;
 	return (0);
 }
