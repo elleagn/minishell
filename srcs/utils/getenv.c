@@ -35,7 +35,7 @@ char	*mini_getenv(char *name, char **env)
 	len = ft_strlen(name);
 	while (env[i])
 	{
-		if (!ft_strncmp(name, env[i], len))
+		if (!ft_strncmp(name, env[i], len + 1))
 			return (get_value(env[i]));
 		i++;
 	}
