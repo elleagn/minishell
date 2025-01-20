@@ -83,6 +83,8 @@ t_token	*lexer(char *input)
 		return (NULL);
 	token_list = NULL;
 	i = 0;
+	while (input[i] == ' ' || input[i] == '\t')
+		i += 1;
 	while (input[i])
 	{
 		token = create_next_token(&input[i]);
