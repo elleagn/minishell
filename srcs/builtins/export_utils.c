@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 09:07:56 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/20 10:02:48 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/20 11:21:45 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_non_empty(char *var)
 	while (var[i])
 	{
 		if (var[i] == '=')
-			return (var[i + 1]);
+			return (1);
 		i++;
 	}
 	return (0);
