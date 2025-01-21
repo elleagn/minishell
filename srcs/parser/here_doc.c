@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:34:15 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/18 06:43:25 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/21 10:25:31 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,15 @@ char	*get_stdin(t_data *data, char *limiter)
 
 	input = readline("> ");
 	if (!g_flag && !input)
+	{
 		ft_printf("minishell: warning: here-document at line %i delimited by "
 			"end-of-file (wanted `%s')\n", data->line, limiter);
+		data->exit_code = 0;
+	}
 	if (g_flag)
 	{
 		g_flag = 0;
 		data->exit_code = 130;
-		if (dup2(data->stdin_fd, 0))
-		{
-			data->exit_code = -1;
-			perror("minishell");
-		}
 		free(input);
 		return (NULL);
 	}

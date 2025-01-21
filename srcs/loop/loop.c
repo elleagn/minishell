@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 07:02:36 by gozon             #+#    #+#             */
-/*   Updated: 2025/01/16 11:20:33 by gozon            ###   ########.fr       */
+/*   Updated: 2025/01/21 10:45:03 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,26 @@ t_command	*process_line(char *input, t_data *data)
 	return (commands);
 }
 
+int	is_empty(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if ((input[i] < 9 || input[i] > 13) && input[i] != 32)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	process_and_execute(char *input, t_data *data)
 {
 	t_command	*command;
 
-	add_history(input);
+	if (!is_empty(input))
+		add_history(input);
 	command = process_line(input, data);
 	free(input);
 	if (!command)
